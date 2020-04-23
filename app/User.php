@@ -6,7 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
@@ -18,7 +19,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password',
     ];
-
+    const ADMIN =1;
+    const USERS =0;
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -36,4 +38,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
 }
+
