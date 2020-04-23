@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','WebController@home');
+Route::get('/product','WebController@product');
+Route::get('/listcate','WebController@listCate');
+Route::get('/listbrand','WebController@listBrand');
+Route::get('/cart','WebController@cart');
+Route::get('/checkout','WebController@checkout');
