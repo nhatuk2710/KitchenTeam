@@ -51,9 +51,39 @@
 
     <!-- Header Icon -->
     <div class="header-icons">
-        <a href="#" class="header-wrapicon1 dis-block">
-            <img src="{{asset("images/icons/icon-header-01.png")}}" class="header-icon1" alt="ICON">
-        </a>
+        @if(!Auth::check())
+            <a href="{{url("login")}}" class="header-wrapicon1 dis-block m-l-30">
+                <img src="{{asset("images/icons/icon-header-01.png")}}"  class="header-icon1" alt="ICON">
+            </a>
+        @else
+            <a href="#" class="header-wrapicon1 dis-block m-l-30 pull-right">
+                <img src="{{asset("admin/img/minh-hang.jpg")}}" class="header-icon1 rounded-circle "  alt="ICON">
+            </a>
+{{--            <div class="topbar-language rs1-select2">--}}
+{{--                <select class="selection-1" href="{{url("logout")}}" name="time">--}}
+{{--                    <option>{{Auth::user()->name}}</option>--}}
+{{--                    <option>Profile</option>--}}
+{{--                    --}}{{--                            <option>Your old order</option>--}}
+{{--                    <option>Mail</option>--}}
+{{--                    --}}{{--                            <div class="dropdown-divider"></div>--}}
+{{--                    <option>Log out</option>--}}
+{{--                </select>--}}
+{{--            </div>--}}
+            {{--                    <ul class="nav-item dropdow">--}}
+            {{--                            <p class="nav-link active dropdown-toggle" data-toggle="dropdown" href="#" role="button"--}}
+            {{--                               aria-haspopup="true"--}}
+            {{--                               aria-expanded="false">{{Auth::user()->name}}</p>--}}
+            {{--                        <div class="dropdown-menu ml-auto">--}}
+            {{--                            <a href="#" style="margin-left: 6%">Profile</a>--}}
+            {{--                            <br/>--}}
+            {{--                            <a href="#" style="margin-left: 6%">Mail</a>--}}
+            {{--                            <br/>--}}
+            {{--                            <a href="#" style="margin-left: 6%">Your old order</a>--}}
+            {{--                            <div class="dropdown-divider"></div>--}}
+            {{--                            <a href="#" style="margin-left: 6%">Logout</a>--}}
+            {{--                        </div>--}}
+            {{--                    </ul>--}}
+        @endif
 
         <span class="linedivide1"></span>
 
@@ -172,17 +202,43 @@
 						fashe@example.com
 					</span>
 
-                <div class="topbar-language rs1-select2">
-                    <select class="selection-1" name="time">
-                        <option>USD</option>
-                        <option>EUR</option>
-                    </select>
-                </div>
+                @if(!Auth::check())
+                    <a href="{{url("login")}}" class="header-wrapicon1 dis-block m-l-30">
+                        <img src="{{asset("images/icons/icon-header-01.png")}}"  class="header-icon1" alt="ICON">
+                    </a>
+                @else
+                    <a href="#" class="header-wrapicon1 dis-block m-l-30">
+                        <img src="{{asset("admin/img/minh-hang.jpg")}}" class="header-icon1 rounded-circle "  alt="ICON">
+                    </a>
+                    <div class="topbar-language rs1-select2">
+                        <select class="selection-1" href="{{url("logout")}}" name="time">
+                            <option>{{Auth::user()->name}}</option>
+                            <option>Profile</option>
+{{--                            <option>Your old order</option>--}}
+                            <option>Mail</option>
+{{--                            <div class="dropdown-divider"></div>--}}
+                            <option>Log out</option>
+                        </select>
+                    </div>
+                    {{--                    <ul class="nav-item dropdow">--}}
+                    {{--                            <p class="nav-link active dropdown-toggle" data-toggle="dropdown" href="#" role="button"--}}
+                    {{--                               aria-haspopup="true"--}}
+                    {{--                               aria-expanded="false">{{Auth::user()->name}}</p>--}}
+                    {{--                        <div class="dropdown-menu ml-auto">--}}
+                    {{--                            <a href="#" style="margin-left: 6%">Profile</a>--}}
+                    {{--                            <br/>--}}
+                    {{--                            <a href="#" style="margin-left: 6%">Mail</a>--}}
+                    {{--                            <br/>--}}
+                    {{--                            <a href="#" style="margin-left: 6%">Your old order</a>--}}
+                    {{--                            <div class="dropdown-divider"></div>--}}
+                    {{--                            <a href="#" style="margin-left: 6%">Logout</a>--}}
+                    {{--                        </div>--}}
+                    {{--                    </ul>--}}
+                @endif
+
 
                 <!--  -->
-                <a href="#" class="header-wrapicon1 dis-block m-l-30">
-                    <img src="{{asset("images/icons/icon-header-01.png")}}" class="header-icon1" alt="ICON">
-                </a>
+
 
                 <span class="linedivide1"></span>
 
@@ -331,9 +387,39 @@
         <div class="btn-show-menu">
             <!-- Header Icon mobile -->
             <div class="header-icons-mobile">
-                <a href="#" class="header-wrapicon1 dis-block">
-                    <img src="{{asset("images/icons/icon-header-01.png")}}" class="header-icon1" alt="ICON">
-                </a>
+                @if(!Auth::check())
+                    <a href="#" class="header-wrapicon1 dis-block m-l-30">
+                        <img src="{{asset("images/icons/icon-header-01.png")}}" class="header-icon1" alt="ICON">
+                    </a>
+                @else
+                    <a href="#" class="header-wrapicon1 dis-block m-l-30">
+                        <img src="{{asset("admin/img/minh-hang.jpg")}}" class="header-icon1 rounded-circle "  alt="ICON">
+                    </a>
+                    <div class="topbar-language rs1-select2">
+                        <select class="selection-1" name="time">
+                            <option>{{Auth::user()->name}}</option>
+                            <option>Profile</option>
+                            {{--                            <option>Your old order</option>--}}
+                            <option>Mail</option>
+                            {{--                            <div class="dropdown-divider"></div>--}}
+                            <option href="{{url("/logout")}}">Log out</option>
+                        </select>
+                    </div>
+                    {{--                    <ul class="nav-item dropdow">--}}
+                    {{--                            <p class="nav-link active dropdown-toggle" data-toggle="dropdown" href="#" role="button"--}}
+                    {{--                               aria-haspopup="true"--}}
+                    {{--                               aria-expanded="false">{{Auth::user()->name}}</p>--}}
+                    {{--                        <div class="dropdown-menu ml-auto">--}}
+                    {{--                            <a href="#" style="margin-left: 6%">Profile</a>--}}
+                    {{--                            <br/>--}}
+                    {{--                            <a href="#" style="margin-left: 6%">Mail</a>--}}
+                    {{--                            <br/>--}}
+                    {{--                            <a href="#" style="margin-left: 6%">Your old order</a>--}}
+                    {{--                            <div class="dropdown-divider"></div>--}}
+                    {{--                            <a href="#" style="margin-left: 6%">Logout</a>--}}
+                    {{--                        </div>--}}
+                    {{--                    </ul>--}}
+                @endif
 
                 <span class="linedivide2"></span>
 
@@ -440,12 +526,39 @@
 								fashe@example.com
 							</span>
 
-                        <div class="topbar-language rs1-select2">
-                            <select class="selection-1" name="time">
-                                <option>USD</option>
-                                <option>EUR</option>
-                            </select>
-                        </div>
+                        @if(!Auth::check())
+                            <a href="{{url("login")}}" class="header-wrapicon1 dis-block m-l-30">
+                                <img src="{{asset("images/icons/icon-header-01.png")}}"  class="header-icon1" alt="ICON">
+                            </a>
+                        @else
+                            <a href="#" class="header-wrapicon1 dis-block m-l-30">
+                                <img src="{{asset("admin/img/minh-hang.jpg")}}" class="header-icon1 rounded-circle "  alt="ICON">
+                            </a>
+                            <div class="topbar-language rs1-select2">
+                                <select class="selection-1" href="{{url("logout")}}" name="time">
+                                    <option>{{Auth::user()->name}}</option>
+                                    <option>Profile</option>
+                                    {{--                            <option>Your old order</option>--}}
+                                    <option>Mail</option>
+                                    {{--                            <div class="dropdown-divider"></div>--}}
+                                    <option>Log out</option>
+                                </select>
+                            </div>
+                            {{--                    <ul class="nav-item dropdow">--}}
+                            {{--                            <p class="nav-link active dropdown-toggle" data-toggle="dropdown" href="#" role="button"--}}
+                            {{--                               aria-haspopup="true"--}}
+                            {{--                               aria-expanded="false">{{Auth::user()->name}}</p>--}}
+                            {{--                        <div class="dropdown-menu ml-auto">--}}
+                            {{--                            <a href="#" style="margin-left: 6%">Profile</a>--}}
+                            {{--                            <br/>--}}
+                            {{--                            <a href="#" style="margin-left: 6%">Mail</a>--}}
+                            {{--                            <br/>--}}
+                            {{--                            <a href="#" style="margin-left: 6%">Your old order</a>--}}
+                            {{--                            <div class="dropdown-divider"></div>--}}
+                            {{--                            <a href="#" style="margin-left: 6%">Logout</a>--}}
+                            {{--                        </div>--}}
+                            {{--                    </ul>--}}
+                        @endif
                     </div>
                 </li>
 
