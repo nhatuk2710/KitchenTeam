@@ -38,7 +38,14 @@ Route::get("/clear-cart","WebController@clearCart")->middleware("auth");
 Route::get("/check-out","WebController@checkout")->middleware("auth");
 Route::post("/check-out","WebController@placeOrder")->middleware("auth");
 Route::get("checkout-success","WebController@checkoutSuccess") ;
+//Route::get("cancelBill","WebController@@cancelbill");
 Route::get("listOrder","WebController@getListOrder");
+Route::get("oldBill","WebController@oldBill");
+Route::get("deleteOrder/{id}","WebController@deleteOrder");
+
+Route::get('/profile','WebController@profile')->middleware("auth");
+Route::post("/upProfile","WebController@upProfile");
+Route::post("upAvt","WebController@upAvt");
 
 Route::get('log','WebController@log');
 Route::get("test",function (){

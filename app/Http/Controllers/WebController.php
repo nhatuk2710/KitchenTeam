@@ -6,6 +6,8 @@ use App\Category;
 use App\Order;
 use App\Product;
 use App\Brand;
+use App\User;
+use http\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -202,7 +204,6 @@ class WebController extends Controller
                 "quantity" => $product->quantity-$p->cart_qty,
                 "purchase" => $product->purchase+$p->cart_qty,
 
-
             ]);
             DB::table("order_product")->insert([
                 'order_id'=> $order->id,
@@ -212,7 +213,17 @@ class WebController extends Controller
             ]);
         }
 //        Mail::to(Auth::user()->email)->send(new OrderCreated($order,$cart));
+        session()->forget("cart");
         return redirect()->to("/checkout-success");
+    }
+
+    public function oldBill(Request $request){
+        $orderPend = Order::where("user_id",Auth::id())->where("status",0)->get();
+        $orderPro = Order::where("user_id",Auth::id())->where("status",1)->get();
+        $orderShip = Order::where("user_id",Auth::id())->where("status",2)->get();
+        $orderCom = Order::where("user_id",Auth::id())->where("status",3)->get();
+        $orderCan = Order::where("user_id",Auth::id())->where("status",4)->get();
+       return view("oldBill",['orderPend'=>$orderPend,'orderPro'=>$orderPro,'orderShip'=>$orderShip,'orderCom'=>$orderCom,'orderCan'=>$orderCan]);
     }
 
     public function deleteOrder($id)
@@ -227,7 +238,7 @@ class WebController extends Controller
             return redirect()->back();
         }
 //        Mail::to(Auth::user()->email)->send(new CancelOrder($order));
-        return redirect()->to("listOrder");
+        return redirect()->to("/");
     }
 
 
@@ -254,5 +265,52 @@ class WebController extends Controller
             return response()->json(['status'=>true,'message'=>"Login successfully!"]);
         }
         return response()->json(['status'=>false,'message'=>"login failure"]);
+    }
+
+    public function profile(){
+        $user = Auth::user();
+        $order = Order::where("user_id",Auth::id())->paginate(1);
+        return view('profile',['user'=>$user,'order'=>$order]);
+    }
+
+    public function upProfile(Request $request){
+        $user = User::find(Auth::id());
+        $request->validate([
+            "name"=>'required',
+//            "email"=>'required|unique:users|email',
+            "address"=>'string',
+            "phone"=>'string|unique:users,phone,'.Auth::id(),
+        ]);
+        try{
+           $user->update([
+               "name"=>$request->get("name"),
+               "address"=>$request->get("address"),
+               "phone"=>$request->get("phone"),
+           ]);
+        }catch (\Exception $e){
+            return redirect()->back();
+        }
+        return redirect()->to("/");
+    }
+
+    public function upAvt(Request $request){
+        $user = User::find(Auth::id());
+        try {
+            $avt = null;
+            if($request->hasFile("avt")) {
+                $file = $request->file("avt");
+                $file_name = $file->getClientOriginalName();
+                $ext = $file->getClientOriginalExtension();
+                $file->move("upload", $file_name);
+                $avt = "upload/" . $file_name;
+            }
+            $user->update([
+                "avt"=>$avt,
+            ]);
+
+        }catch (\Exception $e){
+            return redirect()->back();
+        }
+        return redirect()->to("profile");
     }
 }
