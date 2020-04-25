@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Mail\email;
 use App\Order;
 use App\Product;
 use App\Brand;
@@ -237,7 +238,7 @@ class WebController extends Controller
         } catch (\Exception $e) {
             return redirect()->back();
         }
-//        Mail::to(Auth::user()->email)->send(new CancelOrder($order));
+        Mail::to(Auth::user()->email)->send(new email());
         return redirect()->to("/");
     }
 

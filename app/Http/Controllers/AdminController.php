@@ -4,8 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Brand;
 use App\Category;
+use App\Mail\email;
+use App\Order;
 use App\Product;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
@@ -244,5 +249,42 @@ class AdminController extends Controller
             ]);
             return response()->json(["status"=>true,"message"=>"Brand succcess"]);
         }
+    }
+
+    public function tableOrder(){
+        $order = Order::all();
+        return view("admin.order.tableOrder",['order'=>$order]);
+    }
+
+    public function editOrder($id, Request $request){
+        $order = Order::find($id);
+        $user = User::where("id",$order->id)->get();
+
+        $request->validate([
+            "status"=>"",
+        ]);
+        try{
+            $order->update([
+                "status"=>$request->get("status"),
+            ]);
+        }catch (\Exception $e){
+            return redirect()->back();
+        }
+
+        foreach ($user as $u){
+            if ($order->status == 1){
+                Mail::to($u->email)->send(new email());
+            }
+            if($order->status == 2){
+                Mail::to($u->email)->send(new email());
+            }
+            if($order->status == 3){
+                Mail::to($u->email)->send(new email());
+            }
+            if($order->status == 4){
+                Mail::to($u->email)->send(new email());
+            }
+        }
+        return redirect()->back();
     }
 }
