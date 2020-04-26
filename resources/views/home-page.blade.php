@@ -124,7 +124,7 @@
                             <!-- Block2 -->
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-                                    <img src={{asset("images/products/3.1.jpg")}} alt="IMG-PRODUCT">
+                                    <img src={{asset($s->thumbnail)}} alt="IMG-PRODUCT">
 
                                     <div class="block2-overlay trans-0-4">
                                         <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -134,9 +134,9 @@
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
                                             <!-- Button -->
-                                            <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                            <a class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" href="{{url("shopping/{$s->id}")}}">
                                                 Add to Cart
-                                            </button>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -164,7 +164,7 @@
                             <!-- Block2 -->
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
-                                    <img src={{asset("images/item-07.jpg")}} alt="IMG-PRODUCT">
+                                    <img src={{asset($s->thumbnail)}} alt="IMG-PRODUCT">
 
                                     <div class="block2-overlay trans-0-4">
                                         <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -174,9 +174,9 @@
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
                                             <!-- Button -->
-                                            <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                            <a class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" href="{{url("shopping/{$s->id}")}}">
                                                 Add to Cart
-                                            </button>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -206,7 +206,7 @@
                             <!-- Block2 -->
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
-                                    <img src={{asset("images/products/3.1.jpg")}} alt="IMG-PRODUCT">
+                                    <img src={{asset($s->thumbnail)}} alt="IMG-PRODUCT">
 
                                     <div class="block2-overlay trans-0-4">
                                         <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -216,9 +216,9 @@
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
                                             <!-- Button -->
-                                            <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                            <a class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" href="{{url("shopping/{$s->id}")}}">
                                                 Add to Cart
-                                            </button>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -246,7 +246,7 @@
                             <!-- Block2 -->
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-                                    <img src={{asset("images/item-02.jpg")}} alt="IMG-PRODUCT">
+                                    <img src={{asset($s->thumbnail)}} alt="IMG-PRODUCT">
 
                                     <div class="block2-overlay trans-0-4">
                                         <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -256,9 +256,9 @@
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
                                             <!-- Button -->
-                                            <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                            <a class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" href="{{url("shopping/{$s->id}")}}">
                                                 Add to Cart
-                                            </button>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
