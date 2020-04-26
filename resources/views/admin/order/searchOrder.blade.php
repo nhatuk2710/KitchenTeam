@@ -12,18 +12,18 @@
                             <h3>Order detail <small>Order design</small></h3>
                         </div>
                         <form method="get" action="{{url("/admin/order/searchOrder")}}">
-                        <div class="title_right">
-                            <div class="col-md-5 col-sm-5   form-group pull-right top_search">
-                                <div class="input-group">
+                            <div class="title_right">
+                                <div class="col-md-5 col-sm-5   form-group pull-right top_search">
+                                    <div class="input-group">
 
-                                    <input type="text" name="telephone" class="form-control" placeholder="Search for telephone">
-                                    <span class="input-group-btn">
+                                        <input type="text" name="telephone" class="form-control" placeholder="Search for telephone">
+                                        <span class="input-group-btn">
                       <button class="btn btn-secondary" type="submit">Go!</button>
                     </span>
 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         </form>
                     </div>
 
@@ -68,7 +68,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @forelse($order as $p)
+                                        @forelse($search as $p)
                                             <tr>
                                                 <td>{{$p->id}}</td>
                                                 <td>
@@ -91,15 +91,15 @@
                                                 <td>
                                                     @if($p->status == 0)
                                                         <a>Pending</a>
-                                                        @elseif($p->status == 1)
+                                                    @elseif($p->status == 1)
                                                         <a>Process</a>
-                                                        @elseif($p->status == 2)
+                                                    @elseif($p->status == 2)
                                                         <a>Shipping</a>
-                                                        @elseif($p->status == 3)
+                                                    @elseif($p->status == 3)
                                                         <a>Complete</a>
-                                                        @elseif($p->status == 4)
+                                                    @elseif($p->status == 4)
                                                         <a>Cancel</a>
-                                                        @endif
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     <a>{{$p->created_at}}</a>
@@ -116,11 +116,11 @@
                                                             <option value="4">Cancel</option>
                                                         </select>
                                                     </form>
-{{--                                                    <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>--}}
+                                                    {{--                                                    <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>--}}
                                                 </td>
                                             </tr>
                                         @empty
-                                            <p>No Brands</p>
+                                            <p>No Order</p>
                                         @endforelse
                                         </tbody>
                                     </table>
@@ -138,4 +138,5 @@
             <!-- /footer content -->
         </div>
     </div>
-    @endsection
+@endsection
+

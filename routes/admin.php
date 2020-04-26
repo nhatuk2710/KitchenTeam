@@ -33,7 +33,7 @@ Route::post('editBrand/','AdminController@editBrand')->name("editBrand");
 //order
 Route::get("order/tableOrder","AdminController@tableOrder");
 Route::post("order/editOrder/{id}","AdminController@editOrder");
-//Route::post("editOrder","AdminController@editOrderPost");
+Route::get("order/searchOrder","AdminController@searchOrder");
 
 
 

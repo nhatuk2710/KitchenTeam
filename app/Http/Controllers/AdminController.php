@@ -94,10 +94,13 @@ class AdminController extends Controller
         }
         return redirect()->to("admin/brand/tableBrand");
     }
+
+
     public function brandEdit($id){
         $brand = Brand::find($id);
         return view('admin.brand.brandEdit',['brand'=>$brand]);
     }
+
     public function brandPostEdit($id, Request $request){
         $brand = Brand::find($id);
         $request->validate([
@@ -256,6 +259,11 @@ class AdminController extends Controller
         return view("admin.order.tableOrder",['order'=>$order]);
     }
 
+    public function searchOrder(Request $request){
+        $search = Order::where("telephone","LIKE",'%'.$request->get("telephone").'%')->get();
+        return view("admin.order.searchOrder",['search'=>$search]);
+    }
+
     public function editOrder($id, Request $request){
         $order = Order::find($id);
         $user = User::where("id",$order->id)->get();
@@ -287,4 +295,6 @@ class AdminController extends Controller
         }
         return redirect()->back();
     }
+
+
 }
