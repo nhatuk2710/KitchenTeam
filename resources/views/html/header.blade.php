@@ -57,7 +57,7 @@
             </a>
         @else
             <a href="{{url("profile")}}" class="header-wrapicon1 dis-block m-l-30 pull-right">
-                <img  src="{{asset(Auth::user()->avt)}}" class="header-icon1 rounded-circle "  alt="ICON">
+                <img  src="{{Auth::user()->avt}}" class="header-icon1 rounded-circle "  alt="ICON">
             </a>
 {{--            <div class="topbar-language rs1-select2">--}}
 {{--                <select class="selection-1" href="{{url("logout")}}" name="time">--}}
@@ -518,7 +518,7 @@
                             </a>
                         @else
                             <a href="{{url("profile")}}" class="header-wrapicon1 dis-block m-l-30">
-                                <img src="{{asset(Auth::user()->avt)}}" class="header-icon1 rounded-circle "  alt="ICON">
+                                <img src="{{(Auth::user()->avt)}}" class="header-icon1 rounded-circle "  alt="ICON">
                             </a>
                             <div class="topbar-language rs1-select2">
                                 <a>{{Auth::user()->name}}</a>
