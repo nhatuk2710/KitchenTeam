@@ -91,15 +91,25 @@
             </div>
 
             <ul class="list-group">
-                <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Shares</strong></span> 125</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Likes</strong></span> 13</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Posts</strong></span> 37</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span> 78</li>
+                <li class="list-group-item text-muted">Activity of Trade <i class="fa fa-dashboard fa-1x"></i></li>
+{{--                @php $countOrder = session()->get("profile") @endphp--}}
+                @if(isset($countPend) || ($countPro) || ($countShip) || ($countCom) || ($countCan))
+                <li class="list-group-item text-right"><span class="pull-left"><strong>Pending</strong></span>{{$countPend}}</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong>Processing</strong></span>{{$countPro}}</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong>Shipping</strong></span>{{$countShip}}</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong>Completing</strong></span>{{$countCom}}</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong>Cancelling</strong></span>{{$countCan}}</li>
+                @else
+                    <li class="list-group-item text-right"><span class="pull-left"><strong>Pending</strong></span>0</li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong>Processing</strong></span>0</li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong>Shipping</strong></span>0</li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong>Completting</strong></span>0</li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong>Canceling</strong></span>0</li>
+                @endif
             </ul>
 
             <div class="panel panel-default">
-                <div class="panel-heading">Social Media</div>
+                <div class="panel-heading"><a href="{{url("oldBill")}}">View Order</a></div>
                 <div class="panel-body">
                     <i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i> <i class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i class="fa fa-google-plus fa-2x"></i>
                 </div>

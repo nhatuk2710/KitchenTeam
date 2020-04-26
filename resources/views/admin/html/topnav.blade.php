@@ -8,7 +8,7 @@
                 <li class="nav-item dropdown open" style="padding-left: 15px;">
                     @if(Auth::check())
                     <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                        <img src={{asset("admin/img/minh-hang.jpg")}} alt="">{{Auth::user()->name}}
+                        <img src={{asset(Auth::user()->avt)}} alt="">{{Auth::user()->name}}
                     </a>
                     @else
                         <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">

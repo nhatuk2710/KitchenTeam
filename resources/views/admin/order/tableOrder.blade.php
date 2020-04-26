@@ -9,7 +9,7 @@
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Brands <small>Order design</small></h3>
+                            <h3>Order detail <small>Order design</small></h3>
                         </div>
 
                         <div class="title_right">
@@ -30,7 +30,7 @@
                         <div class="col-md-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Brands</h2>
+                                    <h2>Orders</h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>
@@ -60,7 +60,7 @@
                                             <th>Address</th>
                                             <th>Payment method</th>
                                             <th>Status</th>
-                                            <th>Grand_total</th>
+                                            <th>Created_at</th>
                                             <th style="width: 20%">#Edit</th>
                                         </tr>
                                         </thead>

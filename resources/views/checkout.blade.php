@@ -72,7 +72,7 @@
 
                                     <label>Customer Name</label>
                                     <div class="form-control col-lg-6">
-                                        <input type="text" name="customer_name" class="form-group-sm col-lg-12 col-xs-12">
+                                        <input type="text" name="customer_name" class="form-group-sm col-lg-12 col-xs-12" value="{{$k->name}}">
                                     </div>
                                     <br/>
                                     <label>Shipping address</label>

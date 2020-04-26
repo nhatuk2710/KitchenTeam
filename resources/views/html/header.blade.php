@@ -56,8 +56,8 @@
                 <img src="{{asset("images/icons/icon-header-01.png")}}"  class="header-icon1" alt="ICON">
             </a>
         @else
-            <a href="#" class="header-wrapicon1 dis-block m-l-30 pull-right">
-                <img src="{{asset("admin/img/minh-hang.jpg")}}" class="header-icon1 rounded-circle "  alt="ICON">
+            <a href="{{url("profile")}}" class="header-wrapicon1 dis-block m-l-30 pull-right">
+                <img  src="{{asset(Auth::user()->avt)}}" class="header-icon1 rounded-circle "  alt="ICON">
             </a>
 {{--            <div class="topbar-language rs1-select2">--}}
 {{--                <select class="selection-1" href="{{url("logout")}}" name="time">--}}
@@ -199,7 +199,7 @@
 
             <div class="topbar-child2">
 					<span class="topbar-email">
-						fashe@example.com
+						{{Auth::user()->email}}
 					</span>
 
                 @if(!Auth::check())
@@ -207,18 +207,11 @@
                         <img src="{{asset("images/icons/icon-header-01.png")}}"  class="header-icon1" alt="ICON">
                     </a>
                 @else
-                    <a href="#" class="header-wrapicon1 dis-block m-l-30">
-                        <img src="{{asset("admin/img/minh-hang.jpg")}}" class="header-icon1 rounded-circle "  alt="ICON">
+                    <a href="{{url("profile")}}" class="header-wrapicon1 dis-block m-l-30">
+                        <img src="{{Auth::user()->avt}}" class="header-icon1 rounded-circle ">
                     </a>
                     <div class="topbar-language rs1-select2">
-                        <select class="selection-1" href="{{url("logout")}}" name="time">
-                            <option>{{Auth::user()->name}}</option>
-                            <option>Profile</option>
-{{--                            <option>Your old order</option>--}}
-                            <option>Mail</option>
-{{--                            <div class="dropdown-divider"></div>--}}
-                            <option>Log out</option>
-                        </select>
+                        <a href="{{url("profile")}}">{{Auth::user()->name}}</a>
                     </div>
                     {{--                    <ul class="nav-item dropdow">--}}
                     {{--                            <p class="nav-link active dropdown-toggle" data-toggle="dropdown" href="#" role="button"--}}
@@ -392,18 +385,11 @@
                         <img src="{{asset("images/icons/icon-header-01.png")}}" class="header-icon1" alt="ICON">
                     </a>
                 @else
-                    <a href="#" class="header-wrapicon1 dis-block m-l-30">
-                        <img src="{{asset("admin/img/minh-hang.jpg")}}" class="header-icon1 rounded-circle "  alt="ICON">
+                    <a href="{{url("profile")}}" class="header-wrapicon1 dis-block m-l-30">
+                        <img src="{{asset(Auth::user()->avt)}}" class="header-icon1 rounded-circle "  alt="ICON">
                     </a>
                     <div class="topbar-language rs1-select2">
-                        <select class="selection-1" name="time">
-                            <option>{{Auth::user()->name}}</option>
-                            <option>Profile</option>
-                            {{--                            <option>Your old order</option>--}}
-                            <option>Mail</option>
-                            {{--                            <div class="dropdown-divider"></div>--}}
-                            <option href="{{url("/logout")}}">Log out</option>
-                        </select>
+                        <a>{{Auth::user()->name}}</a>
                     </div>
                     {{--                    <ul class="nav-item dropdow">--}}
                     {{--                            <p class="nav-link active dropdown-toggle" data-toggle="dropdown" href="#" role="button"--}}
@@ -531,18 +517,11 @@
                                 <img src="{{asset("images/icons/icon-header-01.png")}}"  class="header-icon1" alt="ICON">
                             </a>
                         @else
-                            <a href="#" class="header-wrapicon1 dis-block m-l-30">
-                                <img src="{{asset("admin/img/minh-hang.jpg")}}" class="header-icon1 rounded-circle "  alt="ICON">
+                            <a href="{{url("profile")}}" class="header-wrapicon1 dis-block m-l-30">
+                                <img src="{{asset(Auth::user()->avt)}}" class="header-icon1 rounded-circle "  alt="ICON">
                             </a>
                             <div class="topbar-language rs1-select2">
-                                <select class="selection-1" href="{{url("logout")}}" name="time">
-                                    <option>{{Auth::user()->name}}</option>
-                                    <option>Profile</option>
-                                    {{--                            <option>Your old order</option>--}}
-                                    <option>Mail</option>
-                                    {{--                            <div class="dropdown-divider"></div>--}}
-                                    <option>Log out</option>
-                                </select>
+                                <a>{{Auth::user()->name}}</a>
                             </div>
                             {{--                    <ul class="nav-item dropdow">--}}
                             {{--                            <p class="nav-link active dropdown-toggle" data-toggle="dropdown" href="#" role="button"--}}

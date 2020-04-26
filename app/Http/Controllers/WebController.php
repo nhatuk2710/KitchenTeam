@@ -18,7 +18,12 @@ use Illuminate\Support\Facades\Validator;
 class WebController extends Controller
 {
     public function home(){
-        return view('home-page');
+        $cateband = Category::all()->take(3);
+        $sale = Product::take(8)->orderBy("price",'asc')->get();
+        $ex = Product::take(8)->orderBy("price",'desc')->get();
+        $new = Product::take(4)->orderBy("created_at",'desc')->get();
+        $top = Product::all()->take(12);
+        return view('home-page',['cateband'=>$cateband,'sale'=>$sale,'ex'=>$ex,'new'=>$new,'top'=>$top]);
     }
 
     public function product($id){
@@ -27,7 +32,7 @@ class WebController extends Controller
         $category=Category::find($product->category_id);
         $img =explode(",",$product->gallery);
         $brand_product =$brand->Products()->take(4)->get();
-        $category_product =Category::find($product->category_id)->Products()->take(4)->get();
+        $category_product =Category::find($product->category_id)->Products()->take(8)->get();
         return view('product',['product'=>$product,'category_product'=>$category_product,'brand_product'=>$brand_product,'brand'=>$brand,'img'=>$img,'category'=>$category]);
     }
     public function listingcate($id){
@@ -251,6 +256,7 @@ class WebController extends Controller
         $listOrder =Order::where ("user_id",Auth::id())->get();
         return view('listOrder',['listOrder'=>$listOrder]);
     }
+
     public function postLogin(Request $request){
         $validator = Validator::make($request->all(),[
             "email" => 'required|email',
@@ -271,7 +277,12 @@ class WebController extends Controller
     public function profile(){
         $user = Auth::user();
         $order = Order::where("user_id",Auth::id())->paginate(1);
-        return view('profile',['user'=>$user,'order'=>$order]);
+        $countPend = Order::where("user_id",Auth::id())->where("status",0)->get()->count();
+        $countPro = Order::where("user_id",Auth::id())->where("status",1)->get()->count();
+        $countShip = Order::where("user_id",Auth::id())->where("status",2)->get()->count();
+        $countCom = Order::where("user_id",Auth::id())->where("status",3)->get()->count();
+        $countCan = Order::where("user_id",Auth::id())->where("status",4)->get()->count();
+        return view('profile',['user'=>$user,'order'=>$order,'countPend'=>$countPend,'countPro'=>$countPro,'countShip'=>$countShip,'countCom'=>$countCom,'countCan'=>$countCan]);
     }
 
     public function upProfile(Request $request){
