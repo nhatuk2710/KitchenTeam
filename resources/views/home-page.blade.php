@@ -4,7 +4,7 @@
     <section class="slide1">
         <div class="wrap-slick1">
             <div class="slick1">
-                <div class="item-slick1 item1-slick1" style="background-image: url(images/master-slide-07.jpg);">
+                <div class="item-slick1 item1-slick1" style="background-image: url(images/slide-07.jpg);">
                     <div style="color: red"  class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
                         <h2 style="color: red" class="caption1-slide1 xl-text2 t-center bo14 p-b-6 animated visible-false m-b-22" data-appear="fadeInUp">
                             Runner Machine
@@ -23,7 +23,7 @@
                     </div>
                 </div>
 
-                <div  class="item-slick1 item2-slick1" style="background-image: url(images/master-slide-06.jpg);">
+                <div  class="item-slick1 item2-slick1" style="background-image: url(images/slide-06.jpg);">
                     <div style="color: red"  class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
                         <h2 style="color: red"  class="caption1-slide1 xl-text2 t-center bo14 p-b-6 animated visible-false m-b-22" data-appear="rollIn">
                             Fashion Sport
@@ -42,7 +42,7 @@
                     </div>
                 </div>
 
-                <div class="item-slick1 item3-slick1" style="background-image: url(images/master-slide-02.jpg);">
+                <div class="item-slick1 item3-slick1" style="background-image: url(images/slide-02.jpg);">
                     <div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
                         <h2 style="color: red"  class="caption1-slide1 xl-text2 t-center bo14 p-b-6 animated visible-false m-b-22" data-appear="rotateInDownLeft">
                             Sport Outfit
@@ -124,7 +124,7 @@
                             <!-- Block2 -->
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-                                    <img src={{asset("images/item-02.jpg")}} alt="IMG-PRODUCT">
+                                    <img src={{asset("images/products/3.1.jpg")}} alt="IMG-PRODUCT">
 
                                     <div class="block2-overlay trans-0-4">
                                         <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -206,7 +206,7 @@
                             <!-- Block2 -->
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
-                                    <img src={{asset("images/item-01.jpg")}} alt="IMG-PRODUCT">
+                                    <img src={{asset("images/products/3.1.jpg")}} alt="IMG-PRODUCT">
 
                                     <div class="block2-overlay trans-0-4">
                                         <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
