@@ -86,65 +86,37 @@
         @endif
 
         <span class="linedivide1"></span>
-
+            @php $cart= session("cart") @endphp
+            @if(isset($cart))
         <div class="header-wrapicon2">
             <img src="{{asset("images/icons/icon-header-02.png")}}" class="header-icon1 js-show-header-dropdown" alt="ICON">
-            <span class="header-icons-noti">0</span>
+            <span class="header-icons-noti">{{count($cart)}}</span>
 
             <!-- Header cart noti -->
             <div class="header-cart header-dropdown">
                 <ul class="header-cart-wrapitem">
+                    <?php $total=0 ?>
+                    @foreach($cart as $c)
                     <li class="header-cart-item">
                         <div class="header-cart-item-img">
-                            <img src="{{asset("images/item-cart-01.jpg")}}" alt="IMG">
+                            <img src="{{asset("$c->thumbnail")}}" alt="IMG">
                         </div>
 
                         <div class="header-cart-item-txt">
                             <a href="#" class="header-cart-item-name">
-                                White Shirt With Pleat Detail Back
+                                {{$c->product_name}}
                             </a>
-
+                            <?php $total+=($c->cart_qty*$c->price) ?>
                             <span class="header-cart-item-info">
-									1 x $19.00
+									${{$c->getPrice()}} x {{$c->cart_qty}}
 								</span>
                         </div>
                     </li>
-
-                    <li class="header-cart-item">
-                        <div class="header-cart-item-img">
-                            <img src="{{asset("images/item-cart-02.jpg")}}" alt="IMG">
-                        </div>
-
-                        <div class="header-cart-item-txt">
-                            <a href="#" class="header-cart-item-name">
-                                Converse All Star Hi Black Canvas
-                            </a>
-
-                            <span class="header-cart-item-info">
-									1 x $39.00
-								</span>
-                        </div>
-                    </li>
-
-                    <li class="header-cart-item">
-                        <div class="header-cart-item-img">
-                            <img src="{{asset("images/item-cart-03.jpg")}}" alt="IMG">
-                        </div>
-
-                        <div class="header-cart-item-txt">
-                            <a href="#" class="header-cart-item-name">
-                                Nixon Porter Leather Watch In Tan
-                            </a>
-
-                            <span class="header-cart-item-info">
-									1 x $17.00
-								</span>
-                        </div>
-                    </li>
+                        @endforeach
                 </ul>
 
                 <div class="header-cart-total">
-                    Total: $75.00
+                    Total: ${{$total}}
                 </div>
 
                 <div class="header-cart-buttons">
@@ -164,6 +136,12 @@
                 </div>
             </div>
         </div>
+                @else
+                <div class="header-wrapicon2">
+                    <img src="{{asset("images/icons/icon-header-02.png")}}" class="header-icon1 js-show-header-dropdown" alt="ICON">
+                    <span class="header-icons-noti">0</span>
+                </div>
+        @endif
     </div>
 </div>
 
@@ -196,19 +174,20 @@
             <a href="{{asset("/")}}" class="logo2">
                 <img src="{{asset("images/icons/logo.png")}}" alt="IMG-LOGO">
             </a>
-
+            @if(!Auth::check())
             <div class="topbar-child2">
 					<span class="topbar-email">
-						{{Auth::user()->email}}
 					</span>
-
-                @if(!Auth::check())
                     <a href="{{url("login")}}" class="header-wrapicon1 dis-block m-l-30">
                         <img src="{{asset("images/icons/icon-header-01.png")}}"  class="header-icon1" alt="ICON">
                     </a>
                 @else
+                    <div class="topbar-child2">
+					<span class="topbar-email">
+						{{Auth::user()->email}}
+					</span>
                     <a href="{{url("profile")}}" class="header-wrapicon1 dis-block m-l-30">
-                        <img src="{{Auth::user()->avt}}" class="header-icon1 rounded-circle ">
+                        <img src="{{asset(Auth::user()->avt)}}" class="header-icon1 rounded-circle ">
                     </a>
                     <div class="topbar-language rs1-select2">
                         <a href="{{url("profile")}}">{{Auth::user()->name}}</a>
@@ -235,83 +214,61 @@
 
                 <span class="linedivide1"></span>
 
-                <div class="header-wrapicon2 m-r-13">
-                    <img src="{{asset("images/icons/icon-header-02.png")}}" class="header-icon1 js-show-header-dropdown" alt="ICON">
-                    <span class="header-icons-noti">0</span>
+                @if(isset($cart))
+                    <div class="header-wrapicon2">
+                        <img src="{{asset("images/icons/icon-header-02.png")}}" class="header-icon1 js-show-header-dropdown" alt="ICON">
+                        <span class="header-icons-noti">{{count($cart)}}</span>
 
-                    <!-- Header cart noti -->
-                    <div class="header-cart header-dropdown">
-                        <ul class="header-cart-wrapitem">
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="{{asset("images/item-cart-01.jpg")}}" alt="IMG">
-                                </div>
+                        <!-- Header cart noti -->
+                        <div class="header-cart header-dropdown">
+                            <ul class="header-cart-wrapitem">
+                                <?php $total=0 ?>
+                                @foreach($cart as $c)
+                                    <li class="header-cart-item">
+                                        <div class="header-cart-item-img">
+                                            <img src="{{asset("$c->thumbnail")}}" alt="IMG">
+                                        </div>
 
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        White Shirt With Pleat Detail Back
-                                    </a>
+                                        <div class="header-cart-item-txt">
+                                            <a href="#" class="header-cart-item-name">
+                                                {{$c->product_name}}
+                                            </a>
+                                            <?php $total+=($c->cart_qty*$c->price) ?>
+                                            <span class="header-cart-item-info">
+									${{$c->getPrice()}} x {{$c->cart_qty}}
+								</span>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
 
-                                    <span class="header-cart-item-info">
-											1 x $19.00
-										</span>
-                                </div>
-                            </li>
-
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="{{asset("images/item-cart-02.jpg")}}" alt="IMG">
-                                </div>
-
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        Converse All Star Hi Black Canvas
-                                    </a>
-
-                                    <span class="header-cart-item-info">
-											1 x $39.00
-										</span>
-                                </div>
-                            </li>
-
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="{{asset("images/item-cart-03.jpg")}}" alt="IMG">
-                                </div>
-
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        Nixon Porter Leather Watch In Tan
-                                    </a>
-
-                                    <span class="header-cart-item-info">
-											1 x $17.00
-										</span>
-                                </div>
-                            </li>
-                        </ul>
-
-                        <div class="header-cart-total">
-                            Total: $75.00
-                        </div>
-
-                        <div class="header-cart-buttons">
-                            <div class="header-cart-wrapbtn">
-                                <!-- Button -->
-                                <a href="{{asset("cart")}}" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                    View Cart
-                                </a>
+                            <div class="header-cart-total">
+                                Total: ${{$total}}
                             </div>
 
-                            <div class="header-cart-wrapbtn">
-                                <!-- Button -->
-                                <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                    Check Out
-                                </a>
+                            <div class="header-cart-buttons">
+                                <div class="header-cart-wrapbtn">
+                                    <!-- Button -->
+                                    <a href="{{url("cart")}}" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                        View Cart
+                                    </a>
+                                </div>
+
+                                <div class="header-cart-wrapbtn">
+                                    <!-- Button -->
+                                    <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                        Check Out
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @else
+                    <div class="header-wrapicon2">
+                        <img src="{{asset("images/icons/icon-header-02.png")}}" class="header-icon1 js-show-header-dropdown" alt="ICON">
+                        <span class="header-icons-noti">0</span>
+                    </div>
+                @endif
             </div>
         </div>
 
@@ -408,84 +365,62 @@
                 @endif
 
                 <span class="linedivide2"></span>
+                    @if(isset($cart))
+                        <div class="header-wrapicon2">
+                            <img src="{{asset("images/icons/icon-header-02.png")}}" class="header-icon1 js-show-header-dropdown" alt="ICON">
+                            <span class="header-icons-noti">{{count($cart)}}</span>
 
-                <div class="header-wrapicon2">
-                    <img src="{{asset("images/icons/icon-header-02.png")}}" class="header-icon1 js-show-header-dropdown" alt="ICON">
-                    <span class="header-icons-noti">0</span>
+                            <!-- Header cart noti -->
+                            <div class="header-cart header-dropdown">
+                                <ul class="header-cart-wrapitem">
+                                    <?php $total=0 ?>
+                                    @foreach($cart as $c)
+                                        <li class="header-cart-item">
+                                            <div class="header-cart-item-img">
+                                                <img src="{{asset("$c->thumbnail")}}" alt="IMG">
+                                            </div>
 
-                    <!-- Header cart noti -->
-                    <div class="header-cart header-dropdown">
-                        <ul class="header-cart-wrapitem">
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="{{asset("images/item-cart-01.jpg")}}" alt="IMG">
+                                            <div class="header-cart-item-txt">
+                                                <a href="#" class="header-cart-item-name">
+                                                    {{$c->product_name}}
+                                                </a>
+                                                <?php $total+=($c->cart_qty*$c->price) ?>
+                                                <span class="header-cart-item-info">
+									${{$c->getPrice()}} x {{$c->cart_qty}}
+								</span>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ul>
+
+                                <div class="header-cart-total">
+                                    Total: ${{$total}}
                                 </div>
 
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        White Shirt With Pleat Detail Back
-                                    </a>
+                                <div class="header-cart-buttons">
+                                    <div class="header-cart-wrapbtn">
+                                        <!-- Button -->
+                                        <a href="{{url("cart")}}" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                            View Cart
+                                        </a>
+                                    </div>
 
-                                    <span class="header-cart-item-info">
-											1 x $19.00
-										</span>
+                                    <div class="header-cart-wrapbtn">
+                                        <!-- Button -->
+                                        <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                            Check Out
+                                        </a>
+                                    </div>
                                 </div>
-                            </li>
-
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="{{asset("images/item-cart-02.jpg")}}" alt="IMG">
-                                </div>
-
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        Converse All Star Hi Black Canvas
-                                    </a>
-
-                                    <span class="header-cart-item-info">
-											1 x $39.00
-										</span>
-                                </div>
-                            </li>
-
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="{{asset("images/item-cart-03.jpg")}}" alt="IMG">
-                                </div>
-
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                        Nixon Porter Leather Watch In Tan
-                                    </a>
-
-                                    <span class="header-cart-item-info">
-											1 x $17.00
-										</span>
-                                </div>
-                            </li>
-                        </ul>
-
-                        <div class="header-cart-total">
-                            Total: $75.00
-                        </div>
-
-                        <div class="header-cart-buttons">
-                            <div class="header-cart-wrapbtn">
-                                <!-- Button -->
-                                <a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                    View Cart
-                                </a>
-                            </div>
-
-                            <div class="header-cart-wrapbtn">
-                                <!-- Button -->
-                                <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                    Check Out
-                                </a>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    @else
+                        <div class="header-wrapicon2">
+                            <img src="{{asset("images/icons/icon-header-02.png")}}" class="header-icon1 js-show-header-dropdown" alt="ICON">
+                            <span class="header-icons-noti">0</span>
+                        </div>
+                    @endif
+
             </div>
 
             <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
