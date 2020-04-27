@@ -266,8 +266,7 @@ class AdminController extends Controller
 
     public function editOrder($id, Request $request){
         $order = Order::find($id);
-        $user = User::where("id",$order->id)->get();
-
+        $user = User::find($order->id);
         $request->validate([
             "status"=>"",
         ]);
@@ -278,21 +277,18 @@ class AdminController extends Controller
         }catch (\Exception $e){
             return redirect()->back();
         }
-
-        foreach ($user as $u){
             if ($order->status == 1){
-                Mail::to($u->email)->send(new email());
+                Mail::to($user->email)->send(new email());
             }
             if($order->status == 2){
-                Mail::to($u->email)->send(new email());
+                Mail::to($user->email)->send(new email());
             }
             if($order->status == 3){
-                Mail::to($u->email)->send(new email());
+                Mail::to($user->email)->send(new email());
             }
             if($order->status == 4){
-                Mail::to($u->email)->send(new email());
+                Mail::to($user->email)->send(new email());
             }
-        }
         return redirect()->back();
     }
 
