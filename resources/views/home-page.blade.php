@@ -66,18 +66,23 @@
     </section>
 <div class="banner bgwhite p-t-40 p-b-40">
     <div class="container">
-        <div class="row">
-            @foreach($cateband as $p)
+        <div class="sec-title p-b-22">
+            <h3 class="m-text5 t-center">
+                Local Brand
+            </h3>
+        </div>
+        <div class="row" style="border-bottom: #ff0000 solid 2px; padding-bottom: 2%;padding-top: 5%">
+            @foreach($brandband as $p)
             <div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto">
                 <!-- block1 -->
                 <div class="block1 hov-img-zoom pos-relative m-b-30">
-                    <img src={{asset("images/banner-05.jpg")}} alt="IMG-BENNER">
+                    <a href="{{url("listingBrand/{$p->id}")}}"><img src={{asset($p->image)}} alt="IMG-BENNER"></a>
 
                     <div class="block1-wrapbtn w-size2">
                         <!-- Button -->
-                        <a href="{{url("listingCate/{$p->id}")}}" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
-                            {{$p->category_name}}
-                        </a>
+{{--                        <a class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">--}}
+{{--                            {{$p->brand_name}}--}}
+{{--                        </a>--}}
                     </div>
                 </div>
             </div>
@@ -284,7 +289,7 @@
 
 
 <!-- Banner video -->
-<section class="parallax0 parallax100" style="background-image: url(images/bg-2.jpg);">
+<section class="parallax0 parallax100" style="background-image: url(images/blog/banner-1.jpg);">
     <div class="overlay0 p-t-190 p-b-200">
         <div class="flex-col-c-m p-l-15 p-r-15">
 				<span class="m-text9 p-t-45 fs-20-sm">
@@ -317,7 +322,7 @@
                 <!-- Block3 -->
                 <div class="block3">
                     <a href="{{asset("blog-detail.html")}}" class="block3-img dis-block hov-img-zoom">
-                        <img src={{asset("images/blog-01.jpg")}} alt="IMG-BLOG">
+                        <img src={{asset("images/blog/1.jpg")}} alt="IMG-BLOG">
                     </a>
 
                     <div class="block3-txt p-t-14">
@@ -341,7 +346,7 @@
                 <!-- Block3 -->
                 <div class="block3">
                     <a href="blog-detail.html" class="block3-img dis-block hov-img-zoom">
-                        <img src="images/blog-02.jpg" alt="IMG-BLOG">
+                        <img src={{asset("images/blog/2.jpg")}} alt="IMG-BLOG">
                     </a>
 
                     <div class="block3-txt p-t-14">
@@ -365,7 +370,7 @@
                 <!-- Block3 -->
                 <div class="block3">
                     <a href="blog-detail.html" class="block3-img dis-block hov-img-zoom">
-                        <img src="images/blog-03.jpg" alt="IMG-BLOG">
+                        <img src={{asset("images/blog/3.jpg")}} alt="IMG-BLOG">
                     </a>
 
                     <div class="block3-txt p-t-14">
@@ -392,14 +397,14 @@
 <section class="instagram p-t-20">
     <div class="sec-title p-b-52 p-l-15 p-r-15">
         <h3 class="m-text5 t-center">
-            @ follow us on Instagram
+            @ follow us to work hard out together!!
         </h3>
     </div>
 
     <div class="flex-w">
         <!-- Block4 -->
         <div class="block4 wrap-pic-w">
-            <img src={{asset("images/gallery-03.jpg")}} alt="IMG-INSTAGRAM">
+            <img src={{asset("images/blog/blog-1.jpg")}} alt="IMG-INSTAGRAM">
 
             <a href="#" class="block4-overlay sizefull ab-t-l trans-0-4">
 					<span class="block4-overlay-heart s-text9 flex-m trans-0-4 p-l-40 p-t-25">
@@ -421,7 +426,7 @@
 
         <!-- Block4 -->
         <div class="block4 wrap-pic-w">
-            <img src={{asset("images/gallery-07.jpg")}} alt="IMG-INSTAGRAM">
+            <img src={{asset("images/blog/blog-2.jpg")}} alt="IMG-INSTAGRAM">
 
             <a href="#" class="block4-overlay sizefull ab-t-l trans-0-4">
 					<span class="block4-overlay-heart s-text9 flex-m trans-0-4 p-l-40 p-t-25">
@@ -443,7 +448,7 @@
 
         <!-- Block4 -->
         <div class="block4 wrap-pic-w">
-            <img src={{asset("images/gallery-09.jpg")}} alt="IMG-INSTAGRAM">
+            <img src={{asset("images/blog/blog-3.jpg")}} alt="IMG-INSTAGRAM">
 
             <a href="#" class="block4-overlay sizefull ab-t-l trans-0-4">
 					<span class="block4-overlay-heart s-text9 flex-m trans-0-4 p-l-40 p-t-25">
@@ -465,7 +470,7 @@
 
         <!-- Block4 -->
         <div class="block4 wrap-pic-w">
-            <img src="images/gallery-13.jpg" alt="IMG-INSTAGRAM">
+            <img src={{asset("images/blog/blog-4.jpg")}} alt="IMG-INSTAGRAM">
 
             <a href="#" class="block4-overlay sizefull ab-t-l trans-0-4">
 					<span class="block4-overlay-heart s-text9 flex-m trans-0-4 p-l-40 p-t-25">
@@ -487,7 +492,7 @@
 
         <!-- Block4 -->
         <div class="block4 wrap-pic-w">
-            <img src="images/gallery-15.jpg" alt="IMG-INSTAGRAM">
+            <img src={{asset("images/blog/blog-5.jpg")}} alt="IMG-INSTAGRAM">
 
             <a href="#" class="block4-overlay sizefull ab-t-l trans-0-4">
 					<span class="block4-overlay-heart s-text9 flex-m trans-0-4 p-l-40 p-t-25">

@@ -76,7 +76,7 @@
                                             <td>
                                                 <ul class="list-inline">
                                                     <li>
-                                                        <a></a>
+                                                        <a><img style="width: 50px;height: 50px" src="{{asset($p->image)}}"></a>
                                                     </li>
                                                 </ul>
                                             </td>

@@ -19,6 +19,6 @@
     </div>
 </div>
 
-<!-- jQuery -->@includeIf('admin..html.script')
+<!-- jQuery -->@includeIf('admin.html.script')
 </body>
 </html>

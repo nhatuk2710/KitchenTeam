@@ -53,8 +53,17 @@ class AdminController extends Controller
             "category_name"=> "string|unique:category,category_name,".$id
         ]);
         try {
+            $image = null;
+            if($request->hasFile("image")){
+                $file = $request->file("image");
+                $file_name = $file->getClientOriginalName();
+                $ext = $file->getClientOriginalExtension();
+                $file->move("upload",$file_name);
+                $image = "upload/".$file_name;
+            }
             $category->update([
-                "category_name"=>$request->get('category_name')
+                "category_name"=>$request->get('category_name'),
+                "image"=>$image,
             ]);
         }catch (\Exception $e){
             return redirect()->back();
@@ -107,8 +116,17 @@ class AdminController extends Controller
             "brand_name"=> "string|unique:brand,brand_name,".$id
         ]);
         try {
+            $image = null;
+            if($request->hasFile("image")){
+                $file = $request->file("image");
+                $file_name = $file->getClientOriginalName();
+                $ext = $file->getClientOriginalExtension();
+                $file->move("upload",$file_name);
+                $image = "upload/".$file_name;
+            }
             $brand->update([
-                "brand_name"=>$request->get('brand_name')
+                "brand_name"=>$request->get('brand_name'),
+                "image"=>$image,
             ]);
         }catch (\Exception $e){
             return redirect()->back();

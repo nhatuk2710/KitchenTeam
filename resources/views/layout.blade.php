@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 @includeIf('html.head')
+<style>
+    /*body{*/
+    /*    background-color: darkgray;*/
+    /*}*/
+</style>
 <body class="animsition">
 
 <!-- header fixed -->

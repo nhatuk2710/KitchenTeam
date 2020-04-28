@@ -42,7 +42,7 @@
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
-                            <form class="" action="{{url("admin/category/catepost",['id'=>$category->id])}}" method="post" novalidate>
+                            <form class="" action="{{url("admin/category/catepost",['id'=>$category->id])}}" enctype="multipart/form-data" method="post" novalidate>
                                 @csrf
                                 <p>For alternative validation library <code>parsleyJS</code> check out in the <a
                                         href="form.html">form page</a>
@@ -57,6 +57,18 @@
                                                placeholder="Category Name" value="{{$category->category_name}}" required="required" />
                                         @if($errors->has("category_name"))
                                             <p style="color:red">{{$errors->first("category_name")}}</p>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="field item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Image<span
+                                            class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input class="form-control @if($errors->has("image"))is-invalid @endif" data-validate-length-range="6" data-validate-words="2"
+                                               name="image" type="file"
+                                               placeholder="Image" value="{{$category->image}}"  required >
+                                        @if($errors->has("image"))
+                                            <p style="color:red">{{$errors->first("image")}}</p>
                                         @endif
                                     </div>
                                 </div>

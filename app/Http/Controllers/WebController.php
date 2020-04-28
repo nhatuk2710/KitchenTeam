@@ -19,11 +19,12 @@ class WebController extends Controller
 {
     public function home(){
         $cateband = Category::all()->take(3);
+        $brandband = Brand::all()->take(3);
         $sale = Product::take(8)->orderBy("price",'asc')->get();
         $ex = Product::take(8)->orderBy("price",'desc')->get();
         $new = Product::take(4)->orderBy("created_at",'desc')->get();
         $top = Product::all()->take(12);
-        return view('home-page',['cateband'=>$cateband,'sale'=>$sale,'ex'=>$ex,'new'=>$new,'top'=>$top]);
+        return view('home-page',['brandband'=>$brandband,'cateband'=>$cateband,'sale'=>$sale,'ex'=>$ex,'new'=>$new,'top'=>$top]);
     }
 
     public function product($id){

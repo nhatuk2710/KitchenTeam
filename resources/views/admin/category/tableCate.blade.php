@@ -75,9 +75,9 @@
                                             <br />
                                         </td>
                                         <td>
-                                            <ul class="list-inline">
+                                            <ul class="list-inline ">
                                                 <li>
-                                                <a></a>
+                                                <img style="width: 50px; height: 50px"  src="{{asset($p->image)}}">
                                                 </li>
                                             </ul>
                                         </td>
@@ -98,7 +98,6 @@
                                     </tbody>
                                 </table>
                                 <!-- end project list -->
-
                             </div>
                         </div>
                     </div>
