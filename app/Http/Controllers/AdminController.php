@@ -273,19 +273,24 @@ class AdminController extends Controller
     }
 
     public function tableOrder(){
-        $order = Order::all();
-        return view("admin.order.tableOrder",['order'=>$order]);
+        $orderPending = Order::where("status",0)->get();
+        $orderProcess = Order::where("status",1)->get();
+        $orderShipping = Order::where("status",2)->get();
+        $orderComplete = Order::where("status",3)->get();
+        $orderCancel = Order::where("status",4)->get();
+        return view("admin.order.tableOrder",['orderPending'=>$orderPending,'orderProcess'=>$orderProcess,'orderShipping'=>$orderShipping,'orderComplete'=>$orderComplete,'orderCancel'=>$orderCancel]);
     }
 
     public function searchOrder(Request $request){
         $search = Order::where("telephone","LIKE",'%'.$request->get("telephone").'%')->get();
-        return view("admin.order.searchOrder",['search'=>$search]);
+        $searchday= Order::where("created_at","LIKE",'%'.$request->get("telephone").'%')->get();
+        $searchname= Order::where("customer_name","LIKE",'%'.$request->get("telephone").'%')->get();
+        return view("admin.order.searchOrder",['search'=>$search,'searchday'=>$searchday,'searchname'=>$searchname]);
     }
 
     public function editOrder($id, Request $request){
         $order = Order::find($id);
-        $user = User::where("id",$order->id)->get();
-
+        $user = User::find($order->id);
         $request->validate([
             "status"=>"",
         ]);
@@ -296,21 +301,18 @@ class AdminController extends Controller
         }catch (\Exception $e){
             return redirect()->back();
         }
-
-        foreach ($user as $u){
             if ($order->status == 1){
-                Mail::to($u->email)->send(new email());
+                Mail::to($user->email)->send(new email());
             }
             if($order->status == 2){
-                Mail::to($u->email)->send(new email());
+                Mail::to($user->email)->send(new email());
             }
             if($order->status == 3){
-                Mail::to($u->email)->send(new email());
+                Mail::to($user->email)->send(new email());
             }
             if($order->status == 4){
-                Mail::to($u->email)->send(new email());
+                Mail::to($user->email)->send(new email());
             }
-        }
         return redirect()->back();
     }
 

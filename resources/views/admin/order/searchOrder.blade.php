@@ -28,7 +28,6 @@
                     </div>
 
                     <div class="clearfix"></div>
-
                     <div class="row">
                         <div class="col-md-12">
                             <div class="x_panel">
@@ -44,8 +43,7 @@
                                                 <a class="dropdown-item" href="#">Settings 2</a>
                                             </div>
                                         </li>
-                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                        </li>
+
                                     </ul>
                                     <div class="clearfix"></div>
                                 </div>
