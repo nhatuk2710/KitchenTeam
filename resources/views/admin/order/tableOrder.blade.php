@@ -120,17 +120,17 @@
                                                                     <button type="submit" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</button>
                                                                     <select name="status" class="btn btn-danger btn-xs">
                                                                         <option value="1">Process</option>
-                                                                        <option value="2">Shipping</option>
-                                                                        <option value="3">Complete</option>
+{{--                                                                        <option value="2">Shipping</option>--}}
+{{--                                                                        <option value="3">Complete</option>--}}
                                                                         <option value="4">Cancel</option>
                                                                     </select>
                                                                 @elseif($p->status==1)
+                                                                    <button type="submit" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</button>
                                                                     <select name="status" class="btn btn-danger btn-xs">
-                                                                        <option value="2">Shipping</option>
-                                                                        <option value="3">Complete</option>
+                                                                        <option value="2">Ship</option>
+{{--                                                                        <option value="3">Complete</option>--}}
                                                                         <option value="4">Cancel</option>
                                                                     </select>
-                                                                    <button type="submit" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</button>
                                                                 @elseif($p->status==2)
                                                                     <button type="submit" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</button>
                                                                     <select name="status" class="btn btn-danger btn-xs">
@@ -245,12 +245,11 @@
                                                                         <option value="4">Cancel</option>
                                                                     </select>
                                                                 @elseif($p->status==1)
+                                                                    <button type="submit" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</button>
                                                                     <select name="status" class="btn btn-danger btn-xs">
                                                                         <option value="2">Shipping</option>
-                                                                        <option value="3">Complete</option>
                                                                         <option value="4">Cancel</option>
                                                                     </select>
-                                                                    <button type="submit" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</button>
                                                                 @elseif($p->status==2)
                                                                     <button type="submit" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</button>
                                                                     <select name="status" class="btn btn-danger btn-xs">

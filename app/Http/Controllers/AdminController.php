@@ -298,9 +298,6 @@ class AdminController extends Controller
             $order->update([
                 "status"=>$request->get("status"),
             ]);
-        }catch (\Exception $e){
-            return redirect()->back();
-        }
             if ($order->status == 1){
                 Mail::to($user->email)->send(new email());
             }
@@ -313,6 +310,9 @@ class AdminController extends Controller
             if($order->status == 4){
                 Mail::to($user->email)->send(new email());
             }
+        }catch (\Exception $e){
+            return redirect()->back();
+        }
         return redirect()->back();
     }
 
