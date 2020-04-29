@@ -32,7 +32,7 @@
                 <th scope="col">Price</th>
                 <th scope="col">Qty</th>
                 <th scope="col">Date</th>
-                <th scope="col">Total: $ {{$p->grand_total}}</th>
+                <th scope="col">Total: $ {{number_format($p->grand_total,2)}}</th>
                 <th><a class="btn btn-danger" href="{{url("deleteOrder",['id'=>$p->id])}}">Delete</a></th>
             </tr>
             </thead>
@@ -69,7 +69,7 @@
                         <th scope="col">Price</th>
                         <th scope="col">Qty</th>
                         <th scope="col">Date</th>
-                        <th scope="col">Total: {{$p->grand_total}}</th>
+                        <th scope="col">Total: {{number_format($p->grand_total,2)}}</th>
                     </tr>
                     </thead>
                     @foreach($p->Products as $o)
@@ -102,7 +102,7 @@
                         <th scope="col">Price</th>
                         <th scope="col">Qty</th>
                         <th scope="col">Date</th>
-                        <th scope="col">Total: {{$p->grand_total}}</th>
+                        <th scope="col">Total: {{number_format($p->grand_total,2)}}</th>
                     </tr>
                     </thead>
 
@@ -136,7 +136,7 @@
                         <th scope="col">Price</th>
                         <th scope="col">Qty</th>
                         <th scope="col">Date</th>
-                        <th scope="col">Total: {{$p->grand_total}}</th>
+                        <th scope="col">Total: {{number_format($p->grand_total,2)}}</th>
                     </tr>
                     </thead>
 
@@ -171,7 +171,7 @@
                         <th scope="col">Price</th>
                         <th scope="col">Qty</th>
                         <th scope="col">Date</th>
-                        <th scope="col">Total: {{$p->grand_total}}</th>
+                        <th scope="col">Total: {{number_format($p->grand_total,2)}}</th>
                     </tr>
                     </thead>
 

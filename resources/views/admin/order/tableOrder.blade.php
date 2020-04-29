@@ -66,7 +66,8 @@
                                                 <thead>
                                                 <tr>
                                                     <th style="width: 1%">ID</th>
-                                                    <th style="width: 20%">Customer name</th>
+                                                    <th>Customer</th>
+                                                    <th>Email</th>
                                                     <th>Phone</th>
                                                     <th>Address</th>
                                                     <th>Payment method</th>
@@ -77,12 +78,14 @@
                                                 </thead>
                                                 <tbody>
                                                 @forelse($orderPending as $p)
+                                                    @php $user = \App\User::find($p->id) @endphp
                                                     <tr>
                                                         <td>{{$p->id}}</td>
                                                         <td>
                                                             <a>{{$p->customer_name}}</a>
                                                             <br />
                                                         </td>
+                                                        <td><a>{{$user->email}}</a></td>
                                                         <td>
                                                             <ul class="list-inline">
                                                                 <li>
@@ -186,7 +189,8 @@
                                                 <thead>
                                                 <tr>
                                                     <th style="width: 1%">ID</th>
-                                                    <th style="width: 20%">Customer name</th>
+                                                    <th>Customer name</th>
+                                                    <th>Email</th>
                                                     <th>Phone</th>
                                                     <th>Address</th>
                                                     <th>Payment method</th>
@@ -197,12 +201,14 @@
                                                 </thead>
                                                 <tbody>
                                                 @forelse($orderProcess as $p)
+                                                    @php $user = \App\User::find($p->id) @endphp
                                                     <tr>
                                                         <td>{{$p->id}}</td>
                                                         <td>
                                                             <a>{{$p->customer_name}}</a>
                                                             <br />
                                                         </td>
+                                                        <td>{{$user->email}}</td>
                                                         <td>
                                                             <ul class="list-inline">
                                                                 <li>
@@ -305,7 +311,8 @@
                                                 <thead>
                                                 <tr>
                                                     <th style="width: 1%">ID</th>
-                                                    <th style="width: 20%">Customer name</th>
+                                                    <th>Customer name</th>
+                                                    <th>Email</th>
                                                     <th>Phone</th>
                                                     <th>Address</th>
                                                     <th>Payment method</th>
@@ -316,12 +323,15 @@
                                                 </thead>
                                                 <tbody>
                                                 @forelse($orderShipping as $p)
+                                                    @php $user = \App\User::find($p->id) @endphp
                                                     <tr>
                                                         <td>{{$p->id}}</td>
                                                         <td>
                                                             <a>{{$p->customer_name}}</a>
+                                                            <a>{{$user->email}}</a>
                                                             <br />
                                                         </td>
+                                                        <td>{{$user->email}}</td>
                                                         <td>
                                                             <ul class="list-inline">
                                                                 <li>
@@ -425,7 +435,8 @@
                                                 <thead>
                                                 <tr>
                                                     <th style="width: 1%">ID</th>
-                                                    <th style="width: 20%">Customer name</th>
+                                                    <th>Customer name</th>
+                                                    <th>Email</th>
                                                     <th>Phone</th>
                                                     <th>Address</th>
                                                     <th>Payment method</th>
@@ -436,12 +447,14 @@
                                                 </thead>
                                                 <tbody>
                                                 @forelse($orderComplete as $p)
+                                                    @php $user = \App\User::find($p->id) @endphp
                                                     <tr>
                                                         <td>{{$p->id}}</td>
                                                         <td>
                                                             <a>{{$p->customer_name}}</a>
                                                             <br />
                                                         </td>
+                                                        <td>{{$user->email}}</td>
                                                         <td>
                                                             <ul class="list-inline">
                                                                 <li>
@@ -545,7 +558,8 @@
                                                 <thead>
                                                 <tr>
                                                     <th style="width: 1%">ID</th>
-                                                    <th style="width: 20%">Customer name</th>
+                                                    <th>Customer name</th>
+                                                    <th>Email</th>
                                                     <th>Phone</th>
                                                     <th>Address</th>
                                                     <th>Payment method</th>
@@ -556,12 +570,14 @@
                                                 </thead>
                                                 <tbody>
                                                 @forelse($orderCancel as $p)
+                                                    @php $user = \App\User::find($p->id) @endphp
                                                     <tr>
                                                         <td>{{$p->id}}</td>
                                                         <td>
                                                             <a>{{$p->customer_name}}</a>
                                                             <br />
                                                         </td>
+                                                        <td>{{$user->email}}</td>
                                                         <td>
                                                             <ul class="list-inline">
                                                                 <li>
