@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Brand;
 use App\Category;
 use App\Mail\email;
+use App\Mail\OrderCancel;
+use App\Mail\OrderComplete;
+use App\Mail\OrderProcess;
+use App\Mail\OrderShipping;
 use App\Order;
 use App\Product;
 use App\User;
@@ -299,16 +303,16 @@ class AdminController extends Controller
                 "status"=>$request->get("status"),
             ]);
             if ($order->status == 1){
-                Mail::to($user->email)->send(new email());
+                Mail::to($user->email)->send(new OrderProcess());
             }
             if($order->status == 2){
-                Mail::to($user->email)->send(new email());
+                Mail::to($user->email)->send(new OrderShipping());
             }
             if($order->status == 3){
-                Mail::to($user->email)->send(new email());
+                Mail::to($user->email)->send(new OrderComplete());
             }
             if($order->status == 4){
-                Mail::to($user->email)->send(new email());
+                Mail::to($user->email)->send(new OrderCancel());
             }
         }catch (\Exception $e){
             return redirect()->back();

@@ -49,8 +49,12 @@ Route::post("upAvt","WebController@upAvt");
 
 Route::get('log','WebController@log');
 Route::get("test",function (){
-    $a=\App\Order::all();
-    dd($a);
+   $u =\App\Product::where("id",1)->limit(1)->get();
+
+   dd($u->product_name);
+   foreach ($u as $user){
+       dd($user->product_name);
+   }
 });
 
 Route::get('/logout', function (){
