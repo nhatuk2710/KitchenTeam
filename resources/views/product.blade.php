@@ -20,7 +20,8 @@
 			{{$product->product_name}}
 		</span>
     </div>
-
+    <form action="{{url("/shopping/{$product->id}")}}" method="post">
+        @csrf
     <!-- Product Detail -->
     <div class="container bgwhite p-t-35 p-b-80">
         <div class="flex-w flex-sb">
@@ -95,7 +96,7 @@
                                     <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
                                 </button>
 
-                                <input class="size8 m-text18 t-center num-product" type="number" name="num-product" value="1">
+                                <input class="size8 m-text18 t-center num-product" type="number" name="qty" value="1">
 
                                 <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
                                     <i class="fs-12 fa fa-plus" aria-hidden="true"></i>
@@ -104,14 +105,13 @@
 
                             <div class="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10">
                                 <!-- Button -->
-                                <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+                                <button type="submit" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
                                     Add to Cart
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="p-b-45">
                     <span class="s-text8 m-r-35">SKU: MUG-01</span>
                     <span class="s-text8">Categories: Mug, Design</span>
@@ -162,7 +162,7 @@
             </div>
         </div>
     </div>
-
+    </form>
 
     <!-- Relate Product -->
     <section class="relateproduct bgwhite p-t-45 p-b-138">
@@ -181,7 +181,7 @@
                         <!-- Block2 -->
                         <div class="block2">
                             <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-                                <img src={{asset("images/item-02.jpg")}} alt="IMG-PRODUCT">
+                                <img src={{asset($p->thumbnail)}} alt="IMG-PRODUCT">
 
                                 <div class="block2-overlay trans-0-4">
                                     <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -191,9 +191,9 @@
 
                                     <div class="block2-btn-addcart w-size1 trans-0-4">
                                         <!-- Button -->
-                                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                        <a href="{{url("/shopping/{$p->id}")}}" class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                             Add to Cart
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                             </div>

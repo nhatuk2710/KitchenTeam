@@ -53,7 +53,7 @@ $factory->define(Product::class,function (Faker $faker){
         'product_name'=>$faker->unique()->name,
         'product_desc' => $faker->title,
         'thumbnail' => 'images/machine/'.random_int(1,13).'.jpg',
-        'gallery'   =>  'images/machine/'.random_int(1,13).'.jpg'.",".'images/machine/.'.''.random_int(1,13).'.jpg',
+        'gallery'   =>  'images/machine/'.random_int(1,13).'.jpg'.",".'images/machine/'.random_int(1,13).'.jpg',
         'price'=> random_int(1000,100000),
         'quantity'=> random_int(1,15),
         'category_id'=> random_int(1,5),
