@@ -555,7 +555,7 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                @forelse($orderComplete as $p)
+                                                @forelse($orderCancel as $p)
                                                     <tr>
                                                         <td>{{$p->id}}</td>
                                                         <td>

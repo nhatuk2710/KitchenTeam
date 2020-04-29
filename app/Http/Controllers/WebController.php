@@ -31,10 +31,9 @@ class WebController extends Controller
         $product=Product::find($id);
         $brand = Brand::find($product->brand_id);
         $category=Category::find($product->category_id);
-        $img =explode(",",$product->gallery);
         $brand_product =$brand->Products()->take(4)->get();
         $category_product =Category::find($product->category_id)->Products()->take(8)->get();
-        return view('product',['product'=>$product,'category_product'=>$category_product,'brand_product'=>$brand_product,'brand'=>$brand,'img'=>$img,'category'=>$category]);
+        return view('product',['product'=>$product,'category_product'=>$category_product,'brand_product'=>$brand_product,'brand'=>$brand,'category'=>$category]);
     }
     public function listingcate($id){
         $categories = Category::find($id);
