@@ -57,13 +57,13 @@ class WebController extends Controller
             if($p->id == $product->id){
                 $p->cart_qty =$p->cart_qty+1;
                 session(["cart"=>$cart]);
-                return redirect()->to("/cart");
+                return redirect()->back()->with('success', ['your message,here']);
             }
         }
         $product->cart_qty=1;
         $cart[]=$product;
         session(["cart"=>$cart]);
-        return redirect()->to("/cart");
+        return redirect()->back();
     }
     public function pshopping($id, Request $request){
         $product=Product::find($id);
@@ -225,14 +225,47 @@ class WebController extends Controller
     }
 
     public function oldBill(Request $request){
+        $order =Order::where ("user_id",Auth::id())->get();
         $orderPend = Order::where("user_id",Auth::id())->where("status",0)->get();
         $orderPro = Order::where("user_id",Auth::id())->where("status",1)->get();
         $orderShip = Order::where("user_id",Auth::id())->where("status",2)->get();
         $orderCom = Order::where("user_id",Auth::id())->where("status",3)->get();
         $orderCan = Order::where("user_id",Auth::id())->where("status",4)->get();
-       return view("oldBill",['orderPend'=>$orderPend,'orderPro'=>$orderPro,'orderShip'=>$orderShip,'orderCom'=>$orderCom,'orderCan'=>$orderCan]);
+       return view("oldBill",['order'=>$order,'orderPend'=>$orderPend,'orderPro'=>$orderPro,'orderShip'=>$orderShip,'orderCom'=>$orderCom,'orderCan'=>$orderCan]);
     }
+    public function orderDetails($id){
+        $order = Order::find($id);
+        $product=$order->Products;
+        return view('orderDetails',['product'=>$product,'order'=>$order]);
+    }
+    public function repurchase($id,Request $request){
+        $order = Order::find($id);
+        $product=$order->Products;
 
+        $grand_total = 0;
+        foreach ($product as $p) {
+            $grand_total+=$p->pivot->qty*$p->price;
+
+        }
+        $o = Order::create([
+            'user_id'=> Auth::id(),
+            'customer_name'=> $order->customer_name,
+            'shipping_address'=>$order->shipping_address,
+            'telephone'=> $order->telephone,
+            'grand_total'=> $grand_total,
+            'payment_method'=>$order->payment_method,
+            "status"=> Order::STATUS_PENDING
+        ]);
+        foreach ($product as $p){
+            DB::table("order_product")->insert([
+                'order_id'=> $o->id,
+                'product_id'=>$p->id,
+                'qty'=>$p->pivot->qty,
+                'price'=>$p->pivot->price
+            ]);
+        }
+        return redirect()->to("/checkout-success");
+    }
     public function deleteOrder($id)
     {
         $order = Order::find($id);
