@@ -39,9 +39,10 @@ Route::get("/check-out","WebController@checkout")->middleware("auth");
 Route::post("/check-out","WebController@placeOrder")->middleware("auth");
 Route::get("checkout-success","WebController@checkoutSuccess") ;
 //Route::get("cancelBill","WebController@@cancelbill");
-Route::get("listOrder","WebController@getListOrder");
 Route::get("oldBill","WebController@oldBill");
+Route::get("orderDetails/{id}","WebController@orderDetails");
 Route::get("deleteOrder/{id}","WebController@deleteOrder");
+Route::get("repurchase/{id}","WebController@repurchase");
 
 Route::get('/profile','WebController@profile')->middleware("auth");
 Route::post("/upProfile","WebController@upProfile");

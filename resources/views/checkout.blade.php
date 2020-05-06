@@ -1,128 +1,90 @@
 @extends('layout')
 @section('tittle',"Đặt hàng")
 @section('all')
-    <link rel="stylesheet" href={{asset("https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css")}} integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <style>
-        .form-control btn btn-group col-lg-12{
-            border-bottom: 100px;
-        }
-        .bo9{
-            margin-top: 5%;
-            margin-bottom: 5%;
-        }
-    </style>
-    <section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url({{asset("images/heading-pages-01.jpg")}});">
+    <section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(images/heading-pages-01.jpg);">
         <h2 class="l-text2 t-center">
-           Check out
+            Cart
         </h2>
     </section>
 
     <!-- Cart -->
-    <section class="checkout-section spad">
+    <section class="cart bgwhite p-t-70 p-b-100">
         <div class="container">
-            <form method="post" action="{{url("check-out")}}" class="checkout-form">
-                @csrf
-                <div class="container" >
-                    <div class="col-lg-12">
-                        <div class="bo9 col-md-12 ">
-                            <h5 class="m-text20 p-b-24 text-center">
-                                Cart Totals
-                            </h5>
+            <div class="bo9 w-size18 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">
+                <h5 class="m-text20 p-b-24">
+                    Cart Totals
+                </h5>
 
-                            <!--  -->
-                            @if(isset($cart))
-                            <div class="flex-w flex-sb-m p-b-12">
+                <!--  -->
+                <div class="flex-w flex-sb-m p-b-12">
+					<span class="s-text18 w-size19 w-full-sm">
+						Subtotal:
+					</span>
 
-                            </div>
-                            @endif
+                    <span class="m-text21 w-size20 w-full-sm">
+						$39.00
+					</span>
+                </div>
 
-                            <!--  -->
-                            <div class="">
+                <!--  -->
+                <div class="flex-w flex-sb bo10 p-t-15 p-b-20">
+					<span class="s-text18 w-size19 w-full-sm">
+						Shipping:
+					</span>
 
-                                <div class="">
-                                    <p class="s-text8 p-b-23">
+                    <div class="w-size20 w-full-sm">
+                        <p class="s-text8 p-b-23">
+                            There are no shipping methods available. Please double check your address, or contact us if you need any help.
+                        </p>
 
-                                    </p>
-                                    <span class="s-text19">
-							 Shipping Detail:
+                        <span class="s-text19">
+							Calculate Shipping
 						</span>
-                                    <table class="table">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Product</th>
-                                            <th scope="col">Qty</th>
-                                            <th scope="col">Price</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @forelse($cart as $k)
-                                            @php $cart_total+=($k->price*$k->cart_qty) @endphp
-                                        <tr>
-                                            <th scope="row">{{$k->id}}</th>
-                                            <td>{{$k->product_name}}</td>
-                                            <td>x{{$k->cart_qty}}</td>
-                                            <td>{{$k->price}}</td>
-                                        </tr>
-                                            @empty
-                                            <p>No Product</p>
-                                        @endforelse
-                                        </tbody>
-                                    </table>
 
-                                    <label>Customer Name</label>
-                                    <div class="form-control col-lg-6">
-                                        <input type="text" name="customer_name" class="form-group-sm col-lg-12 col-xs-12" value="{{$k->name}}">
-                                    </div>
-                                    <br/>
-                                    <label>Shipping address</label>
-                                    <div class="form-control col-md-6">
-                                        <input type="text" name="shipping_address" class="form-group-sm col-lg-12 col-xs-12">
-                                    </div>
-                                    <br/>
-                                    <label>Telephone</label>
-                                    <div class="form-control col-md-6">
-                                        <input type="number" name="telephone" class="form-group-sm col-lg-12 col-xs-12">
-                                    </div>
-                                    <br/>
-                                    <div class="row">
-                                    <div class="form-group col-md-3">
-                                        <label for="exampleFormControlSelect1">Paymen Method</label>
-                                        <select class="form-control btn-dark" name="payment_method" id="exampleFormControlSelect1">
-                                            <option name="payment_method">PayPal</option>
-                                            <option name="payment_method">Shipping Cod</option>
-                                            <option name="payment_method">Trading directly</option>
-                                        </select>
-                                </div>
-                                    </div>
-                            </div>
+                        <div class="rs2-select2 rs3-select2 rs4-select2 bo4 of-hidden w-size21 m-t-8 m-b-12">
+                            <select class="selection-2" name="country">
+                                <option>Select a country...</option>
+                                <option>US</option>
+                                <option>UK</option>
+                                <option>Japan</option>
+                            </select>
+                        </div>
 
-                            <!--  -->
-                            <div class="flex-w flex-sb-m p-t-26 p-b-30">
+                        <div class="size13 bo4 m-b-12">
+                            <input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="state" placeholder="State /  country">
+                        </div>
+
+                        <div class="size13 bo4 m-b-22">
+                            <input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="postcode" placeholder="Postcode / Zip">
+                        </div>
+
+                        <div class="size14 trans-0-4 m-b-10">
+                            <!-- Button -->
+                            <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+                                Update Totals
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!--  -->
+                <div class="flex-w flex-sb-m p-t-26 p-b-30">
 					<span class="m-text22 w-size19 w-full-sm">
 						Total:
 					</span>
 
-                                <span class="m-text21 w-size20 w-full-sm">
-						${{$k->cart_qty*$k->price}}.00
+                    <span class="m-text21 w-size20 w-full-sm">
+						$39.00
 					</span>
-                            </div>
-
-                            <div class="size14 trans-0-4 m-b-10 pull-right ">
-                                <!-- Button -->
-                                <a href="{{url("/clear-cart")}}" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-                                    Cancel Bill
-                                </a>
-                            </div>
-
-                                <button class="flex-c-m col-md-3 size15 bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-                                    Proceed to Checkout
-                                </button>
-                            <br/>
-                        </div>
-                    </div>
                 </div>
-            </form>
+
+                <div class="size15 trans-0-4">
+                    <!-- Button -->
+                    <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+                        Proceed to Checkout
+                    </button>
+                </div>
+            </div>
         </div>
     </section>
 @endsection
