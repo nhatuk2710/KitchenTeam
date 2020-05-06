@@ -68,3 +68,6 @@ Auth::routes(['verify' => true]);
 //Route::get('profile', function () {
 //    return view('home-page');
 //})->middleware('verified');
+
+Route::get('chart-line', 'ChartController@chartLine');
+Route::get('chart-line-ajax', 'ChartController@chartLineAjax');

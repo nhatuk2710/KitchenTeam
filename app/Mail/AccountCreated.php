@@ -18,7 +18,7 @@ class AccountCreated extends Mailable
      */
     public function __construct()
     {
-        //
+
     }
 
     /**
