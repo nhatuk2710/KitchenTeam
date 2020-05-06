@@ -56,13 +56,13 @@ class WebController extends Controller
             if($p->id == $product->id){
                 $p->cart_qty =$p->cart_qty+1;
                 session(["cart"=>$cart]);
-                return redirect()->to("/cart");
+                return redirect()->back()->with('success', ['your message,here']);
             }
         }
         $product->cart_qty=1;
         $cart[]=$product;
         session(["cart"=>$cart]);
-        return redirect()->to("/cart");
+        return redirect()->back();
     }
     public function pshopping($id, Request $request){
         $product=Product::find($id);
