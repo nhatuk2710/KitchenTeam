@@ -45,3 +45,6 @@ Route::get('category/brandDestroy/{id}',"AdminController@brandDestroy");
 Route::get('category/productDestroy/{id}',"AdminController@productDestroy");
 
 
+
+
+

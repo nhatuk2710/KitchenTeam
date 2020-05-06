@@ -302,18 +302,18 @@ class AdminController extends Controller
             $order->update([
                 "status"=>$request->get("status"),
             ]);
-            if ($order->status == 1){
-                Mail::to($user->email)->send(new OrderProcess());
-            }
-            if($order->status == 2){
-                Mail::to($user->email)->send(new OrderShipping());
-            }
-            if($order->status == 3){
-                Mail::to($user->email)->send(new OrderComplete());
-            }
-            if($order->status == 4){
-                Mail::to($user->email)->send(new OrderCancel());
-            }
+//            if ($order->status == 1){
+//                Mail::to($user->email)->send(new OrderProcess());
+//            }
+//            if($order->status == 2){
+//                Mail::to($user->email)->send(new OrderShipping());
+//            }
+//            if($order->status == 3){
+//                Mail::to($user->email)->send(new OrderComplete());
+//            }
+//            if($order->status == 4){
+//                Mail::to($user->email)->send(new OrderCancel());
+//            }
         }catch (\Exception $e){
             return redirect()->back();
         }

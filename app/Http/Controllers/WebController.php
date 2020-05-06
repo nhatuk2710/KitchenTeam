@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Mail\email;
+use App\Mail\OrderCreated;
 use App\Order;
 use App\Product;
 use App\Brand;
@@ -218,7 +219,7 @@ class WebController extends Controller
                 'price'=>$p->price
             ]);
         }
-//        Mail::to(Auth::user()->email)->send(new OrderCreated($order,$cart));
+        Mail::to(Auth::user()->email)->send(new OrderCreated());
         session()->forget("cart");
         return redirect()->to("/checkout-success");
     }
