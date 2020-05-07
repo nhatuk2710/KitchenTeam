@@ -75,7 +75,7 @@
                                     <li><a href="{{url("/admin/brand/tableBrand")}}">Brand</a></li>
                                     <li><a href="{{url("/admin/product/tableProduct")}}">Product</a></li>
                                 </ul>
-                            <li><a href="#">Table User</a></li>
+                            <li><a href="{{url("admin/user/tableUser")}}">Table User</a></li>
                             <li><a href="{{url("admin/order/tableOrder")}}">Table Order</a></li>
                         </ul>
                     </li>

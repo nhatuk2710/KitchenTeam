@@ -35,6 +35,9 @@ Route::get("order/tableOrder","AdminController@tableOrder");
 Route::post("order/editOrder/{id}","AdminController@editOrder");
 Route::get("order/searchOrder","AdminController@searchOrder");
 
+//User
+Route::get('user/tableUser','AdminController@tableUser');
+Route::post('user/userEdit/{id}','AdminController@userEdit');
 
 
 //Delete
