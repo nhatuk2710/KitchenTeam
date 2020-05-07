@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Comment;
+use App\FeedBack;
 use App\Mail\email;
 use App\Mail\OrderCreated;
 use App\Order;
@@ -358,5 +360,25 @@ class WebController extends Controller
             return redirect()->back();
         }
         return redirect()->to("profile");
+    }
+
+    public function feedback(){
+        return view('feedback');
+    }
+    public function feedbacks(Request $request){
+        $request->validate([
+            'message'=> 'required',
+            'product_id'=>'',
+        ]);
+        try {
+        Comment::create([
+            'user_id'=>Auth::id(),
+            'product_id'=>$request->get('product_id'),
+            'message'=>$request->get('message'),
+        ]);
+        }catch (\Exception $e){
+            return redirect()->back();
+        }
+        return redirect()->to("/");
     }
 }

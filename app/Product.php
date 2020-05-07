@@ -22,4 +22,8 @@ class Product extends Model
     public function getPrice(){
         return number_format($this->price,2,',','.');
     }
+
+    public function Comment(){
+        return $this->hasMany("\App\Comment");
+    }
 }

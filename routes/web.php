@@ -50,7 +50,11 @@ Route::post("upAvt","WebController@upAvt");
 
 Route::get('log','WebController@log');
 Route::get("test",function (){
- return view("test");
+ $comment = \App\Comment::all();
+ foreach ($comment as $c){
+     $user = \App\User::find($c->user_id);
+     dd($user->name);
+ }
 });
 
 Route::get('/logout', function (){
@@ -67,3 +71,6 @@ Auth::routes(['verify' => true]);
 
 Route::get('chart-line', 'ChartController@chartLine');
 Route::get('chart-line-ajax', 'ChartController@chartLineAjax');
+Route::get('feedback','WebController@feedback');
+Route::post('feedback','WebController@feedbacks');
+

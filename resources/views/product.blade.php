@@ -163,7 +163,53 @@
         </div>
     </div>
     </form>
+    <div class="container">
+        <div class="form-control-feedback wrap-dropdown-content bo7 p-t-15 p-b-14">
+            @php $comment = \App\Comment::where('product_id',$product->id)->get()  @endphp
+            @forelse($comment as $c)
+                @php $user = \App\User::find($c->user_id) @endphp
+                <a href="{{url("profile")}}" class="header-wrapicon1 dis-block m-l-30">
+                    <img src="{{asset($user->avt)}}" class="header-icon1 rounded-circle ">
+                </a>
+                {{$user->name}}{{$c->message}}
+                <span class="border-bottom"></span>
+                @empty
+                No comment
+            @endforelse
+        </div>
+    @if(Auth::check())
+    <div class="form-control-feedback wrap-dropdown-content bo7 p-t-15 p-b-14">
+        <div class="form-control-feedback">
+            <div class="avt">
+                <div class="container">
+                    <form action="{{url("feedback")}}" method="post" class="leave-comment">
+                        @csrf
+                        <h4 class="m-text25 p-b-14">
+                            Leave a Comment
+                        </h4>
+                        <p class="s-text8 p-b-40">
+                            Your email address will not be published. Required fields are marked *
+                        </p>
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Example textarea</label>
+                            <textarea class="form-control col-md-6 col-sx-12" name="message" id="exampleFormControlTextarea1" rows="5"></textarea>
+                        </div>
+                        <input name ="product_id" hidden value="{{$product->id}}">
 
+                        <div class="w-size24">
+                            <!-- Button -->
+                            <button type="submit" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                Post Comment
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+        @endif
+    </div>
     <!-- Relate Product -->
     <section class="relateproduct bgwhite p-t-45 p-b-138">
         <div class="container">
