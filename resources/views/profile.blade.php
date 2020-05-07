@@ -171,7 +171,7 @@
                             <div class="col-xs-12">
                                 <br>
                                 <button class="btn btn-lg btn-success" style="font-size: large" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
-                                <button class="btn btn-lg btn-primary pull-right" style="font-size: large" href="{{"/logout"}}" type="reset"><i class="glyphicon glyphicon-repeat"></i> Log out</button>
+                                <a class="btn btn-lg btn-primary pull-right" style="font-size: large" href="{{asset("/logout")}}" type="reset"><i class="glyphicon glyphicon-repeat"></i> Log out</a>
                             </div>
                         </div>
                     </form>

@@ -28,8 +28,6 @@
     <link rel="stylesheet" type="text/css" href={{asset("vendor/slick/slick.css")}}>
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href={{asset("vendor/lightbox2/css/lightbox.min.css")}}>
-    <script type="text/javascript" src={{asset("vendor/jquery/jquery-3.2.1.min.js")}}></script>
-    <script type="text/javascript" src={{asset("vendor/bootstrap/js/bootstrap.min.js")}}></script>
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href={{asset("css/util.css")}}>
     <link rel="stylesheet" type="text/css" href={{asset("css/main.css")}}>

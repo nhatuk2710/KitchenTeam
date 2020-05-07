@@ -24,6 +24,28 @@ class AdminController extends Controller
     public function dashboard(){
         return view('admin.dashboard');
     }
+    //User
+    public function tableUser(){
+        $user = User::where("role",0)->get();
+        return view('admin.user.tableUser',['user'=>$user]);
+    }
+    public function userEdit($id ,Request $request){
+        $user = User::find($id);
+
+        $request->validate([
+            "role"=>"",
+        ]);
+        try{
+            $user->update([
+                "role"=>$request->get("role"),
+            ]);
+        }catch (\Exception $e){
+            return redirect()->back();
+        }
+        return redirect()->back();
+
+    }
+
 
     //Category
     public function tableCate(){

@@ -1,5 +1,5 @@
 <div class="wrap_header fixed-header2 trans-0-4">
-    <!-- Logo -->
+
     <a href="{{asset("/")}}" class="logo">
         <img src="{{asset("images/icons/logo.png")}}" alt="IMG-LOGO">
     </a>
@@ -178,34 +178,27 @@
             <div class="topbar-child2">
 					<span class="topbar-email">
 					</span>
-                    <a href="{{url("login")}}" class="header-wrapicon1 dis-block m-l-30">
-                        <img src="{{asset("images/icons/icon-header-01.png")}}"  class="header-icon1" alt="ICON">
-                    </a>
+                <a href="#"class="header-wrapicon1 dis-block m-l-30" data-toggle="modal" data-target="#myModal">
+                    <img src="{{asset("images/icons/icon-header-01.png")}}"  class="header-icon1" alt="ICON">
+                </a>
                 @else
                     <div class="topbar-child2">
-					<span class="topbar-email">
+                        <span class="topbar-email">
 						{{Auth::user()->email}}
 					</span>
-                    <a href="{{url("profile")}}" class="header-wrapicon1 dis-block m-l-30">
-                        <img src="{{asset(Auth::user()->avt)}}" class="header-icon1 rounded-circle ">
-                    </a>
+                        <div class="dropdown">
+                            <button class="header-wrapicon1 dis-block m-l-30" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="{{asset(Auth::user()->avt)}}" class="header-icon1 rounded-circle ">
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="{{url("profile")}}">View profile</a>
+                                <a class="dropdown-item" href="{{url("oldBill")}}">View Order</a>
+                                <a class="dropdown-item" href="{{url("logout")}}">Logout</a>
+                            </div>
+                        </div>
                     <div class="topbar-language rs1-select2">
-                        <a href="{{url("profile")}}">{{Auth::user()->name}}</a>
+                        <a href="#">{{Auth::user()->name}}</a>
                     </div>
-                    {{--                    <ul class="nav-item dropdow">--}}
-                    {{--                            <p class="nav-link active dropdown-toggle" data-toggle="dropdown" href="#" role="button"--}}
-                    {{--                               aria-haspopup="true"--}}
-                    {{--                               aria-expanded="false">{{Auth::user()->name}}</p>--}}
-                    {{--                        <div class="dropdown-menu ml-auto">--}}
-                    {{--                            <a href="#" style="margin-left: 6%">Profile</a>--}}
-                    {{--                            <br/>--}}
-                    {{--                            <a href="#" style="margin-left: 6%">Mail</a>--}}
-                    {{--                            <br/>--}}
-                    {{--                            <a href="#" style="margin-left: 6%">Your old order</a>--}}
-                    {{--                            <div class="dropdown-divider"></div>--}}
-                    {{--                            <a href="#" style="margin-left: 6%">Logout</a>--}}
-                    {{--                        </div>--}}
-                    {{--                    </ul>--}}
                 @endif
 
 
