@@ -78,14 +78,14 @@
                                                 </thead>
                                                 <tbody>
                                                 @forelse($orderPending as $p)
-                                                    @php $user = \App\User::find($p->id) @endphp
+                                                    @php $user = \App\User::find($p->user_id) @endphp
                                                     <tr>
                                                         <td>{{$p->id}}</td>
                                                         <td>
                                                             <a>{{$p->customer_name}}</a>
                                                             <br />
                                                         </td>
-                                                        <td><a>{{$user->email}}</a></td>
+                                                        <td>{{$user->email}}</td>
                                                         <td>
                                                             <ul class="list-inline">
                                                                 <li>
@@ -201,7 +201,7 @@
                                                 </thead>
                                                 <tbody>
                                                 @forelse($orderProcess as $p)
-                                                    @php $user = \App\User::find($p->id) @endphp
+                                                    @php $user = \App\User::find($p->user_id) @endphp
                                                     <tr>
                                                         <td>{{$p->id}}</td>
                                                         <td>
@@ -323,7 +323,7 @@
                                                 </thead>
                                                 <tbody>
                                                 @forelse($orderShipping as $p)
-                                                    @php $user = \App\User::find($p->id) @endphp
+                                                    @php $user = \App\User::find($p->user_id) @endphp
                                                     <tr>
                                                         <td>{{$p->id}}</td>
                                                         <td>
@@ -447,7 +447,7 @@
                                                 </thead>
                                                 <tbody>
                                                 @forelse($orderComplete as $p)
-                                                    @php $user = \App\User::find($p->id) @endphp
+                                                    @php $user = \App\User::find($p->user_id) @endphp
                                                     <tr>
                                                         <td>{{$p->id}}</td>
                                                         <td>
@@ -570,7 +570,7 @@
                                                 </thead>
                                                 <tbody>
                                                 @forelse($orderCancel as $p)
-                                                    @php $user = \App\User::find($p->id) @endphp
+                                                    @php $user = \App\User::find($p->user_id) @endphp
                                                     <tr>
                                                         <td>{{$p->id}}</td>
                                                         <td>

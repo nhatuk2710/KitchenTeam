@@ -46,18 +46,18 @@
                     <div class="size10 trans-0-4 m-t-10 m-b-10">
                         <!-- Button -->
                         @if($order->status==0)
-                        <a href="{{url("/clear-cart")}}" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-                            Cancel Order
-                        </a>
+                            <a  onclick="return checkDelete()" href="{{\Illuminate\Support\Facades\URL::signedRoute("deleteOrder",['id'=>$order->id])}}" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">  Cancel Order</a>
                             @endif
                     </div>
                 </div>
 
                 <div class="size15 trans-0-4 pull-right" style="margin-top: 2%">
                     <!-- Button -->
+                    @if($order->status==4)
                     <a class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" href="{{url("repurchase/{$order->id}")}}">
                       Repurchased
                     </a>
+                        @endif
                 </div>
             </div>
     </section>
