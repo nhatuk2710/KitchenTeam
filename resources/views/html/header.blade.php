@@ -51,6 +51,7 @@
 
     <!-- Header Icon -->
     <div class="header-icons">
+
         @if(!Auth::check())
             <a href="{{url("login")}}" class="header-wrapicon1 dis-block m-l-30">
                 <img src="{{asset("images/icons/icon-header-01.png")}}"  class="header-icon1" alt="ICON">
@@ -169,7 +170,6 @@
                 <a href="#" class="topbar-social-item fa fa-snapchat-ghost"></a>
                 <a href="#" class="topbar-social-item fa fa-youtube-play"></a>
             </div>
-
             <!-- Logo2 -->
             <a href="{{asset("/")}}" class="logo2">
                 <img src="{{asset("images/icons/logo.png")}}" alt="IMG-LOGO">
