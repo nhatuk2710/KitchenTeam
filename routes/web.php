@@ -43,7 +43,8 @@ Route::get("oldBill","WebController@oldBill");
 Route::get("orderDetails/{id}","WebController@orderDetails")->name('orderDetails')->middleware("signed");
 Route::get("deleteOrder/{id}","WebController@deleteOrder")->name('deleteOrder')->middleware("signed");
 Route::get("repurchase/{id}","WebController@repurchase")->middleware("auth");
-Route::get("feedback/{id}","WebController@feedback")->name('feedback')->middleware("signed");
+Route::get("feedback/{a}/{id}","WebController@feedback")->name('feedback')->middleware("signed");
+Route::post("feedback/{id}","WebController@postFeedback");
 
 Route::get('/profile','WebController@profile')->middleware("auth");
 Route::post("/upProfile","WebController@upProfile");
@@ -51,11 +52,11 @@ Route::post("upAvt","WebController@upAvt");
 
 Route::get('log','WebController@log');
 Route::get("test",function (){
- $comment = \App\Comment::all();
- foreach ($comment as $c){
-     $user = \App\User::find($c->user_id);
-     dd($user->name);
- }
+$order =\App\Order::find(1);
+$product=$order->Products;
+foreach ($product as $p){
+  echo "$p->product_name";
+}
 });
 
 Route::get('/logout', function (){
@@ -72,6 +73,6 @@ Auth::routes(['verify' => true]);
 
 Route::get('chart-line', 'ChartController@chartLine');
 Route::get('chart-line-ajax', 'ChartController@chartLineAjax');
-Route::get('feedback','WebController@feedback');
-Route::post('feedback','WebController@feedbacks');
+Route::get('comment','WebController@comment');
+Route::post('comment','WebController@postComment');
 

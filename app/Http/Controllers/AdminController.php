@@ -333,7 +333,9 @@ class AdminController extends Controller
             if($order->status == 3){
                 Mail::to($user->email)->send(new OrderComplete($order));
             }
-
+            if($order->status == 4){
+                Mail::to($user->email)->send(new OrderCancel());
+            }
         }catch (\Exception $e){
             return redirect()->back();
         }

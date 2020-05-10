@@ -182,7 +182,7 @@
         <div class="form-control-feedback">
             <div class="avt">
                 <div class="container">
-                    <form action="{{url("feedback")}}" method="post" class="leave-comment">
+                    <form action="{{url("comment")}}" method="post" class="leave-comment">
                         @csrf
                         <h4 class="m-text25 p-b-14">
                             Leave a Comment

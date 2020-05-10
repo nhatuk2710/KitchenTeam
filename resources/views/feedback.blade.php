@@ -1,7 +1,10 @@
 @extends('layout')
 @section('all')
+
     <section class="bgwhite p-t-60 p-b-25">
         <div class="container">
+            <h1>{{$order->id}}</h1>
+            <h2>{{$product->id}}</h2>
             <div class="row">
                 <div class="col-md-8 col-lg-9 p-b-80">
                     <div class="p-r-50 p-r-0-lg">
