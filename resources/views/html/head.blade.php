@@ -31,5 +31,10 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href={{asset("css/util.css")}}>
     <link rel="stylesheet" type="text/css" href={{asset("css/main.css")}}>
+    <script  type="text/javascript">
+        function checkDelete(){
+            return confirm('Are you sure?');
+        }
+    </script>
     <!--===============================================================================================-->
 </head>

@@ -3,8 +3,8 @@
 
 Order Complete
 
-@component('mail::button', ['url' => 'http://karluk.herokuapp.com/'])
-Continue shopping
+@component('mail::button', ['url' => \Illuminate\Support\Facades\URL::signedRoute("feedback",['id'=>$order->id])])
+Rate
 @endcomponent
 
 Thanks,<br>

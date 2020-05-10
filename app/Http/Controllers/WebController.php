@@ -279,8 +279,7 @@ class WebController extends Controller
         } catch (\Exception $e) {
             return redirect()->back();
         }
-        Mail::to(Auth::user()->email)->send(new email());
-        return redirect()->to("/");
+        return redirect()->to("/oldBill");
     }
 
 

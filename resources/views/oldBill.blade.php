@@ -26,7 +26,8 @@
                             @forelse($order as $p)
                                 <tr class="table-row">
                                     <td >
-                                    <a href="{{url("orderDetails/{$p->id}")}}"> # {{$p->id}}</a>
+                                        <a href="{{\Illuminate\Support\Facades\URL::signedRoute("orderDetails",['id'=>$p->id])}}"># {{$p->id}}</a>
+{{--                                    <a href="{{url("orderDetails",['id'=>$p->id])}}"> # {{$p->id}}</a>--}}
                                     </td>
                                     <td >{{$p->customer_name}}</td>
                                     <td >{{$p->shipping_address}}</td>
@@ -41,7 +42,7 @@
                                         <td >Shipping</td>
                                     @elseif($p->status==3)
                                         <td >Complete</td>
-                                    @elseif($p->status==3)
+                                    @elseif($p->status==4)
                                         <td >Cancel</td>
                                         @endif
                                     <td >{{$p->created_at}}</td>

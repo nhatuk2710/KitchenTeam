@@ -40,9 +40,10 @@ Route::post("/check-out","WebController@placeOrder")->middleware("auth");
 Route::get("checkout-success","WebController@checkoutSuccess") ;
 //Route::get("cancelBill","WebController@@cancelbill");
 Route::get("oldBill","WebController@oldBill");
-Route::get("orderDetails/{id}","WebController@orderDetails");
-Route::get("deleteOrder/{id}","WebController@deleteOrder");
-Route::get("repurchase/{id}","WebController@repurchase");
+Route::get("orderDetails/{id}","WebController@orderDetails")->name('orderDetails')->middleware("signed");
+Route::get("deleteOrder/{id}","WebController@deleteOrder")->name('deleteOrder')->middleware("signed");
+Route::get("repurchase/{id}","WebController@repurchase")->middleware("auth");
+Route::get("feedback/{id}","WebController@feedback")->name('feedback')->middleware("signed");
 
 Route::get('/profile','WebController@profile')->middleware("auth");
 Route::post("/upProfile","WebController@upProfile");
