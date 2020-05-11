@@ -383,6 +383,7 @@ class WebController extends Controller
 
     }
     public function comment(){
+//        $countComment = Comment::all()->count();
         return view('comment');
     }
     public function postComment(Request $request){

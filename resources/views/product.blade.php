@@ -1,5 +1,21 @@
 @extends('layout')
 @section('all')
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+{{--    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>--}}
+{{--    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>--}}
+    <!------ Include the above in your HEAD tag ---------->
+    <style>
+        .widget .panel-body { padding:0px; }
+        .widget .list-group { margin-bottom: 0; }
+        .widget .panel-title { display:inline }
+        .widget .label-info { float: right; }
+        .widget li.list-group-item {border-radius: 0;border: 0;border-top: 1px solid #ddd;}
+        .widget li.list-group-item:hover { background-color: rgba(86,61,124,.1); }
+        .widget .mic-info { color: #666666;font-size: 11px; }
+        .widget .action { margin-top:5px; }
+        .widget .comment-text { font-size: 12px; }
+        .widget .btn-block { border-top-left-radius:0px;border-top-right-radius:0px; }
+    </style>
     <div class="bread-crumb bgwhite flex-w p-l-52 p-r-15 p-t-30 p-l-15-sm">
         <a href="{{url("/")}}" class="s-text16">
             Home
@@ -163,20 +179,48 @@
         </div>
     </div>
     </form>
+    @php $comment = \App\Comment::where('product_id',$product->id)->get()  @endphp
     <div class="container">
-        <div class="form-control-feedback wrap-dropdown-content bo7 p-t-15 p-b-14">
-            @php $comment = \App\Comment::where('product_id',$product->id)->get()  @endphp
-            @forelse($comment as $c)
-                @php $user = \App\User::find($c->user_id) @endphp
-                <a href="{{url("profile")}}" class="header-wrapicon1 dis-block m-l-30">
-                    <img src="{{asset($user->avt)}}" class="header-icon1 rounded-circle ">
-                </a>
-                {{$user->name}}{{$c->message}}
-                <span class="border-bottom"></span>
-                @empty
-                No comment
-            @endforelse
-        </div>
+            <div class="panel panel-default widget">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-comment"></span>
+                <h3 class="panel-title">
+                    Recent Comments</h3>
+                <span class="label label-info">
+                    {{count($comment)}}</span>
+            </div>
+                    <div class="panel-body">
+                        <ul class="list-group">
+
+                            @forelse($comment as $c)
+                                @php $user = \App\User::find($c->user_id) @endphp
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-xs-2 col-md-1">
+                                        @if(!isset($user->avt))
+                                        <img src="http://placehold.it/80" class="img-circle img-responsive" alt="" /></div>
+                                    @else
+                                        <img src="{{asset($user->avt)}}" class="img-circle img-responsive" alt="" /></div>
+                                @endif
+                                    <div class="col-xs-10 col-md-11">
+                                        <div>
+                                            <div class="mic-info">
+                                                <a href="#">{{$user->name}}</a> on {{$c->created_at}}
+                                            </div>
+                                            <div class="comment-text">
+                                                <p> {{$c->message}} </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </li>
+                            @empty
+                                No comment
+                            @endforelse
+                        </ul>
+                        <a href="#" class="btn btn-primary btn-sm btn-block" role="button"> KitchenTeam Project html</a>
+                    </div>
+            </div>
+    </div>
     @if(Auth::check())
     <div class="form-control-feedback wrap-dropdown-content bo7 p-t-15 p-b-14">
         <div class="form-control-feedback">
@@ -187,14 +231,12 @@
                         <h4 class="m-text25 p-b-14">
                             Leave a Comment
                         </h4>
-                        <p class="s-text8 p-b-40">
-                            Your email address will not be published. Required fields are marked *
-                        </p>
                         <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Example textarea</label>
                             <textarea class="form-control col-md-6 col-sx-12" name="comment" id="exampleFormControlTextarea1" rows="5"></textarea>
                         </div>
+                        <br/>
                         <input name ="product_id" hidden value="{{$product->id}}">
+
 
                         <div class="w-size24">
                             <!-- Button -->
