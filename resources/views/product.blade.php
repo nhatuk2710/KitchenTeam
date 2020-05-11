@@ -251,7 +251,8 @@
         </div>
     </div>
         @endif
-    </div>
+
+
     <!-- Relate Product -->
     <section class="relateproduct bgwhite p-t-45 p-b-138">
         <div class="container">

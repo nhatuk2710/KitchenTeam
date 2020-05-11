@@ -11,11 +11,11 @@
                 </p>
 
                 <div class="flex-m p-t-30">
-                    <a href="#" class="fs-18 color1 p-r-20 fa fa-facebook"></a>
-                    <a href="#" class="fs-18 color1 p-r-20 fa fa-instagram"></a>
-                    <a href="#" class="fs-18 color1 p-r-20 fa fa-pinterest-p"></a>
-                    <a href="#" class="fs-18 color1 p-r-20 fa fa-snapchat-ghost"></a>
-                    <a href="#" class="fs-18 color1 p-r-20 fa fa-youtube-play"></a>
+                    <a href="https://www.facebook.com/" class="fs-18 color1 p-r-20 fa fa-facebook"></a>
+                    <a href="https://www.instagram.com/" class="fs-18 color1 p-r-20 fa fa-instagram"></a>
+                    <a href="https://www.pinterest.com/" class="fs-18 color1 p-r-20 fa fa-pinterest-p"></a>
+                    <a href="https://www.snapchat.com/" class="fs-18 color1 p-r-20 fa fa-snapchat-ghost"></a>
+                    <a href="https://www.yotube.com/" class="fs-18 color1 p-r-20 fa fa-youtube-play"></a>
                 </div>
             </div>
         </div>
@@ -24,31 +24,15 @@
             <h4 class="s-text12 p-b-30">
                 Categories
             </h4>
-
+<?php $cate =\App\Category::all() ?>
             <ul>
+                @foreach($cate as $c)
                 <li class="p-b-9">
-                    <a href="#" class="s-text7">
-                        Men
+                    <a href="{{url("listingCate/{$c->id}")}}" class="s-text7">
+                        {{$c->category_name}}
                     </a>
                 </li>
-
-                <li class="p-b-9">
-                    <a href="#" class="s-text7">
-                        Women
-                    </a>
-                </li>
-
-                <li class="p-b-9">
-                    <a href="#" class="s-text7">
-                        Dresses
-                    </a>
-                </li>
-
-                <li class="p-b-9">
-                    <a href="#" class="s-text7">
-                        Sunglasses
-                    </a>
-                </li>
+                    @endforeach
             </ul>
         </div>
 
@@ -140,23 +124,23 @@
 
     <div class="t-center p-l-15 p-r-15">
         <a href="#">
-            <img class="h-size2" src="images/icons/paypal.png" alt="IMG-PAYPAL">
+            <img class="h-size2" src="{{asset("images/icons/paypal.png")}}" alt="IMG-PAYPAL">
         </a>
 
         <a href="#">
-            <img class="h-size2" src="images/icons/visa.png" alt="IMG-VISA">
+            <img class="h-size2" src="{{asset("images/icons/visa.png")}}" alt="IMG-VISA">
         </a>
 
         <a href="#">
-            <img class="h-size2" src="images/icons/mastercard.png" alt="IMG-MASTERCARD">
+            <img class="h-size2" src="{{asset("images/icons/mastercard.png")}}" alt="IMG-MASTERCARD">
         </a>
 
         <a href="#">
-            <img class="h-size2" src="images/icons/express.png" alt="IMG-EXPRESS">
+            <img class="h-size2" src="{{asset("images/icons/express.png")}}" alt="IMG-EXPRESS">
         </a>
 
         <a href="#">
-            <img class="h-size2" src="images/icons/discover.png" alt="IMG-DISCOVER">
+            <img class="h-size2" src="{{asset("images/icons/discover.png")}}" alt="IMG-DISCOVER">
         </a>
 
         <div class="t-center s-text8 p-t-20">
@@ -184,7 +168,7 @@
         <div class="close-mo-video-01 trans-0-4" data-dismiss="modal" aria-label="Close">&times;</div>
 
         <div class="wrap-video-mo-01">
-            <div class="w-full wrap-pic-w op-0-0"><img src="images/icons/video-16-9.jpg" alt="IMG"></div>
+            <div class="w-full wrap-pic-w op-0-0"><img src="{{asset("images/icons/video-16-9.jpg")}}" alt="IMG"></div>
             <div class="video-mo-01">
                 <iframe src="https://www.youtube.com/embed/Nt8ZrWY2Cmk?rel=0&amp;showinfo=0" allowfullscreen></iframe>
             </div>
