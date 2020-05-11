@@ -275,38 +275,42 @@
                             <a href="{{asset("/")}}">Home</a>
                         </li>
 
-                        <li>
-                            <a href="{{asset("/")}}">Category</a>
-                            <ul class="sub_menu">
-                                @foreach(\App\Category::all() as $c)
+{{--                        <li>--}}
+{{--                            <ul class="sub_menu">--}}
+                                @foreach(\App\Category::all()->take(3) as $c)
                                 <li><a href="{{url("listingCate/{$c->id}")}}">{{$c->category_name}}</a></li>
                                     @endforeach
-                            </ul>
-                        </li>
+{{--                            </ul>--}}
+{{--                        </li>--}}
 
+{{--                        <li>--}}
+{{--                            <a href="{{asset("/")}}">Brand</a>--}}
+{{--                            <ul class="sub_menu">--}}
+{{--                                @foreach(\App\Brand::all() as $c)--}}
+{{--                                    <li><a href="{{url("listingBrand/{$c->id}")}}">{{$c->brand_name}}</a></li>--}}
+{{--                                @endforeach--}}
+{{--                            </ul>--}}
+{{--                        </li>--}}
+
+{{--                        <li>--}}
+{{--                            <a href="{{url("cart")}}">Features</a>--}}
+{{--                        </li>--}}
+
+{{--                        <li>--}}
+{{--                            <a href="#">Blog</a>--}}
+{{--                        </li>--}}
+
+{{--                        <li>--}}
+{{--                            <a href="#">About</a>--}}
+{{--                        </li>--}}
+
+{{--                        <li>--}}
+{{--                            <a href="#">Contact</a>--}}
+{{--                        </li>--}}
                         <li>
-                            <a href="{{asset("/")}}">Brand</a>
-                            <ul class="sub_menu">
-                                @foreach(\App\Brand::all() as $c)
-                                    <li><a href="{{url("listingBrand/{$c->id}")}}">{{$c->brand_name}}</a></li>
+                            @foreach(\App\Brand::all()->take(1) as $b)
+                                <a href="{{url("listingBrand"{$c->id})}}">{{$b->brand_name}}</a>
                                 @endforeach
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a href="{{url("cart")}}">Features</a>
-                        </li>
-
-                        <li>
-                            <a href="#">Blog</a>
-                        </li>
-
-                        <li>
-                            <a href="#">About</a>
-                        </li>
-
-                        <li>
-                            <a href="#">Contact</a>
                         </li>
                     </ul>
                 </nav>

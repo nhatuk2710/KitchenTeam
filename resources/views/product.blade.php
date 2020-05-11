@@ -27,11 +27,6 @@
             <i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
         </a>
 
-        <a href="{{"listingBrand/{$brand->id}"}}" class="s-text16">
-            {{$brand->brand_name}}
-            <i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
-        </a>
-
         <span class="s-text17">
 			{{$product->product_name}}
 		</span>
@@ -73,38 +68,6 @@
 
                 <!--  -->
                 <div class="p-t-33 p-b-60">
-                    <div class="flex-m flex-w p-b-10">
-                        <div class="s-text15 w-size15 t-center">
-                            Size
-                        </div>
-
-                        <div class="rs2-select2 rs3-select2 bo4 of-hidden w-size16">
-                            <select class="selection-2" name="size">
-                                <option>Choose an option</option>
-                                <option>Size S</option>
-                                <option>Size M</option>
-                                <option>Size L</option>
-                                <option>Size XL</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="flex-m flex-w">
-                        <div class="s-text15 w-size15 t-center">
-                            Color
-                        </div>
-
-                        <div class="rs2-select2 rs3-select2 bo4 of-hidden w-size16">
-                            <select class="selection-2" name="color">
-                                <option>Choose an option</option>
-                                <option>Gray</option>
-                                <option>Red</option>
-                                <option>Black</option>
-                                <option>Blue</option>
-                            </select>
-                        </div>
-                    </div>
-
                     <div class="flex-r-m flex-w p-t-10">
                         <div class="w-size16 flex-m flex-w">
                             <div class="flex-w bo5 of-hidden m-r-22 m-t-10 m-b-10">
@@ -127,10 +90,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="p-b-45">
-                    <span class="s-text8 m-r-35">SKU: MUG-01</span>
-                    <span class="s-text8">Categories: Mug, Design</span>
                 </div>
 
                 <!--  -->
@@ -205,7 +164,8 @@
                                     <div class="col-xs-10 col-md-11">
                                         <div>
                                             <div class="mic-info">
-                                                <a href="#">{{$user->name}}</a> on {{$c->created_at}}
+                                                <a href="#">{{$user->name}}</a> on {{date_format($user->created_at,"d M Y")}}
+
                                             </div>
                                             <div class="comment-text">
                                                 <p> {{$c->message}} </p>
