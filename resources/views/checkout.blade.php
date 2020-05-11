@@ -79,7 +79,7 @@
                     <br/>
                     <label>Telephone</label>
                     <div class="form-control ">
-                        <input type="number" name="telephone" class="form-group-sm ">
+                        <input type="tel" name="telephone" class="form-group-sm ">
                     </div>
                 </div>
                 <br/>
