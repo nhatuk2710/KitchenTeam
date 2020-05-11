@@ -69,12 +69,12 @@
 {{--                    </li>--}}
                     <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a>Table Trade<span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu">
+{{--                            <li><a>Table Trade<span class="fa fa-chevron-down"></span></a>--}}
+{{--                                <ul class="nav child_menu">--}}
                                     <li><a href="{{url("/admin/category/tableCate")}}">Category</a></li>
                                     <li><a href="{{url("/admin/brand/tableBrand")}}">Brand</a></li>
                                     <li><a href="{{url("/admin/product/tableProduct")}}">Product</a></li>
-                                </ul>
+{{--                                </ul>--}}
                             <li><a href="{{url("admin/user/tableUser")}}">Table User</a></li>
                             <li><a href="{{url("admin/order/tableOrder")}}">Table Order</a></li>
                         </ul>
@@ -144,15 +144,15 @@
 
         <!-- /menu footer buttons -->
         <div class="sidebar-footer hidden-small">
-            <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-            </a>
-            <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-            </a>
-            <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-            </a>
+{{--            <a data-toggle="tooltip" data-placement="top" title="Settings">--}}
+{{--                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>--}}
+{{--            </a>--}}
+{{--            <a data-toggle="tooltip" data-placement="top" title="FullScreen">--}}
+{{--                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>--}}
+{{--            </a>--}}
+{{--            <a data-toggle="tooltip" data-placement="top" title="Lock">--}}
+{{--                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>--}}
+{{--            </a>--}}
             <a data-toggle="tooltip" data-placement="top" title="Logout" href="{{url("logout")}}">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
             </a>
