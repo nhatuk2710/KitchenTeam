@@ -78,9 +78,6 @@
                                                 </td>
 
                                                 <td>
-                                                    {{--                                                <a href="" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal{{$p->id}}">--}}
-                                                    {{--                                                    Edit--}}
-                                                    {{--                                                </a>--}}
                                                     <form action="{{url("admin/user/userEdit/{$p->id}")}}" method="post">
                                                         @csrf
                                                         <input hidden name="role" value="1">

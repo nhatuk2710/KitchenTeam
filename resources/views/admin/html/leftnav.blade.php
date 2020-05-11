@@ -69,12 +69,12 @@
 {{--                    </li>--}}
                     <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a>Table Trade<span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu">
+{{--                            <li><a>Table Trade<span class="fa fa-chevron-down"></span></a>--}}
+{{--                                <ul class="nav child_menu">--}}
                                     <li><a href="{{url("/admin/category/tableCate")}}">Category</a></li>
                                     <li><a href="{{url("/admin/brand/tableBrand")}}">Brand</a></li>
                                     <li><a href="{{url("/admin/product/tableProduct")}}">Product</a></li>
-                                </ul>
+{{--                                </ul>--}}
                             <li><a href="{{url("admin/user/tableUser")}}">Table User</a></li>
                             <li><a href="{{url("admin/order/tableOrder")}}">Table Order</a></li>
                         </ul>
@@ -157,6 +157,5 @@
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
             </a>
         </div>
-        <!-- /menu footer buttons -->
     </div>
 </div>

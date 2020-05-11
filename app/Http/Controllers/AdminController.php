@@ -43,7 +43,6 @@ class AdminController extends Controller
             return redirect()->back();
         }
         return redirect()->back();
-
     }
 
 

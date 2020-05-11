@@ -1,6 +1,6 @@
 <footer>
     <div class="pull-right">
-        Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+      Kitchen Team by <a href="https://karluk.herokuapp.com">Karluk.herokuapp.com</a>
     </div>
     <div class="clearfix"></div>
 </footer>
