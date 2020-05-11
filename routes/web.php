@@ -52,11 +52,7 @@ Route::post("upAvt","WebController@upAvt");
 
 Route::get('log','WebController@log');
 Route::get("test",function (){
-$order =\App\Order::find(1);
-$product=$order->Products;
-foreach ($product as $p){
-  echo "$p->product_name";
-}
+    return view("rate");
 });
 
 Route::get('/logout', function (){

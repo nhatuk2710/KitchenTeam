@@ -1,8 +1,7 @@
 <head>
     <title>@yield('tittle')</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--===============================================================================================-->
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!--===============================================================================================-->
     <link rel="icon" type="image/png" href={{asset("images/icons/favicon.png")}}/>
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href={{asset("vendor/bootstrap/css/bootstrap.min.css")}}>
@@ -28,6 +27,8 @@
     <link rel="stylesheet" type="text/css" href={{asset("vendor/slick/slick.css")}}>
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href={{asset("vendor/lightbox2/css/lightbox.min.css")}}>
+    <script type="text/javascript" src={{asset("vendor/jquery/jquery-3.2.1.min.js")}}></script>
+
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href={{asset("css/util.css")}}>
     <link rel="stylesheet" type="text/css" href={{asset("css/main.css")}}>

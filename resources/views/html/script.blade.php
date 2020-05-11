@@ -1,4 +1,4 @@
-<script type="text/javascript" src={{asset("vendor/jquery/jquery-3.2.1.min.js")}}></script>
+
 <!--===============================================================================================-->
 <script type="text/javascript" src={{asset("vendor/animsition/js/animsition.min.js")}}></script>
 <!--===============================================================================================-->
@@ -18,6 +18,8 @@
     });
 </script>
 <!--===============================================================================================-->
+
+
 <script type="text/javascript" src={{asset("vendor/slick/slick.min.js")}}></script>
 <script type="text/javascript" src={{asset("js/slick-custom.js")}}></script>
 <!--===============================================================================================-->

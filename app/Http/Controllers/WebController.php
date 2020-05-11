@@ -365,6 +365,7 @@ class WebController extends Controller
         $product=Product::find($id);
         return view('feedback',['product'=>$product,'order'=>$order]);
     }
+
     public function postFeedback(Request $request,$id){
         $request->validate([
             'rate'=>'required',
@@ -385,19 +386,20 @@ class WebController extends Controller
         return view('comment');
     }
     public function postComment(Request $request){
-        $request->validate([
+        $validator = Validator::make($request->all(),[
             'message'=> 'required',
             'product_id'=>'',
         ]);
-        try {
-        Comment::create([
-            'user_id'=>Auth::id(),
-            'product_id'=>$request->get('product_id'),
-            'message'=>$request->get('message'),
-        ]);
-        }catch (\Exception $e){
-            return redirect()->back();
+        if( $validator->fails()){
+            return response()->json(["status"=>false,"message"=>$validator->errors()->first()]);
+        } else {
+            Comment::create([
+                'user_id'=>Auth::id(),
+                'product_id'=>$request->get('product_id'),
+                'message'=>$request->get('message'),
+            ]);
+            return response()->json(['status'=>true,'message'=>"Comment success"]);
         }
-        return redirect()->to("/");
+
     }
 }

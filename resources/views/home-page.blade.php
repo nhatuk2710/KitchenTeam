@@ -1,7 +1,9 @@
 @extends('layout')
 @section('tittle','Trang chủ')
 @section('all')
+
     <section class="slide1">
+
         <div class="wrap-slick1">
             <div class="slick1">
                 <div class="item-slick1 item1-slick1" style="background-image: url(images/slide-07.jpg);">
@@ -95,6 +97,7 @@
 <!-- Our product -->
 <section class="bgwhite p-t-45 p-b-58">
     <div class="container">
+
         <div class="sec-title p-b-22">
             <h3 class="m-text5 t-center">
                 Our Products

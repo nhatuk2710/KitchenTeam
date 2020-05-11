@@ -182,7 +182,7 @@
         <div class="form-control-feedback">
             <div class="avt">
                 <div class="container">
-                    <form action="{{url("comment")}}" method="post" class="leave-comment">
+                    <form action="#" method="post" class="leave-comment">
                         @csrf
                         <h4 class="m-text25 p-b-14">
                             Leave a Comment
@@ -192,13 +192,13 @@
                         </p>
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Example textarea</label>
-                            <textarea class="form-control col-md-6 col-sx-12" name="message" id="exampleFormControlTextarea1" rows="5"></textarea>
+                            <textarea class="form-control col-md-6 col-sx-12" name="comment" id="exampleFormControlTextarea1" rows="5"></textarea>
                         </div>
                         <input name ="product_id" hidden value="{{$product->id}}">
 
                         <div class="w-size24">
                             <!-- Button -->
-                            <button type="submit" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                            <button type="button" id="pComment" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
                                 Post Comment
                             </button>
                         </div>
@@ -261,4 +261,24 @@
 
         </div>
     </section>
+    <script type="text/javascript">
+        $("#pComment").bind("click",function () {
+            $.ajax({
+                url: "{{url("comment")}}",
+                method: "POST",
+                data: {
+                    _token: $("input[name=_token]").val(),
+                   message : $("textarea[name=comment]").val(),
+                    product_id: $("input[name=product_id]").val(),
+                },
+                success: function (res) {
+                    if(res.status){
+                        location.reload();
+                    }else{
+                        alert(res.message);
+                    }
+                }
+            });
+        });
+    </script>
     @endsection
