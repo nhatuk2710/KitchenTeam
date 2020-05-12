@@ -155,7 +155,7 @@
 
                     <!-- Product -->
                     <div class="row">
-                        @foreach($product   as $p)
+                        @foreach($product as $p)
                             <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
                                 <!-- Block2 -->
                                 <div class="block2">
