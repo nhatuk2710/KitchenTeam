@@ -170,7 +170,7 @@
 
                                     <div class="block2-btn-addcart w-size1 trans-0-4">
                                         <!-- Button -->
-                                        <a class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" href="{{url("/shopping/{$p->id}")}}">
+                                        <a class="AddtoCart flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" href="{{url("/shopping/{$p->id}")}}">
                                             Add to Cart
                                         </a>
                                     </div>
@@ -195,12 +195,6 @@
                 <div class="pagination flex-m flex-w p-t-26">
                     {!! $product->links('vendor.pagination.bootstrap-4') !!}
                 </div>
-                <div class="row">
-                    <div class="col-12 col-md-6" style="font-size: 2em;">
-                        <h5>Normal example</h5>
-                        <div id="review"></div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -221,12 +215,22 @@
 <div id="dropDownSelect1"></div>
 <div id="dropDownSelect2"></div>
 <script>
-    $("#review").rating({
-        "value": 2,
-        "click": function (e) {
-            console.log(e);
-            $("#starsInput").val(e.stars);
-        }
-    });
+    {{--$(".AddtoCart").bind("click",function () {--}}
+    {{--    var id=$(this).data('id');--}}
+    {{--    var url = '{{\Illuminate\Support\Facades\URL::to('shopping')}}/'+id;--}}
+    {{--    $.ajax({--}}
+    {{--        url: url,--}}
+    {{--        method: "GET",--}}
+    {{--        data: {--}}
+    {{--        },--}}
+    {{--        success: function (res) {--}}
+    {{--            if(res.status){--}}
+    {{--                location.reload();--}}
+    {{--            }else{--}}
+    {{--                alert(res.message);--}}
+    {{--            }--}}
+    {{--        }--}}
+    {{--    });--}}
+    {{--});--}}
 </script>
         @endsection

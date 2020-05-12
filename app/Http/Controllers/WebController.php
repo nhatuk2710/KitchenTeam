@@ -360,26 +360,28 @@ class WebController extends Controller
         }
         return redirect()->to("profile");
     }
-    public function feedback($a,$id){
-        $order=Order::find($a);
+    public function feedback($o,$id){
+        $order=Order::find($o);
         $product=Product::find($id);
         return view('feedback',['product'=>$product,'order'=>$order]);
     }
 
-    public function postFeedback(Request $request,$id){
+    public function postFeedback(Request $request){
         $request->validate([
             'rate'=>'required',
             'message'=> 'required',
         ]);
-        $product=Product::find($id);
-            DB::table("feedback")->insert ([
-                'product_id'=> $product->id,
-                'name'=> $request->get("customer_name"),
-                'email'=> $request->get("email"),
-                'telephone'=> $request->get("telephone"),
-                'rate'=> $request->get("rate"),
-                'message'=> $request->get("message"),
-            ]);
+        FeedBack::create([
+            'product_id'=> $request->get("id"),
+            'name'=> $request->get("name"),
+            'email'=> $request->get("address"),
+            'telephone'=> $request->get("telephone"),
+            'rate'=> $request->get("rate"),
+            'message'=> $request->get("message")
+        ]);
+//            DB::table("feedback")->insert ([
+//
+//            ]);
 
     }
     public function comment(){

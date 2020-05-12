@@ -179,7 +179,7 @@
 
                                     <div class="block2-txt p-t-20">
                                         <a href="{{url("product/{$p->id}")}}" class="block2-name dis-block s-text3 p-b-5">
-                                            {{$p->brand_name}}
+                                            {{$p->product_name}}
                                         </a>
 
                                         <span class="block2-price m-text6 p-r-5">
