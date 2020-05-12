@@ -31,6 +31,8 @@ Route::post("/shopping/{id}","WebController@pshopping")->middleware("auth");
 Route::get('cart','WebController@cart')->middleware('verified');
 Route::get("/reduceOne/{id}","WebController@reduceOne")->middleware("auth");
 Route::get("/increaseOne/{id}","WebController@increaseOne")->middleware("auth");
+//Route::get("/reduceOne/{id}","WebController@reduceOne")->middleware("auth");
+//Route::get("/increaseOne/{id}","WebController@increaseOne")->middleware("auth");
 Route::get("/increase/{id}","WebController@increase")->middleware("auth");
 Route::post("updateCart",'WebController@updateCart')->middleware("auth");
 Route::get("/deleteItemCart/{id}","WebController@deleteItemCart");

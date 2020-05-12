@@ -63,7 +63,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">
+                                        <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#add">
                                             Add +
                                         </a>
                                         @forelse($brands as $p)
@@ -87,11 +87,11 @@
                                                 <a>{{$p->updated_at}}</a>
                                             </td>
                                             <td>
-{{--                                                <a href="" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal{{$p->id}}">--}}
-{{--                                                    Edit--}}
-{{--                                                </a>--}}
-                                                <a href="{{url("admin/brand/brandEdit",['id'=>$p->id])}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                                                <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                                                <a href=""  class="editBrand btn btn-primary btn-xs" data-toggle="modal" data-target="#edit" data-id="{{$p->id}}">
+                                                    Edit
+                                                </a>
+{{--                                                <a href="{{url("admin/brand/brandEdit",['id'=>$p->id])}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>--}}
+                                                <a href="#" class="deleteBrand btn btn-danger btn-xs" data-id="{{$p->id}}"><i class="fa fa-trash-o"></i> Delete </a>
                                             </td>
                                         </tr>
                                             @empty
@@ -107,13 +107,10 @@
                     </div>
                 </div>
             </div>
-            <!-- /page content -->
 
-            <!-- footer content -->
-            <!-- /footer content -->
         </div>
     </div>
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -128,41 +125,35 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button id="loginBtnn" type="button" class="btn btn-primary">ADD</button>
+                        <button id="addBrand" type="button" class="btn btn-primary">ADD</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-{{--    @foreach($brands as $p)--}}
-{{--    <div class="modal fade" id="myModal{{$p->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">--}}
-{{--        <div class="modal-dialog" role="document">--}}
-{{--            <div class="modal-content">--}}
-{{--                <div class="modal-header">--}}
-{{--                    <h4 class="modal-title" id="myModalLabel">Brand</h4>--}}
-{{--                </div>--}}
-{{--                <form action="#" method="post">--}}
-{{--                    @csrf--}}
-{{--                    <div class="modal-body">--}}
-{{--                        <div class="form-group">--}}
-{{--                            <input type="text"  class="form-control @if($errors->has("brand_name"))is-invalid @endif" value="{{$p->brand_name}}" name="brand_name"--}}
-{{--                                   placeholder="Brand Name"/>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="modal-footer">--}}
-{{--                        <button id="loginBtnn{{$p->id}}" type="button" class="btn btn-primary">Edit</button>--}}
-{{--                    </div>--}}
-{{--                </form>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--@endforeach--}}
-{{--    <script type="text/javascript">--}}
-
-{{--    </script>--}}
-{{--    @foreach($brands as $p)--}}
+    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Brand</h4>
+                </div>
+                <form action="#" method="post">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="text"  class="form-control "  name="editBrand_name"
+                                   placeholder="Brand Name"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="editBrand" type="button" class="btn btn-primary">Edit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <script type="text/javascript">
-        $("#loginBtnn").bind("click",function () {
+        $("#addBrand").bind("click",function () {
             $.ajax({
                 url: "{{url("admin/createBrand")}}",
                 method: "POST",
@@ -179,6 +170,47 @@
                 }
             });
         });
+        $(".editBrand").bind("click",function () {
+            var id=$(this).data('id');
+            $("#editBrand").bind("click",function () {
+                var url = '{{\Illuminate\Support\Facades\URL::to('admin/editBrand')}}/'+id;
+                $.ajax({
+                    url: url,
+                    method: "POST",
+                    data: {
+                        _token: $("input[name=_token]").val(),
+                        brand_name: $("input[name=editBrand_name]").val(),
+                        id:id,
+                    },
+                    success: function (res) {
+                        if(res.status){
+                            location.reload();
+                        }else{
+                            alert(res.message);
+                        }
+                    }
+                });
+            });
+        })
+        $(".deleteBrand").bind("click",function () {
+            var id=$(this).data('id');
+            var url = '{{\Illuminate\Support\Facades\URL::to('admin/deleteBrand')}}/'+id;
+            $.ajax({
+                url: url,
+                method: "GET",
+                data: {
+                },
+                success: function (res) {
+                    if(res.status){
+                        location.reload();
+                    }else{
+                        alert(res.message);
+                    }
+                }
+            });
+        });
+
+
+
     </script>
-{{--@endforeach--}}
 @endsection

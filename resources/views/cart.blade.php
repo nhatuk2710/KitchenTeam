@@ -34,13 +34,13 @@
                             <td >$ {{$p->getPrice()}}</td>
                             <td >
                                 <div class="flex-w bo5 of-hidden w-size17">
-                                    <a class=" color1 flex-c-m size7 bg8 eff2" href="{{url("reduceOne/{$p->id}")}}">
+                                    <a class="reduceOne color1 flex-c-m size7 bg8 eff2" href="#" data-id="{{$p->id}}">
                                         <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
                                     </a>
 
                                     <input class="size8 m-text18 t-center num-product" type="number" name="qty/{{$p->id}}" value="{{$p->cart_qty}}">
 
-                                    <a class=" color1 flex-c-m size7 bg8 eff2" href="{{url("increaseOne/{$p->id}")}}" >
+                                    <a class="increaseOne color1 flex-c-m size7 bg8 eff2" href="#" data-id="{{$p->id}}" >
                                         <i class="fs-12 fa fa-plus" aria-hidden="true"></i>
                                     </a>
                                 </div>
@@ -81,5 +81,40 @@
     </section>
 
 
-
+<script type="text/javascript">
+    $(".increaseOne").bind("click",function () {
+        var id=$(this).data('id');
+        var url = '{{\Illuminate\Support\Facades\URL::to('increaseOne')}}/'+id;
+        $.ajax({
+            url: url,
+            method: "GET",
+            data: {
+            },
+            success: function (res) {
+                if(res.status){
+                    location.reload();
+                }else{
+                    alert(res.message);
+                }
+            }
+        });
+    });
+    $(".reduceOne").bind("click",function () {
+        var id=$(this).data('id');
+        var url = '{{\Illuminate\Support\Facades\URL::to('reduceOne')}}/'+id;
+        $.ajax({
+            url: url,
+            method: "GET",
+            data: {
+            },
+            success: function (res) {
+                if(res.status){
+                    location.reload();
+                }else{
+                    alert(res.message);
+                }
+            }
+        });
+    });
+</script>
     @endsection

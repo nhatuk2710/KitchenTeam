@@ -28,8 +28,8 @@ Route::post('product/productpost/{id}','AdminController@productPostEdit');
 
 Route::post('createCategory','AdminController@createCategory');
 Route::post('createBrand','AdminController@createBrand');
-Route::post('editBrand/','AdminController@editBrand')->name("editBrand");
-
+Route::post('editBrand/{id}','AdminController@editBrand');
+Route::get('deleteBrand/{id}','AdminController@deleteBrand');
 //order
 Route::get("order/tableOrder","AdminController@tableOrder");
 Route::post("order/editOrder/{id}","AdminController@editOrder");

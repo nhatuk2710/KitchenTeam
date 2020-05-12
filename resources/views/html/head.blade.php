@@ -28,7 +28,8 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href={{asset("vendor/lightbox2/css/lightbox.min.css")}}>
     <script type="text/javascript" src={{asset("vendor/jquery/jquery-3.2.1.min.js")}}></script>
-
+    <script type="text/javascript" src="{{asset("dist/rating.js")}}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href={{asset("css/util.css")}}>
     <link rel="stylesheet" type="text/css" href={{asset("css/main.css")}}>

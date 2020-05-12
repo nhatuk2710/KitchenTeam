@@ -1,6 +1,6 @@
 @extends('layout')
 @section('tittle',"Danh mục")
-    @section('all')
+@section('all')
 
 
 <!-- Title Page -->
@@ -195,6 +195,12 @@
                 <div class="pagination flex-m flex-w p-t-26">
                     {!! $product->links('vendor.pagination.bootstrap-4') !!}
                 </div>
+                <div class="row">
+                    <div class="col-12 col-md-6" style="font-size: 2em;">
+                        <h5>Normal example</h5>
+                        <div id="review"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -214,4 +220,13 @@
 <!-- Container Selection -->
 <div id="dropDownSelect1"></div>
 <div id="dropDownSelect2"></div>
+<script>
+    $("#review").rating({
+        "value": 2,
+        "click": function (e) {
+            console.log(e);
+            $("#starsInput").val(e.stars);
+        }
+    });
+</script>
         @endsection

@@ -285,7 +285,7 @@ class AdminController extends Controller
     public function editBrand($id,Request $request){
         $brand = Brand::find($id);
         $validator = Validator::make($request->all(),[
-            "brand_name" => 'required|string|unique:brand'.$id,
+            "brand_name" => 'string|unique:brand,brand_name,'.$id,
         ]);
         if($validator->fails()){
             return response()->json(['status'=>false,"message"=>$validator->errors()->first()]);
@@ -295,6 +295,16 @@ class AdminController extends Controller
             ]);
             return response()->json(["status"=>true,"message"=>"Brand succcess"]);
         }
+    }
+    public function deleteBrand($id){
+        $brand = Brand::find($id);
+
+        try {
+            $brand->delete();
+        }catch (\Exception $e){
+            return response()->json(['status'=>false,"message"=>"Fails"]);
+        }
+        return response()->json(["status"=>true,"message"=>"Succcess"]);
     }
 
     public function tableOrder(){

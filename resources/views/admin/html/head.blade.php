@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Kitchen Team Project! | </title>
-<script type="text/javascript" src="{{asset("js/jquery-3.3.1.min.js")}}"></script>
 <!-- Bootstrap -->
 <link href="{{asset("admin/vendors/bootstrap/dist/css/bootstrap.min.css")}}" rel="stylesheet">
 <!-- Font Awesome -->

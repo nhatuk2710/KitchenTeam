@@ -129,10 +129,10 @@ class WebController extends Controller
         foreach ($cart as $p){
             if($p->id ==$id){
                 $p->cart_qty-=1;
-                return redirect()->to("/cart");
+                return response()->json(["status"=>true,"message"=>"Succcess"]);
             }
         }
-        return redirect()->to("/cart");
+        return response()->json(['status'=>false,"message"=>"Fails"]);
     }
     public function increaseOne($id,Request $request){
         if(!$cart=session()->has("cart")){
@@ -142,10 +142,10 @@ class WebController extends Controller
         foreach ($cart as $p){
             if($p->id ==$id){
                 $p->cart_qty+=1;
-                return redirect()->to("/cart");
+                return response()->json(["status"=>true,"message"=>"Succcess"]);
             }
         }
-        return redirect()->to("/cart");
+        return response()->json(['status'=>false,"message"=>"Fails"]);
     }
 
 

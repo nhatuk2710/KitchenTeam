@@ -24,7 +24,7 @@
             <h4 class="s-text12 p-b-30">
                 Categories
             </h4>
-<?php $cate =\App\Category::all() ?>
+            <?php $cate =\App\Category::all() ?>
             <ul>
                 @foreach($cate as $c)
                 <li class="p-b-9">
