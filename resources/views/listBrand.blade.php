@@ -155,7 +155,7 @@
 
                     <!-- Product -->
                     <div class="row">
-                        @foreach($product   as $p)
+                        @foreach($product as $p)
                             <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
                                 <!-- Block2 -->
                                 <div class="block2">
@@ -179,7 +179,7 @@
 
                                     <div class="block2-txt p-t-20">
                                         <a href="{{url("product/{$p->id}")}}" class="block2-name dis-block s-text3 p-b-5">
-                                            {{$p->brand_name}}
+                                            {{$p->product_name}}
                                         </a>
 
                                         <span class="block2-price m-text6 p-r-5">

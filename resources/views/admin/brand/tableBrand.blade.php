@@ -180,7 +180,6 @@
                     data: {
                         _token: $("input[name=_token]").val(),
                         brand_name: $("input[name=editBrand_name]").val(),
-                        id:id,
                     },
                     success: function (res) {
                         if(res.status){
@@ -191,7 +190,7 @@
                     }
                 });
             });
-        })
+        });
         $(".deleteBrand").bind("click",function () {
             var id=$(this).data('id');
             var url = '{{\Illuminate\Support\Facades\URL::to('admin/deleteBrand')}}/'+id;

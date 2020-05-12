@@ -12,39 +12,14 @@
                     <a href="{{asset("/")}}">Home</a>
                 </li>
 
-                <li>
-                    <a href="#">Category</a>
-                    <ul class="sub_menu">
-                        @foreach(\App\Category::all() as $p)
+                        @foreach(\App\Category::all()->take(3) as $p)
                         <li><a href="{{url("listingCate/{$p->id}")}}">{{$p->category_name}}</a></li>
                             @endforeach
-                    </ul>
-                </li>
 
-                <li>
-                    <a href="#">Brand</a>
-                    <ul class="sub_menu">
-                        @foreach(\App\Brand::all() as $p)
+                        @foreach(\App\Brand::all()->take(1) as $p)
                             <li><a href="{{url("listingBrand/{$p->id}")}}">{{$p->brand_name}}</a></li>
                         @endforeach
-                    </ul>
-                </li>
 
-                <li>
-                    <a href="{{url("cart")}}">Features</a>
-                </li>
-
-                <li>
-                    <a href="#">Blog</a>
-                </li>
-
-                <li>
-                    <a href="#">About</a>
-                </li>
-
-                <li>
-                    <a href="#">Contact</a>
-                </li>
             </ul>
         </nav>
     </div>
@@ -54,11 +29,11 @@
 
         @if(!Auth::check())
             <a href="{{url("login")}}" class="header-wrapicon1 dis-block m-l-30">
-                <img src="{{asset("images/icons/icon-header-01.png")}}"  class="header-icon1" alt="ICON">
+                <img src="{{asset("images/icons/icon-header-01.png")}}"  class="header-icon1">
             </a>
         @else
             <a href="{{url("profile")}}" class="header-wrapicon1 dis-block m-l-30 pull-right">
-                <img  src="{{Auth::user()->avt}}" class="header-icon1 rounded-circle "  alt="ICON">
+                <img  src="{{Auth::user()->avt}}" class="header-icon1 rounded-circle ">
             </a>
 {{--            <div class="topbar-language rs1-select2">--}}
 {{--                <select class="selection-1" href="{{url("logout")}}" name="time">--}}
@@ -178,7 +153,7 @@
             <div class="topbar-child2">
 					<span class="topbar-email">
 					</span>
-                <a href="#"class="header-wrapicon1 dis-block m-l-30" data-toggle="modal" data-target="#myModal">
+                <a href="#" class="header-wrapicon1 dis-block m-l-30" data-toggle="modal" data-target="#myModal">
                     <img src="{{asset("images/icons/icon-header-01.png")}}"  class="header-icon1" alt="ICON">
                 </a>
                 @else
@@ -279,7 +254,7 @@
                                     @endforeach
                         <li>
                             @foreach(\App\Brand::all()->take(1) as $b)
-                                <a href="{{url("listingBrand"{$c->id})}}">{{$b->brand_name}}</a>
+                                <a href="{{url("listingBrand/{$b->id}")}}">{{$b->brand_name}}</a>
                                 @endforeach
                         </li>
                     </ul>
@@ -462,40 +437,21 @@
                 </li>
 
                 <li class="item-menu-mobile">
-                    <a href="{{url("/")}}">Category</a>
-                    <ul class="sub-menu">
-                        @foreach(\App\Category::all() as $c)
-                        <li><a href="{{asset("listingCate/{$c->id}")}}">{{$c->category_name}}</a></li>
+                        @foreach(\App\Category::all()->take(3) as $c)
+                        <a href="{{asset("listingCate/{$c->id}")}}">{{$c->category_name}}</a>
                             @endforeach
-                    </ul>
                     <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
                 </li>
 
                 <li class="item-menu-mobile">
-                    <a href="{{url("/")}}">Brand</a>
-                    <ul class="sub-menu">
-                        @foreach(\App\Brand::all() as $c)
-                            <li><a href="{{asset("listingBrand/{$c->id}")}}">{{$c->brand_name}}</a></li>
+
+                        @foreach(\App\Brand::all()->take(1) as $c)
+                            <a href="{{asset("listingBrand/{$c->id}")}}">{{$c->brand_name}}</a>
                         @endforeach
-                    </ul>
+
                     <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
                 </li>
 
-                <li class="item-menu-mobile">
-                    <a href="{{url("cart")}}">Features</a>
-                </li>
-
-                <li class="item-menu-mobile">
-                    <a href="#">Blog</a>
-                </li>
-
-                <li class="item-menu-mobile">
-                    <a href="#">About</a>
-                </li>
-
-                <li class="item-menu-mobile">
-                    <a href="#">Contact</a>
-                </li>
             </ul>
         </nav>
     </div>

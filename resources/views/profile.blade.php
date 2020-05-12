@@ -6,17 +6,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @includeIf('html.head')
-    <link rel="stylesheet" href={{asset("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")}}>
-        <script src={{asset("https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")}}></script>
-        <script src={{asset("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")}}></script>
-{{--    <link href={{asset("//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css")}} rel="stylesheet" id="bootstrap-css">--}}
-        <script src={{asset("//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js")}}></script>
-        <script src={{asset("//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js")}}></script>
-<!------ Include the above in your HEAD tag ---------->
-
-    <link href={{asset("//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css")}} rel="stylesheet" id="bootstrap-css">
-        <script src={{asset("//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js")}}></script>
-        <script src={{asset("//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js")}}></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 <style>
@@ -40,13 +32,7 @@
 {{--        <i class="fa fa-remove fs-13" aria-hidden="true"></i>--}}
 {{--    </button>--}}
 {{--</div>--}}
-<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(images/heading-pages-02.jpg);">
-    <h2 class="l-text2 t-center">
-    </h2>
-    <p class="m-text13 t-center">
 
-    </p>
-</section>
 <div class="row">
     <div class="col-sm-12 col-lg-12 col-md-12 text-center" style="margin: 5% 0% 3%" ><h1 style="font-size: xx-large">Your Profile</h1></div>
     {{--        <div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100"></a></div>--}}
@@ -119,9 +105,8 @@
         <div class="col-sm-9">
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+                <li><a data-toggle="tab" href="#order">Order</a></li>
             </ul>
-
-
             <div class="tab-content">
                 <div class="tab-pane active" id="home">
                     <hr>
@@ -155,7 +140,7 @@
 
                             <div class="col-xs-6 col-md-6">
                                 <label for="email"><h4>Email</h4></label>
-                                <input type="email" class="form-control" style="font-size: large" name="email" value="{{$user->email}}" id="email" placeholder="you@email.com" title="enter your email.">
+                                <input type="email" class="form-control" style="font-size: large" name="email" value="{{$user->email}}" id="email" placeholder="your@email.com" title="enter your email.">
                             </div>
                         </div>
 
@@ -175,9 +160,64 @@
                             </div>
                         </div>
                     </form>
+
                 </div><!--/tab-pane-->
+                <div class="tab-pane" id="order">
+                    <!-- Cart -->
+                    <section class="cart bgwhite p-t-70 p-b-100">
+                        <div class="container">
+                            <!-- Cart item -->
+                            <div class="container-table-cart pos-relative">
+                                <div class="wrap-table-shopping-cart bgwhite">
+                                    <table class="table-shopping-cart">
+                                        <tr class="table-head">
+                                            <th>Order #</th>
+                                            <th>Customer name</th>
+                                            <th>Shipping address</th>
+                                            <th >Telephone</th>
+                                            <th >Grand total</th>
+                                            <th>Payment method</th>
+                                            <th>Order status</th>
+                                            <th>Created at</th>
+                                        </tr>
+                                        @forelse($order as $p)
+                                            <tr class="table-row">
+                                                <td >
+                                                    <a href="{{\Illuminate\Support\Facades\URL::signedRoute("orderDetails",['id'=>$p->id])}}"># {{$p->id}}</a>
+                                                    {{--                                    <a href="{{url("orderDetails",['id'=>$p->id])}}"> # {{$p->id}}</a>--}}
+                                                </td>
+                                                <td >{{$p->customer_name}}</td>
+                                                <td >{{$p->shipping_address}}</td>
+                                                <td >{{$p->telephone}}</td>
+                                                <td >${{$p->grand_total}}</td>
+                                                <td >{{$p->payment_method}}</td>
+                                                @if($p->status==0)
+                                                    <td >Pending</td>
+                                                @elseif($p->status==1)
+                                                    <td >Process</td>
+                                                @elseif($p->status==2)
+                                                    <td >Shipping</td>
+                                                @elseif($p->status==3)
+                                                    <td >Complete</td>
+                                                @elseif($p->status==4)
+                                                    <td >Cancel</td>
+                                                @endif
+                                                <td >{{$p->created_at}}</td>
+                                            </tr>
+                                        @empty
+                                            <p>Không có đơn hàng</p>
+                                        @endforelse
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
             </div><!--/tab-pane-->
+
         </div><!--/tab-content-->
+
+
 
     </div><!--/col-9-->
 </div><!--/row-->
