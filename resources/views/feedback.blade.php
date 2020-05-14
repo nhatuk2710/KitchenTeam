@@ -24,7 +24,7 @@
                                 <input hidden class="sizefull s-text7 p-l-18 p-r-18" type="text" name="telephone" value="{{$order->telephone}}">
                             <div class=" of-hidden size19 m-b-30">
                                 <p>Rate</p>
-                                <h4><div id="review"></div></h4>
+                                <h4><div id="review" ></div></h4>
                                 <input hidden type="text" name="rate" readonly id="starsInput" class="form-control form-control-sm">
                             </div>
 
@@ -42,8 +42,10 @@
         </div>
     </section>
     <script>
+        var s =1
         $("#review").rating({
-            "value": 5,
+            "half": true,
+            "value":s ,
             "click": function (e) {
                 console.log(e);
                 $("#starsInput").val(e.stars);

@@ -1,9 +1,8 @@
-
+<script src="{{asset("Login/vendor/daterangepicker/moment.min.js")}}"></script>
+<script src="{{asset("Login/vendor/daterangepicker/daterangepicker.js")}}"></script>
 <!--===============================================================================================-->
 <script type="text/javascript" src={{asset("vendor/animsition/js/animsition.min.js")}}></script>
 <!--===============================================================================================-->
-<script type="text/javascript" src={{asset("vendor/bootstrap/js/popper.js")}}></script>
-<script type="text/javascript" src={{asset("vendor/bootstrap/js/bootstrap.min.js")}}></script>
 <!--===============================================================================================-->
 <script type="text/javascript" src={{asset("vendor/select2/select2.min.js")}}></script>
 <script type="text/javascript">
@@ -33,6 +32,12 @@
         var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
         $(this).on('click', function(){
             swal(nameProduct, "is added to cart !", "success");
+        });
+    });
+    $('.out').each(function(){
+        var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
+        $(this).on('click', function(){
+            swal(nameProduct, "Out of stock !", "warning");
         });
     });
 

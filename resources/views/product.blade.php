@@ -1,6 +1,6 @@
 @extends('layout')
 @section('all')
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+{{--    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">--}}
 {{--    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>--}}
 {{--    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>--}}
     <!------ Include the above in your HEAD tag ---------->
@@ -62,8 +62,15 @@
 					${{$product->getPrice()}}
 				</span>
 
+
                 <p class="s-text8 p-t-10">
-                    Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
+                    @if($product->quantity==0)
+                        Quantity : Out of stock
+                   @elseif($product->quantity>0 && $product->quantity<=10)
+                        Quantity : Only {{$product->quantity}} left
+                    @elseif($product->quantity>10)
+                        Quantity :{{$product->quantity}}
+                    @endif
                 </p>
 
                 <!--  -->
@@ -84,12 +91,20 @@
 
                             <div class="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10">
                                 <!-- Button -->
+                                @if(!\Illuminate\Support\Facades\Auth::check())
+                                    <a href="#" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" data-toggle="modal" data-target="#myModal">Add to Cart </a>
+                                        @else
                                 <button type="submit" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
                                     Add to Cart
                                 </button>
+                                    @endif
                             </div>
                         </div>
                     </div>
+                </div>
+                <div  style="color: rgb(252, 215, 3);">
+                <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-full"></i>
                 </div>
 
                 <!--  -->
@@ -133,6 +148,7 @@
                             Fusce ornare mi vel risus porttitor dignissim. Nunc eget risus at ipsum blandit ornare vel sed velit. Proin gravida arcu nisl, a dignissim mauris placerat
                         </p>
                     </div>
+
                 </div>
             </div>
         </div>

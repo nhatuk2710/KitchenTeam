@@ -224,7 +224,7 @@
 
                                 <div class="header-cart-wrapbtn">
                                     <!-- Button -->
-                                    <a href="{{"checkout"}}" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                    <a href="{{url("check-out")}}" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
                                         Check Out
                                     </a>
                                 </div>

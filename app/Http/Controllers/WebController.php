@@ -55,12 +55,20 @@ class WebController extends Controller
         if($cart==null){
             $cart=[];
         }
+
         foreach ($cart as $p){
-            if($p->id == $product->id){
-                $p->cart_qty =$p->cart_qty+1;
-                session(["cart"=>$cart]);
-                return redirect()->back()->with('success', ['your message,here']);
+
+                if($p->id == $product->id ){
+                    if ($p->cart_qty < $product->quantity){ $p->cart_qty =$p->cart_qty+1;
+                        session(["cart"=>$cart]);
+                        return redirect()->back()->with('success', ['your message,here']);
+                    }else{
+                        return back();
+                    }
+
             }
+
+
         }
         $product->cart_qty=1;
         $cart[]=$product;
@@ -70,14 +78,15 @@ class WebController extends Controller
     public function pshopping($id, Request $request){
         $product=Product::find($id);
         $cart =$request->session()->get("cart");
-        $request->validate([
-            'qty'=> 'required | string',
-        ]);
+
         if($cart==null){
             $cart=[];
         }
         foreach ($cart as $p){
             if($p->id == $product->id){
+                $request->validate([
+                    'qty'=> 'required|integer|between:1,'.($product->quantity-$p->cart_qty)
+                ]);
                 $p->cart_qty =$p->cart_qty+$request->get("qty");
                 session(["cart"=>$cart]);
                 return redirect()->to("/cart");
@@ -107,13 +116,15 @@ class WebController extends Controller
             return redirect()->to("/");
         }
         $cart =$request-> session()->get('cart');
-
         if($cart==null){
             $cart=[];
         }
         foreach ($cart as $p){
             $product = Product::find($p->id);
-            $p->cart_qty =$request->input("qty/$p->id");
+            $request->validate([
+                'qty'.'/'.$p->id  => 'required|integer|between:1,'.$product->quantity,
+            ]);
+            $p->cart_qty =$request->get("qty/$p->id");
             $cart[] = $product;
         }
 

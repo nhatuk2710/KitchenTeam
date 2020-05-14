@@ -30,19 +30,32 @@
                                     <img src="{{asset($p->thumbnail)}}" alt="IMG-PRODUCT">
                                 </div>
                             </td>
-                            <td >$ {{$p->product_name}}</td>
+                            <td >$ {{$p->product_name}}
+                            {{$p->id}}
+                            </td>
                             <td >$ {{$p->getPrice()}}</td>
                             <td >
                                 <div class="flex-w bo5 of-hidden w-size17">
-                                    <a class="reduceOne color1 flex-c-m size7 bg8 eff2" href="#" data-id="{{$p->id}}">
+                                    @if($p->cart_qty<=1)
+                                        <a  class="color1 flex-c-m size7 bg8 eff2" disabled>
+                                            <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
+                                        </a>
+                                    @else
+                                    <a  class="reduceOne color1 flex-c-m size7 bg8 eff2" href="#" data-id="{{$p->id}}">
                                         <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
                                     </a>
+                                  @endif
 
                                     <input class="size8 m-text18 t-center num-product" type="number" name="qty/{{$p->id}}" value="{{$p->cart_qty}}">
-
+                                    @if($p->cart_qty<$p->quantity)
                                     <a class="increaseOne color1 flex-c-m size7 bg8 eff2" href="#" data-id="{{$p->id}}" >
                                         <i class="fs-12 fa fa-plus" aria-hidden="true"></i>
                                     </a>
+                                        @else
+                                            <a class="color1 flex-c-m size7 bg8 eff2" disabled >
+                                                <i class="fs-12 fa fa-plus" aria-hidden="true"></i>
+                                            </a>
+                                    @endif
                                 </div>
                             </td>
                             <td >$ {{$p->cart_qty*$p->price}}</td>
