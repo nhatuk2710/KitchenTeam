@@ -168,12 +168,20 @@
                                                 <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
                                             </a>
 
-                                            <div class="block2-btn-addcart w-size1 trans-0-4">
-                                                <!-- Button -->
-                                                <a class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" href="{{url("/shopping/{$p->id}")}}">
-                                                  Add to Cart
-                                                </a>
-                                            </div>
+                                            @if(!$p->quantity==0)
+                                                <div class="block2-btn-addcart w-size1 trans-0-4">
+                                                    <!-- Button -->
+                                                    <a class="AddtoCart flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" href="{{url("/shopping/{$p->id}")}}">
+                                                        Add to Cart
+                                                    </a>
+                                                </div>
+                                            @else
+                                                <div class="block2-btn-addcart out w-size1 trans-0-4">
+                                                    <a class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" disabled>
+                                                        Out of stock
+                                                    </a>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
 

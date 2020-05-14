@@ -30,7 +30,7 @@ Route::get("/shopping/{id}","WebController@shopping")->middleware("auth");
 Route::post("/shopping/{id}","WebController@pshopping")->middleware("auth");
 Route::get('cart','WebController@cart')->middleware('verified');
 Route::get("/reduceOne/{id}","WebController@reduceOne")->middleware("auth");
-Route::get("/increaseOne/{id}","WebController@reduceOne")->middleware("auth");
+Route::get("/increaseOne/{id}","WebController@increaseOne")->middleware("auth");
 //Route::get("/reduceOne/{id}","WebController@reduceOne")->middleware("auth");
 //Route::get("/increaseOne/{id}","WebController@increaseOne")->middleware("auth");
 Route::get("/increase/{id}","WebController@increase")->middleware("auth");
@@ -54,7 +54,7 @@ Route::post("upAvt","WebController@upAvt");
 
 Route::get('log','WebController@log');
 Route::get("test",function (){
-    return view("rate");
+    return view("login");
 });
 
 Route::get('/logout', function (){

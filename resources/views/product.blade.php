@@ -1,14 +1,10 @@
 @extends('layout')
 @section('all')
-{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">--}}
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+{{--    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">--}}
 {{--    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>--}}
 {{--    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>--}}
     <!------ Include the above in your HEAD tag ---------->
     <style>
-        .fa fa-star{
-            color: yellow;
-        }
         .widget .panel-body { padding:0px; }
         .widget .list-group { margin-bottom: 0; }
         .widget .panel-title { display:inline }
@@ -61,60 +57,20 @@
                 <h4 class="product-detail-name m-text16 p-b-13">
                     {{$product->product_name}}
                 </h4>
-                <h4 class="product-detail-name m-text16 p-b-13">
-{{--                    Rank : {{number_format($rate->avg('rate'),0)}}--}}
-                    <div class="" style="color: greenyellow">
-                            @if($rate->avg('rate') < 1)
-                            <i class="fa fa-star-half"></i>
-                                @elseif($rate->avg('rate') == 1)
-                            <i class="fa fa-star"></i>
-                                @elseif($rate->avg('rate') < 2)
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-half-full"></i>
-                                @elseif($rate->avg('rate') == 2)
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                                @elseif($rate->avg('rate') < 3 )
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-half"></i>
-                                @elseif($rate->avg('rate') == 3)
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                                @elseif($rate->avg('rate') < 4)
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-half"></i>
-                                @elseif($rate->avg('rate') == 4)
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                                @elseif($rate->avg('rate') < 5)
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-half"></i>
-                                @elseif($rate->avg('rate') == 5)
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        @endif
-                    </div>
-
-                </h4>
 
                 <span class="m-text17">
 					${{$product->getPrice()}}
 				</span>
 
+
                 <p class="s-text8 p-t-10">
-                    Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
+                    @if($product->quantity==0)
+                        Quantity : Out of stock
+                   @elseif($product->quantity>0 && $product->quantity<=10)
+                        Quantity : Only {{$product->quantity}} left
+                    @elseif($product->quantity>10)
+                        Quantity :{{$product->quantity}}
+                    @endif
                 </p>
 
                 <!--  -->
@@ -135,12 +91,20 @@
 
                             <div class="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10">
                                 <!-- Button -->
+                                @if(!\Illuminate\Support\Facades\Auth::check())
+                                    <a href="#" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" data-toggle="modal" data-target="#myModal">Add to Cart </a>
+                                        @else
                                 <button type="submit" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
                                     Add to Cart
                                 </button>
+                                    @endif
                             </div>
                         </div>
                     </div>
+                </div>
+                <div  style="color: rgb(252, 215, 3);">
+                <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-full"></i>
                 </div>
 
                 <!--  -->
@@ -174,53 +138,17 @@
 
                 <div class="wrap-dropdown-content bo7 p-t-15 p-b-14">
                     <h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
-                        Reviews ( {{count($rate)}} )
+                        Reviews (0)
                         <i class="down-mark fs-12 color1 fa fa-minus dis-none" aria-hidden="true"></i>
                         <i class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>
                     </h5>
-                    <div class="dropdown-content dis-none p-t-15 p-b-23">
-                        @forelse($rate as $r)
-                        @if($r->rate == 5)
-                           <p> {{$r->name}} :
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                           </p>
-                            <a> {{$r->message}}</a>
-                            <p>on {{$r->created_at}}</p>
-{{--                            <p>Feedback : {{$r->telephone}}</p>--}}
-                            @elseif($r->rate == 4)
-                                <p> {{$r->name}} :
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
 
-                                </p>
-                            <a>{{$r->message}}</a>
-                                <p>on {{$r->created_at}}</p>
-                            @elseif($r->rate == 3)
-                               <p> {{$r->name}}
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                               </p>
-                            @elseif($r->rate == 2)
-                                <p>{{$r->name}}
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                </p>
-                            @elseif($r->rate == 1)
-                               <p>{{$r->name}}
-                                <i class="fa fa-star"></i>
-                               </p>
-                            @endif
-                            @empty
-                            No feedback
-                        @endforelse
+                    <div class="dropdown-content dis-none p-t-15 p-b-23">
+                        <p class="s-text8">
+                            Fusce ornare mi vel risus porttitor dignissim. Nunc eget risus at ipsum blandit ornare vel sed velit. Proin gravida arcu nisl, a dignissim mauris placerat
+                        </p>
                     </div>
+
                 </div>
             </div>
         </div>
