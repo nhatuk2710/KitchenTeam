@@ -143,7 +143,7 @@
                                                                         <center style='color:#ffffff;font-family:Oswald, sans-serif;font-size:12px;font-weight:700;'>VIEW MY ORDER</center>
                                                                     </v:roundrect></a>
                                                                 <![endif]-->
-                                                                <!--[if !mso]><!-- --><span class="es-button-border msohide"><a href="https://viewstripo.email/" class="es-button" target="_blank">VIEW MY ORDER</a></span>
+                                                                <!--[if !mso]><!-- --><span class="es-button-border msohide"><a href="{{url("oldBill")}}" class="es-button" target="_blank">VIEW MY ORDER</a></span>
                                                                 <!--<![endif]-->
                                                             </td>
                                                         </tr>
@@ -235,6 +235,7 @@
                                                 <td class="esdev-mso-td" valign="top">
                                                     <table cellspacing="0" cellpadding="0" align="right">
                                                         <tbody>
+                                                        @foreach($cart as $p)
                                                         <tr>
                                                             <td class="esd-container-frame" width="480" align="left">
                                                                 <table width="100%" cellspacing="0" cellpadding="0">
@@ -245,13 +246,13 @@
                                                                                 <tbody>
                                                                                 <tr>
                                                                                     <td>
-                                                                                        <p><strong>BLACK COAT</strong></p>
+                                                                                        <p><strong>{{$p->product_name}}</strong></p>
                                                                                     </td>
                                                                                     <td style="text-align: center;" width="15%">
                                                                                         <p>1</p>
                                                                                     </td>
                                                                                     <td style="text-align: center;" width="30%">
-                                                                                        <p>$240.00</p>
+                                                                                        <p>${{$p->price}}</p>
                                                                                     </td>
                                                                                 </tr>
                                                                                 </tbody>
@@ -272,6 +273,7 @@
                                                                 </table>
                                                             </td>
                                                         </tr>
+                                                            @endforeach
                                                         </tbody>
                                                     </table>
                                                 </td>
@@ -321,49 +323,6 @@
                                                                     <tbody>
                                                                     <tr>
                                                                         <td class="esd-block-image es-p20r" align="left" style="font-size:0"><a href target="_blank"><img src="https://tlr.stripocdn.email/content/guids/CABINET_fbea7d1c20ad1f585ae93867ac6f5ef9/images/60141573133688256.jpg" alt="Natural Balance L.I.D., sale 30%" title="Natural Balance L.I.D., sale 30%" width="100" style="display: block;"></a></td>
-                                                                    </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                                <td class="esdev-mso-td" valign="top">
-                                                    <table cellspacing="0" cellpadding="0" align="right">
-                                                        <tbody>
-                                                        <tr>
-                                                            <td class="esd-container-frame" width="480" align="left">
-                                                                <table width="100%" cellspacing="0" cellpadding="0">
-                                                                    <tbody>
-                                                                    <tr>
-                                                                        <td align="left" class="esd-block-text es-p10b">
-                                                                            <table style="width: 100%;" class="cke_show_border" cellspacing="1" cellpadding="1" border="0">
-                                                                                <tbody>
-                                                                                <tr>
-                                                                                    <td>
-                                                                                        <p><strong>BROWN JACKET</strong></p>
-                                                                                    </td>
-                                                                                    <td style="text-align: center;" width="15%">
-                                                                                        <p>1</p>
-                                                                                    </td>
-                                                                                    <td style="text-align: center;" width="30%">
-                                                                                        <p>$240.00</p>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                </tbody>
-                                                                            </table>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td align="left" class="esd-block-text">
-                                                                            <p style="color: #999999;">Hoodie</p>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td align="left" class="esd-block-text">
-                                                                            <p style="color: #999999;">Medium</p>
-                                                                        </td>
                                                                     </tr>
                                                                     </tbody>
                                                                 </table>

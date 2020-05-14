@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -16,9 +17,12 @@ class OrderCreated extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public $order;
+    public $cart;
+    public function __construct(Order $order,$cart)
     {
-        //
+        $this->order = $order;
+        $this->cart = $cart;
     }
 
     /**
@@ -28,6 +32,6 @@ class OrderCreated extends Mailable
      */
     public function build()
     {
-        return $this->markdown('email.OrderCreated');
+        return $this->markdown('email.OrderCreated')->with(['order'=>$this->order])->with(['cart'=>$this->cart]);
     }
 }
