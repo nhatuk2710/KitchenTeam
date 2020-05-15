@@ -34,7 +34,7 @@
 						Sign In With
 					</span>
 
-                                <a href="#" class="btn-face m-b-20">
+                                <a href="{{ url('/auth/redirect/facebook') }}" class="btn-face m-b-20">
                                     <i class="fa fa-facebook-official"></i>
                                     Facebook
                                 </a>
@@ -63,6 +63,7 @@
                                             Forgot?
                                         </a>
                                     @endif
+
 
                                 </div>
                                 <div class="wrap-input100 validate-input" data-validate = "Password is required">

@@ -74,3 +74,6 @@ Route::get('chart-line-ajax', 'ChartController@chartLineAjax');
 Route::get('comment','WebController@comment');
 Route::post('comment','WebController@postComment');
 
+
+Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
+Route::get('/callback/{provider}', 'SocialController@callback');
