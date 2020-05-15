@@ -27,28 +27,66 @@
 @if(!Auth::check())
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Login</h4>
-                    </div>
-                    <form action="#" method="post">
-                        @csrf
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input type="email" name="email" class="form-control" placeholder="email"/>
-                            </div>
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" name="password" class="form-control" placeholder="password"/>
-                            </div>
+                        <div class="wrap-login100  p-l-110 p-r-110 p-t-62 p-b-33" style="background-color: whitesmoke">
+                            <form method="post" class="login100-form validate-form flex-sb flex-w">
+                                @csrf
+					<span class="login100-form-title p-b-53">
+						Sign In With
+					</span>
+
+                                <a href="#" class="btn-face m-b-20">
+                                    <i class="fa fa-facebook-official"></i>
+                                    Facebook
+                                </a>
+
+                                <a href="#" class="btn-google m-b-20">
+                                    <img src="{{asset("Login/images/icons/icon-google.png")}}" alt="GOOGLE">
+                                    Google
+                                </a>
+
+                                <div class="p-t-31 p-b-9">
+						<span class="txt1">
+							Email
+						</span>
+                                </div>
+                                <div class="wrap-input100 validate-input" data-validate = "Username is required">
+                                    <input class="input100" type="email" name="email" >
+                                    <span class="focus-input100"></span>
+                                </div>
+
+                                <div class="p-t-13 p-b-9">
+						<span class="txt1">
+							Password
+						</span>
+                                    @if (Route::has('password.request'))
+                                        <a href="{{ route('password.request') }}" class="txt2 bo1 m-l-5">
+                                            Forgot?
+                                        </a>
+                                    @endif
+
+                                </div>
+                                <div class="wrap-input100 validate-input" data-validate = "Password is required">
+                                    <input class="input100" type="password" name="password" >
+                                    <span class="focus-input100"></span>
+                                </div>
+
+                                <div class="container-login100-form-btn m-t-17">
+                                    <button type="button" id="loginBtn" class="login100-form-btn">
+                                        Sign In
+                                    </button>
+                                </div>
+
+                                <div class="w-full text-center p-t-55">
+						<span class="txt2">
+							Not a member?
+						</span>
+
+                                    <a href="{{url("register")}}" class="txt2 bo1">
+                                        Sign up now
+                                    </a>
+                                </div>
+                            </form>
                         </div>
-                        <div class="modal-footer">
-                            <button id="loginBtn" type="button" class="btn btn-primary">Login</button>
-                        </div>
-                    </form>
-                </div>
             </div>
         </div>
     <script type="text/javascript">

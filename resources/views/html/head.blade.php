@@ -32,7 +32,6 @@
     <script type="text/javascript" src="{{asset("dist/rating.js")}}"></script>
     <script type="text/javascript" src={{asset("vendor/bootstrap/js/popper.js")}}></script>
     <script type="text/javascript" src={{asset("vendor/bootstrap/js/bootstrap.min.js")}}></script>
-
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href={{asset("css/util.css")}}>
     <link rel="stylesheet" type="text/css" href={{asset("css/main.css")}}>
@@ -42,8 +41,7 @@
         }
     </script>
 
-    <link rel="stylesheet" type="text/css" href="{{asset("Login/css/util.css")}}">
-    <link rel="stylesheet" type="text/css" href="{{asset("Login/css/main.css")}}">
+
     <link rel="icon" type="image/png" href="{{asset("Login/images/icons/favicon.ico")}}"/>
     <!--===============================================================================================-->
     <!--===============================================================================================-->
