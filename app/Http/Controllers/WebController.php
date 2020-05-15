@@ -31,12 +31,14 @@ class WebController extends Controller
     }
 
     public function product($id){
+        $rate = FeedBack::where("product_id",$id)->get();
+        $rateAvg = FeedBack::where("rate",$id)->avg('rate');
         $product=Product::find($id);
         $brand = Brand::find($product->brand_id);
         $category=Category::find($product->category_id);
         $brand_product =$brand->Products()->take(4)->get();
         $category_product =Category::find($product->category_id)->Products()->take(8)->get();
-        return view('product',['product'=>$product,'category_product'=>$category_product,'brand_product'=>$brand_product,'brand'=>$brand,'category'=>$category]);
+        return view('product',['rate'=>$rate,'product'=>$product,'category_product'=>$category_product,'brand_product'=>$brand_product,'brand'=>$brand,'category'=>$category]);
     }
     public function listingcate($id){
         $categories = Category::find($id);
@@ -232,7 +234,7 @@ class WebController extends Controller
                 'price'=>$p->price
             ]);
         }
-        Mail::to(Auth::user()->email)->send(new OrderCreated());
+        Mail::to(Auth::user()->email)->send(new OrderCreated($order,$cart));
         session()->forget("cart");
         return redirect()->to("/checkout-success");
     }
