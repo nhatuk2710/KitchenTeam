@@ -22,6 +22,7 @@ class SocialController extends Controller
     }
     function createUser($getInfo,$provider){
         $user = User::where('provider_id', $getInfo->id)->first();
+        dd($user);
         if (!$user) {
             $user = User::create([
                 'name'     => $getInfo->name,
