@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
@@ -24,7 +25,7 @@ class SocialController extends Controller
         $user = User::where('provider_id', $getInfo->id)->first();
         if (!$user) {
             $user = User::create([
-                'avt'       =>$getInfo->avata,
+                'avatar' => $avatarUrl = Arr::get($user, 'picture'),
                 'name'     => $getInfo->name,
                 'email'    => $getInfo->email,
                 'provider' => $provider,
