@@ -12,13 +12,9 @@
                     <a href="{{asset("/")}}">Home</a>
                 </li>
 
-                        @foreach(\App\Category::all()->take(3) as $p)
-                        <li><a href="{{url("listingCate/{$p->id}")}}">{{$p->category_name}}</a></li>
-                            @endforeach
-
-                        @foreach(\App\Brand::all()->take(1) as $p)
-                            <li><a href="{{url("listingBrand/{$p->id}")}}">{{$p->brand_name}}</a></li>
-                        @endforeach
+                @foreach(\App\Category::all() as $c)
+                    <li><a href="{{url("listingCate/{$c->id}")}}">{{$c->category_name}}</a></li>
+                @endforeach
 
             </ul>
         </nav>
@@ -249,14 +245,9 @@
                         <li>
                             <a href="{{asset("/")}}">Home</a>
                         </li>
-                                @foreach(\App\Category::all()->take(3) as $c)
-                                <li><a href="{{url("listingCate/{$c->id}")}}">{{$c->category_name}}</a></li>
-                                    @endforeach
-                        <li>
-                            @foreach(\App\Brand::all()->take(1) as $b)
-                                <a href="{{url("listingBrand/{$b->id}")}}">{{$b->brand_name}}</a>
-                                @endforeach
-                        </li>
+                        @foreach(\App\Category::all() as $c)
+                            <li><a href="{{url("listingCate/{$c->id}")}}">{{$c->category_name}}</a></li>
+                        @endforeach
                     </ul>
                 </nav>
             </div>
@@ -430,28 +421,12 @@
 
                 <li class="item-menu-mobile">
                     <a href="{{url("/")}}">Home</a>
-                    <ul class="sub-menu">
-                        <li><a href="{{url("/")}}">Home</a></li>
-                    </ul>
-                    <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
                 </li>
-
+                @foreach(\App\Category::all() as $c)
                 <li class="item-menu-mobile">
-                        @foreach(\App\Category::all()->take(3) as $c)
                         <a href="{{asset("listingCate/{$c->id}")}}">{{$c->category_name}}</a>
-                            @endforeach
-                    <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
                 </li>
-
-                <li class="item-menu-mobile">
-
-                        @foreach(\App\Brand::all()->take(1) as $c)
-                            <a href="{{asset("listingBrand/{$c->id}")}}">{{$c->brand_name}}</a>
-                        @endforeach
-
-                    <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
-                </li>
-
+                @endforeach
             </ul>
         </nav>
     </div>

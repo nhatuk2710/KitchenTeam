@@ -40,7 +40,7 @@
                                 </a>
 
                                 <a href="#" class="btn-google m-b-20">
-                                    <img src="{{asset("Login/images/icons/icon-google.png")}}" alt="GOOGLE">
+                                    <img src="{{asset("th/images/icons/icon-google.png")}}" alt="GOOGLE">
                                     Google
                                 </a>
 

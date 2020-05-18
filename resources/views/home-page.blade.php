@@ -55,7 +55,7 @@
 
                         <div style="color: red"  class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="rotateIn">
                             <!-- Button -->
-                            <a style="color: black" href="product.html" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
+                            <a style="color: black" href="#" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
                                 Shop Now
                             </a>
                         </div>
@@ -77,7 +77,7 @@
             <div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto">
                 <!-- block1 -->
                 <div class="block1 hov-img-zoom pos-relative m-b-30">
-                    <a href="{{url("listingBrand/{$p->id}")}}"><img src={{asset($p->image)}} alt="IMG-BENNER"></a>
+                    <a href="{{url("listingBrand/{$p->id}")}}"><img src={{asset($p->image)}} alt="IMG-BENNER" style="width: 75%"></a>
 
                     <div class="block1-wrapbtn w-size2">
                         <!-- Button -->

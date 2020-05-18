@@ -242,8 +242,7 @@
 {{--    });--}}
 {{--</script>--}}
 {{--    @endsection--}}
-@includeIf('html.footer')
-@includeIf('html.script')
+
 </body>
 </html>
 

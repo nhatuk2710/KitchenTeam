@@ -54,7 +54,10 @@ Route::post("upAvt","WebController@upAvt");
 
 Route::get('log','WebController@log');
 Route::get("test",function (){
-    return view("login");
+   $category =\App\Brand::all()->take(1);
+ foreach ($category as $category){
+     dd($category->brand_name);
+ }
 });
 
 Route::get('/logout', function (){
@@ -63,7 +66,7 @@ Route::get('/logout', function (){
     return redirect()->to("/");
 });
 
-Auth::routes(['verify' => true]);
+Auth::routes();
 
 //Route::get('profile', function () {
 //    return view('home-page');
