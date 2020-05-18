@@ -20,11 +20,12 @@ class SocialController extends Controller
         auth()->login($user);
         return redirect()->to('/');
     }
-    function createUser($getInfo,$provider){
+    function createUser($getInfo,$provider,$file, $path){
         $user = User::where('provider_id', $getInfo->id)->first();
-        dd($user);
+        $fileContents = file_get_contents($file);
         if (!$user) {
             $user = User::create([
+                'avt'     => File::put(public_path() . $path . $getInfo->id . ".jpg", $fileContents),
                 'name'     => $getInfo->name,
                 'email'    => $getInfo->email,
                 'provider' => $provider,
