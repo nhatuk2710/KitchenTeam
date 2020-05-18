@@ -159,7 +159,13 @@
 					</span>
                         <div class="dropdown">
                             <button class="header-wrapicon1 dis-block m-l-30" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="{{asset(Auth::user()->avt)}}" class="header-icon1 rounded-circle ">
+                                @if(!isset(Auth::user()->avt))
+                                       <img src="{{asset('images/icons/noImg.jpg')}}" class="header-icon1 rounded-circle ">
+
+                                    @else
+                                       <img src="{{asset(Auth::user()->avt)}}" class="header-icon1 rounded-circle ">
+
+                                @endif
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="{{url("profile")}}">View profile</a>

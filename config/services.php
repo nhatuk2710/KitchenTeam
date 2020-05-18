@@ -13,6 +13,18 @@ return [
     | a conventional file to locate the various service credentials.
     |
     */
+
+//    'google' => [
+//        'client_id' => env('GOOGLE_CLIENT_ID'),
+//        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+//        'redirect' => env('GOOGLE_REDIRECT_URI', env('APP_URL')) . '/social/google/callback',
+//    ],
+    'google' => [
+    'client_id' => ' 979922513056-p3afvouf4rps9gj53bmon9i14b6lvj4c.apps.googleusercontent.com',
+    'client_secret' => ' krtjV9xulsHKmI713cGz3qFf',
+    'redirect' => 'http://karluk.herokuapp.com/auth/google/callback',
+        ],
+
     'facebook' => [
         'client_id' => env('FACEBOOK_APP_ID'),
         'client_secret' => env('FACEBOOK_APP_SECRET'),
