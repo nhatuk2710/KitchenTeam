@@ -66,7 +66,7 @@ Route::get('/logout', function (){
     return redirect()->to("/");
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 //Route::get('profile', function () {
 //    return view('home-page');
