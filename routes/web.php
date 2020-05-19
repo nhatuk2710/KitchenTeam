@@ -54,10 +54,7 @@ Route::post("upAvt","WebController@upAvt");
 
 Route::get('log','WebController@log');
 Route::get("test",function (){
-   $category =\App\Brand::all()->take(1);
- foreach ($category as $category){
-     dd($category->brand_name);
- }
+ return view('email.OrderCreated');
 });
 
 Route::get('/logout', function (){

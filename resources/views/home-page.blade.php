@@ -42,8 +42,8 @@
                         </div>
                     </div>
                 </div>
-                979922513056-p3afvouf4rps9gj53bmon9i14b6lvj4c.apps.googleusercontent.com
-                krtjV9xulsHKmI713cGz3qFf
+{{--                979922513056-p3afvouf4rps9gj53bmon9i14b6lvj4c.apps.googleusercontent.com--}}
+{{--                krtjV9xulsHKmI713cGz3qFf--}}
                 <div class="item-slick1 item3-slick1" style="background-image: url(images/slide-02.jpg);">
                     <div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
                         <h2 style="color: red"  class="caption1-slide1 xl-text2 t-center bo14 p-b-6 animated visible-false m-b-22" data-appear="rotateInDownLeft">

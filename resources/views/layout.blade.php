@@ -39,7 +39,7 @@
                                     Facebook
                                 </a>
 
-                                <a href="{{ URL::to('auth/google') }}" class="btn-google m-b-20">
+                                <a href="{{ url('/auth/google') }}" class="btn-google m-b-20">
                                     <img src="{{asset("th/images/icons/icon-google.png")}}" alt="GOOGLE">
                                     Google
                                 </a>

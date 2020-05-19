@@ -20,8 +20,8 @@ return [
 //        'redirect' => env('GOOGLE_REDIRECT_URI', env('APP_URL')) . '/social/google/callback',
 //    ],
     'google' => [
-    'client_id' => ' 979922513056-p3afvouf4rps9gj53bmon9i14b6lvj4c.apps.googleusercontent.com',
-    'client_secret' => ' krtjV9xulsHKmI713cGz3qFf',
+    'client_id' => ' 979922513056-oio51on9iuoqad1ame14npp4u3qh1f9a.apps.googleusercontent.com',
+    'client_secret' => ' Mb7e5nPWiioRKS58sUR5o6yd',
     'redirect' => 'http://karluk.herokuapp.com/auth/google/callback',
         ],
 

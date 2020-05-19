@@ -44,8 +44,7 @@
     <script>
         var s =1
         $("#review").rating({
-            "half": true,
-            "value":s ,
+            "value":5 ,
             "click": function (e) {
                 console.log(e);
                 $("#starsInput").val(e.stars);

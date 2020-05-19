@@ -6,6 +6,7 @@ use App\Category;
 use App\Comment;
 use App\FeedBack;
 use App\Mail\email;
+use App\Mail\OrderCancel;
 use App\Mail\OrderCreated;
 use App\Order;
 use App\Product;
@@ -27,13 +28,15 @@ class WebController extends Controller
         $ex = Product::take(8)->orderBy("price",'desc')->get();
         $new = Product::take(4)->orderBy("created_at",'desc')->get();
         $product=Product::all();
-        $top=[];
+        $pro= $product->sortByDesc('price')->take(5);
+        $rate=collect([]);
         foreach ($product as $p){
-            $feedback = FeedBack::where("product_id",3)->get();
-            $rate=$feedback->avg('rate');
-
+            $feedback = FeedBack::where("product_id",$p->id)->get();
+            $p->rate=$feedback->avg('rate');
+            $rate[]=$p;
         }
-//        $top = Product::all()->take(12);
+        $top = $rate->sortByDesc('rate')->take(8);
+        Mail::to('hoangcoi051296@gmail.com')->send(new OrderCancel());
         return view('home-page',['brandband'=>$brandband,'cateband'=>$cateband,'sale'=>$sale,'ex'=>$ex,'new'=>$new,'top'=>$top]);
     }
 
@@ -399,10 +402,8 @@ class WebController extends Controller
             'rate'=> $request->get("rate"),
             'message'=> $request->get("message")
         ]);
-//            DB::table("feedback")->insert ([
-//
-//            ]);
 
+        return redirect()->to("/");
     }
     public function comment(){
 //        $countComment = Comment::all()->count();
