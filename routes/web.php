@@ -52,10 +52,10 @@ Route::get('/profile','WebController@profile')->middleware("auth");
 Route::post("/upProfile","WebController@upProfile");
 Route::post("upAvt","WebController@upAvt");
 
-Route::get('log','WebController@log');
+Route::post('postPromotion','WebController@postPromotion');
 Route::get("test",function (){
     $cart = session()->get('cart');
- return view('email.OrderCreated');
+ return view('email.OrderCancel');
 });
 
 Route::get('/logout', function (){

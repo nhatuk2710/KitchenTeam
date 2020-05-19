@@ -14,6 +14,7 @@ use App\Brand;
 use App\User;
 use http\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -62,13 +63,10 @@ class WebController extends Controller
     public function shopping($id, Request $request){
         $product=Product::find($id);
         $cart =$request->session()->get("cart");
-
         if($cart==null){
             $cart=[];
         }
-
         foreach ($cart as $p){
-
                 if($p->id == $product->id ){
                     if ($p->cart_qty < $product->quantity){ $p->cart_qty =$p->cart_qty+1;
                         session(["cart"=>$cart]);
@@ -76,10 +74,7 @@ class WebController extends Controller
                     }else{
                         return back();
                     }
-
             }
-
-
         }
         $product->cart_qty=1;
         $cart[]=$product;
@@ -89,7 +84,6 @@ class WebController extends Controller
     public function pshopping($id, Request $request){
         $product=Product::find($id);
         $cart =$request->session()->get("cart");
-
         if($cart==null){
             $cart=[];
         }
@@ -108,8 +102,6 @@ class WebController extends Controller
         session(["cart"=>$cart]);
         return redirect()->to("/cart");
     }
-
-
     public function cart(Request $request){
         $cart = $request->session()->get("cart");
         if($cart == null){
@@ -120,7 +112,6 @@ class WebController extends Controller
             $cart_total += ($p->price*$p->cart_qty);
         }
         return view("cart",["cart"=>$cart,'cart_total'=>$cart_total]);
-
     }
     public function updateCart(Request $request){
         if(!$cart=session()->has("cart")){
@@ -141,8 +132,6 @@ class WebController extends Controller
 
         return redirect()->to("/cart");
     }
-
-
     public function reduceOne($id,Request $request){
         if(!$cart=session()->has("cart")){
             return redirect()->to("/");
@@ -169,8 +158,6 @@ class WebController extends Controller
         }
         return response()->json(['status'=>false,"message"=>"Fails"]);
     }
-
-
     public function deleteItemCart($id){
         $cartOld = session()->get("cart");
         session()->forget("cart");
@@ -188,13 +175,10 @@ class WebController extends Controller
         }
         return redirect()->to("/cart");
     }
-
     public function clearCart(Request $request){
         $request->session()->forget("cart");
         return redirect()->to("/");
     }
-
-
     public function checkout(Request $request){
         if(!$request->session()->has("cart")){
             return redirect()->to("/");
@@ -247,7 +231,6 @@ class WebController extends Controller
         session()->forget("cart");
         return redirect()->to("/checkout-success");
     }
-
     public function oldBill(Request $request){
         $order =Order::where ("user_id",Auth::id())->get();
         $orderPend = Order::where("user_id",Auth::id())->where("status",0)->get();
@@ -303,17 +286,13 @@ class WebController extends Controller
         }
         return redirect()->to("/oldBill");
     }
-
-
     public function checkoutSuccess(){
         return view("checkoutSuccess");
     }
     public function getListOrder(){
-
         $listOrder =Order::where ("user_id",Auth::id())->get();
         return view('listOrder',['listOrder'=>$listOrder]);
     }
-
     public function postLogin(Request $request){
         $validator = Validator::make($request->all(),[
             "email" => 'required|email',
@@ -330,7 +309,6 @@ class WebController extends Controller
         }
         return response()->json(['status'=>false,'message'=>"login failure"]);
     }
-
     public function profile(){
         $user = Auth::user();
         $order = Order::where("user_id",Auth::id())->paginate(1);
@@ -341,7 +319,6 @@ class WebController extends Controller
         $countCan = Order::where("user_id",Auth::id())->where("status",4)->get()->count();
         return view('profile',['user'=>$user,'order'=>$order,'countPend'=>$countPend,'countPro'=>$countPro,'countShip'=>$countShip,'countCom'=>$countCom,'countCan'=>$countCan]);
     }
-
     public function upProfile(Request $request){
         $user = User::find(Auth::id());
         $request->validate([
@@ -361,7 +338,6 @@ class WebController extends Controller
         }
         return redirect()->to("/");
     }
-
     public function upAvt(Request $request){
         $user = User::find(Auth::id());
         try {
@@ -382,12 +358,27 @@ class WebController extends Controller
         }
         return redirect()->to("profile");
     }
+    public function postPromotion(Request $request){
+        $validator = Validator::make($request->all(),[
+            'emailSub'=> 'required|unique:emailsub,email',
+        ]);
+        if( $validator->fails()){
+            return response()->json(["status"=>false,"message"=>$validator->errors()->first()]);
+        } else {
+            DB::table("emailSub")->insert([
+               'email'=>$request->get('emailSub'),
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now(),
+            ]);
+            return response()->json(['status'=>true,'message'=>"Success"]);
+        }
+
+    }
     public function feedback($o,$id){
         $order=Order::find($o);
         $product=Product::find($id);
         return view('feedback',['product'=>$product,'order'=>$order]);
     }
-
     public function postFeedback(Request $request){
         $request->validate([
             'rate'=>'required',
