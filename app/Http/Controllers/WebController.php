@@ -36,7 +36,6 @@ class WebController extends Controller
             $rate[]=$p;
         }
         $top = $rate->sortByDesc('rate')->take(8);
-        Mail::to('hoangcoi051296@gmail.com')->send(new OrderCancel());
         return view('home-page',['brandband'=>$brandband,'cateband'=>$cateband,'sale'=>$sale,'ex'=>$ex,'new'=>$new,'top'=>$top]);
     }
 

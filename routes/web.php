@@ -54,6 +54,7 @@ Route::post("upAvt","WebController@upAvt");
 
 Route::get('log','WebController@log');
 Route::get("test",function (){
+    $cart = session()->get('cart');
  return view('email.OrderCreated');
 });
 
