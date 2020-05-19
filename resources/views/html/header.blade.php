@@ -12,7 +12,7 @@
                     <a href="{{asset("/")}}">Home</a>
                 </li>
 
-                @foreach(\App\Category::all() as $c)
+                @foreach(\App\Category::all()->take(3) as $c)
                     <li><a href="{{url("listingCate/{$c->id}")}}">{{$c->category_name}}</a></li>
                 @endforeach
 
@@ -24,12 +24,17 @@
     <div class="header-icons">
 
         @if(!Auth::check())
-            <a href="{{url("login")}}" class="header-wrapicon1 dis-block m-l-30">
+            <a href="#" class="header-wrapicon1 dis-block m-l-30" data-toggle="modal" data-target="#myModal">
                 <img src="{{asset("images/icons/icon-header-01.png")}}"  class="header-icon1">
             </a>
         @else
             <a href="{{url("profile")}}" class="header-wrapicon1 dis-block m-l-30 pull-right">
+                @if(isset(Auth::user()->avt))
                 <img  src="{{Auth::user()->avt}}" class="header-icon1 rounded-circle ">
+                    @else
+                    <img  src="{{asset('images/icons/noImg.jpg')}}" class="header-icon1 rounded-circle ">
+                    <a href="{{url("profile")}}">{{Auth::user()->name}}</a>
+                @endif
             </a>
 {{--            <div class="topbar-language rs1-select2">--}}
 {{--                <select class="selection-1" href="{{url("logout")}}" name="time">--}}

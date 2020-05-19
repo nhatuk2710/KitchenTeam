@@ -28,7 +28,7 @@ Route::get('listingBrand/{id}','WebController@listingBrand');
 Route::get('/product/{id}','WebController@product');
 Route::get("/shopping/{id}","WebController@shopping")->middleware("auth");
 Route::post("/shopping/{id}","WebController@pshopping")->middleware("auth");
-Route::get('cart','WebController@cart')->middleware('verified');
+Route::get('cart','WebController@cart')->middleware('auth');
 Route::get("/reduceOne/{id}","WebController@reduceOne")->middleware("auth");
 Route::get("/increaseOne/{id}","WebController@increaseOne")->middleware("auth");
 //Route::get("/reduceOne/{id}","WebController@reduceOne")->middleware("auth");
@@ -37,14 +37,14 @@ Route::get("/increase/{id}","WebController@increase")->middleware("auth");
 Route::post("updateCart",'WebController@updateCart')->middleware("auth");
 Route::get("/deleteItemCart/{id}","WebController@deleteItemCart");
 Route::get("/clear-cart","WebController@clearCart")->middleware("auth");
-Route::get("/check-out","WebController@checkout")->middleware("auth");
-Route::post("/check-out","WebController@placeOrder")->middleware("auth");
-Route::get("checkout-success","WebController@checkoutSuccess") ;
+Route::get("/check-out","WebController@checkout")->middleware('verified');
+Route::post("/check-out","WebController@placeOrder")->middleware('verified');
+Route::get("checkout-success","WebController@checkoutSuccess")->middleware('verified') ;
 //Route::get("cancelBill","WebController@@cancelbill");
-Route::get("oldBill","WebController@oldBill");
-Route::get("orderDetails/{id}","WebController@orderDetails")->name('orderDetails')->middleware("signed");
-Route::get("deleteOrder/{id}","WebController@deleteOrder")->name('deleteOrder')->middleware("signed");
-Route::get("repurchase/{id}","WebController@repurchase")->middleware("auth");
+Route::get("oldBill","WebController@oldBill")->middleware('verified');
+Route::get("orderDetails/{id}","WebController@orderDetails")->name('orderDetails')->middleware("signed")->middleware('verified');
+Route::get("deleteOrder/{id}","WebController@deleteOrder")->name('deleteOrder')->middleware("signed")->middleware('verified');
+Route::get("repurchase/{id}","WebController@repurchase")->middleware('verified');
 Route::get("feedback/{o}/{id}","WebController@feedback")->name('feedback')->middleware("signed");
 Route::post("feedback","WebController@postFeedback");
 
@@ -65,10 +65,6 @@ Route::get('/logout', function (){
 });
 
 Auth::routes(['verify' => true]);
-
-//Route::get('profile', function () {
-//    return view('home-page');
-//})->middleware('verified');
 
 Route::get('chart-line', 'ChartController@chartLine');
 Route::get('chart-line-ajax', 'ChartController@chartLineAjax');

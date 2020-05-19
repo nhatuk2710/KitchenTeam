@@ -342,12 +342,15 @@ class WebController extends Controller
         $user = User::find(Auth::id());
         try {
             $avt = null;
+            $ext_allow = ["png","jpg","jpeg","gif","svg"];
             if($request->hasFile("avt")) {
                 $file = $request->file("avt");
-                $file_name = $file->getClientOriginalName();
+                $file_name = time()."-".$file->getClientOriginalName();
                 $ext = $file->getClientOriginalExtension();
-                $file->move("upload", $file_name);
-                $avt = "upload/" . $file_name;
+                if(in_array($ext,$ext_allow)){
+                    $file->move("upload",$file_name);
+                    $avt = "upload/".$file_name;
+                }
             }
             $user->update([
                 "avt"=>$avt,

@@ -94,13 +94,6 @@
                 @endif
             </ul>
 
-            <div class="panel panel-default">
-                <div class="panel-heading"><a href="{{url("oldBill")}}">View Order</a></div>
-                <div class="panel-body">
-                    <i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i> <i class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i class="fa fa-google-plus fa-2x"></i>
-                </div>
-            </div>
-
         </div><!--/col-3-->
         <div class="col-sm-9">
             <ul class="nav nav-tabs">
