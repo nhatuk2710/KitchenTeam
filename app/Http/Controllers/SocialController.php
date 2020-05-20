@@ -22,12 +22,12 @@ class SocialController extends Controller
         return redirect()->to('/');
     }
     function createUser($getInfo,$provider){
-        $userIn =User::all();
-        foreach($userIn as $u){
-            if ($u->email==$getInfo->email){
-                return back();
-            }
-        }
+//        $userIn =User::all();
+//        foreach($userIn as $u){
+//            if ($u->email==$getInfo->email){
+//                return back();
+//            }
+//        }
         $user = User::where('provider_id', $getInfo->id)->first();
         if (!$user) {
             $user = User::create([
