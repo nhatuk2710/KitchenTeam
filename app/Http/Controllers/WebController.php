@@ -59,18 +59,15 @@ class WebController extends Controller
         }
 
         foreach ($cart as $p){
-
-                if($p->id == $product->id ){
-                    if ($p->cart_qty < $product->quantity){ $p->cart_qty =$p->cart_qty+1;
-                        session(["cart"=>$cart]);
-                        return redirect()->back()->with('success', ['your message,here']);
-                    }else{
-                        return back();
-                    }
-
+            if($p->id == $product->id ){
+                if ($p->cart_qty < $product->quantity){
+                    $p->cart_qty =$p->cart_qty+1;
+                    session(["cart"=>$cart]);
+                    return redirect()->back()->with('success', ['your message,here']);
+                }else{
+                    return back();
+                }
             }
-
-
         }
         $product->cart_qty=1;
         $cart[]=$product;
