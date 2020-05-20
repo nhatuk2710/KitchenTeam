@@ -12,13 +12,9 @@
                     <a href="{{asset("/")}}">Home</a>
                 </li>
 
-                        @foreach(\App\Category::all()->take(3) as $p)
-                        <li><a href="{{url("listingCate/{$p->id}")}}">{{$p->category_name}}</a></li>
-                            @endforeach
-
-                        @foreach(\App\Brand::all()->take(1) as $p)
-                            <li><a href="{{url("listingBrand/{$p->id}")}}">{{$p->brand_name}}</a></li>
-                        @endforeach
+                @foreach(\App\Category::all()->take(3) as $c)
+                    <li><a href="{{url("listingCate/{$c->id}")}}">{{$c->category_name}}</a></li>
+                @endforeach
 
             </ul>
         </nav>
@@ -28,12 +24,17 @@
     <div class="header-icons">
 
         @if(!Auth::check())
-            <a href="{{url("login")}}" class="header-wrapicon1 dis-block m-l-30">
+            <a href="#" class="header-wrapicon1 dis-block m-l-30" data-toggle="modal" data-target="#myModal">
                 <img src="{{asset("images/icons/icon-header-01.png")}}"  class="header-icon1">
             </a>
         @else
             <a href="{{url("profile")}}" class="header-wrapicon1 dis-block m-l-30 pull-right">
+                @if(isset(Auth::user()->avt))
                 <img  src="{{Auth::user()->avt}}" class="header-icon1 rounded-circle ">
+                    @else
+                    <img  src="{{asset('images/icons/noImg.jpg')}}" class="header-icon1 rounded-circle ">
+                    <a href="{{url("profile")}}">{{Auth::user()->name}}</a>
+                @endif
             </a>
 {{--            <div class="topbar-language rs1-select2">--}}
 {{--                <select class="selection-1" href="{{url("logout")}}" name="time">--}}
@@ -163,7 +164,13 @@
 					</span>
                         <div class="dropdown">
                             <button class="header-wrapicon1 dis-block m-l-30" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="{{asset(Auth::user()->avt)}}" class="header-icon1 rounded-circle ">
+                                @if(!isset(Auth::user()->avt))
+                                       <img src="{{asset('images/icons/noImg.jpg')}}" class="header-icon1 rounded-circle ">
+
+                                    @else
+                                       <img src="{{asset(Auth::user()->avt)}}" class="header-icon1 rounded-circle ">
+
+                                @endif
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="{{url("profile")}}">View profile</a>
@@ -249,14 +256,9 @@
                         <li>
                             <a href="{{asset("/")}}">Home</a>
                         </li>
-                                @foreach(\App\Category::all()->take(3) as $c)
-                                <li><a href="{{url("listingCate/{$c->id}")}}">{{$c->category_name}}</a></li>
-                                    @endforeach
-                        <li>
-                            @foreach(\App\Brand::all()->take(1) as $b)
-                                <a href="{{url("listingBrand/{$b->id}")}}">{{$b->brand_name}}</a>
-                                @endforeach
-                        </li>
+                        @foreach(\App\Category::all() as $c)
+                            <li><a href="{{url("listingCate/{$c->id}")}}">{{$c->category_name}}</a></li>
+                        @endforeach
                     </ul>
                 </nav>
             </div>
@@ -280,13 +282,28 @@
             <!-- Header Icon mobile -->
             <div class="header-icons-mobile">
                 @if(!Auth::check())
-                    <a href="#" class="header-wrapicon1 dis-block m-l-30">
-                        <img src="{{asset("images/icons/icon-header-01.png")}}" class="header-icon1" alt="ICON">
-                    </a>
+                    <div class="dropdown">
+                        <button class="header-wrapicon1 dis-block m-l-30" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a href="#" class="header-wrapicon1 dis-block m-l-30" >
+                                <img src="{{asset("images/icons/icon-header-01.png")}}" class="header-icon1" alt="ICON">
+                            </a>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="{{url("login")}}">Login</a>
+                            <a class="dropdown-item" href="{{url("register")}}">Create new account</a>
+                        </div>
+                    </div>
+
                 @else
+                    @if(isset(Auth::user()->avt))
                     <a href="{{url("profile")}}" class="header-wrapicon1 dis-block m-l-30">
                         <img src="{{asset(Auth::user()->avt)}}" class="header-icon1 rounded-circle "  alt="ICON">
                     </a>
+                @else
+                        <a href="{{url("profile")}}" class="header-wrapicon1 dis-block m-l-30">
+                            <img src="{{asset('images/icons/noImg.jpg')}}" class="header-icon1 rounded-circle "  alt="ICON">
+                        </a>
+                    @endif
                     <div class="topbar-language rs1-select2">
                         <a>{{Auth::user()->name}}</a>
                     </div>
@@ -379,45 +396,9 @@
             <ul class="main-menu">
                 <li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
 						<span class="topbar-child1">
-							Free shipping for standard order over $100
+							Free shipping for standard order over $50
 						</span>
                 </li>
-
-                <li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
-                    <div class="topbar-child2-mobile">
-							<span class="topbar-email">
-								fashe@example.com
-							</span>
-
-                        @if(!Auth::check())
-                            <a href="{{url("login")}}" class="header-wrapicon1 dis-block m-l-30">
-                                <img src="{{asset("images/icons/icon-header-01.png")}}"  class="header-icon1" alt="ICON">
-                            </a>
-                        @else
-                            <a href="{{url("profile")}}" class="header-wrapicon1 dis-block m-l-30">
-                                <img src="{{(Auth::user()->avt)}}" class="header-icon1 rounded-circle "  alt="ICON">
-                            </a>
-                            <div class="topbar-language rs1-select2">
-                                <a>{{Auth::user()->name}}</a>
-                            </div>
-                            {{--                    <ul class="nav-item dropdow">--}}
-                            {{--                            <p class="nav-link active dropdown-toggle" data-toggle="dropdown" href="#" role="button"--}}
-                            {{--                               aria-haspopup="true"--}}
-                            {{--                               aria-expanded="false">{{Auth::user()->name}}</p>--}}
-                            {{--                        <div class="dropdown-menu ml-auto">--}}
-                            {{--                            <a href="#" style="margin-left: 6%">Profile</a>--}}
-                            {{--                            <br/>--}}
-                            {{--                            <a href="#" style="margin-left: 6%">Mail</a>--}}
-                            {{--                            <br/>--}}
-                            {{--                            <a href="#" style="margin-left: 6%">Your old order</a>--}}
-                            {{--                            <div class="dropdown-divider"></div>--}}
-                            {{--                            <a href="#" style="margin-left: 6%">Logout</a>--}}
-                            {{--                        </div>--}}
-                            {{--                    </ul>--}}
-                        @endif
-                    </div>
-                </li>
-
                 <li class="item-topbar-mobile p-l-10">
                     <div class="topbar-social-mobile">
                         <a href="#" class="topbar-social-item fa fa-facebook"></a>
@@ -430,28 +411,12 @@
 
                 <li class="item-menu-mobile">
                     <a href="{{url("/")}}">Home</a>
-                    <ul class="sub-menu">
-                        <li><a href="{{url("/")}}">Home</a></li>
-                    </ul>
-                    <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
                 </li>
-
+                @foreach(\App\Category::all() as $c)
                 <li class="item-menu-mobile">
-                        @foreach(\App\Category::all()->take(3) as $c)
                         <a href="{{asset("listingCate/{$c->id}")}}">{{$c->category_name}}</a>
-                            @endforeach
-                    <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
                 </li>
-
-                <li class="item-menu-mobile">
-
-                        @foreach(\App\Brand::all()->take(1) as $c)
-                            <a href="{{asset("listingBrand/{$c->id}")}}">{{$c->brand_name}}</a>
-                        @endforeach
-
-                    <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
-                </li>
-
+                @endforeach
             </ul>
         </nav>
     </div>

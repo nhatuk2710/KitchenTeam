@@ -6,6 +6,7 @@ use App\Category;
 use App\Comment;
 use App\FeedBack;
 use App\Mail\email;
+use App\Mail\OrderCancel;
 use App\Mail\OrderCreated;
 use App\Order;
 use App\Product;
@@ -13,6 +14,7 @@ use App\Brand;
 use App\User;
 use http\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -26,7 +28,15 @@ class WebController extends Controller
         $sale = Product::take(8)->orderBy("price",'asc')->get();
         $ex = Product::take(8)->orderBy("price",'desc')->get();
         $new = Product::take(4)->orderBy("created_at",'desc')->get();
-        $top = Product::all()->take(12);
+        $product=Product::all();
+        $pro= $product->sortByDesc('price')->take(5);
+        $rate=collect([]);
+        foreach ($product as $p){
+            $feedback = FeedBack::where("product_id",$p->id)->get();
+            $p->rate=$feedback->avg('rate');
+            $rate[]=$p;
+        }
+        $top = $rate->sortByDesc('rate')->take(8);
         return view('home-page',['brandband'=>$brandband,'cateband'=>$cateband,'sale'=>$sale,'ex'=>$ex,'new'=>$new,'top'=>$top]);
     }
 
@@ -53,12 +63,11 @@ class WebController extends Controller
     public function shopping($id, Request $request){
         $product=Product::find($id);
         $cart =$request->session()->get("cart");
-
         if($cart==null){
             $cart=[];
         }
-
         foreach ($cart as $p){
+<<<<<<< HEAD
             if($p->id == $product->id ){
                 if ($p->cart_qty < $product->quantity){
                     $p->cart_qty =$p->cart_qty+1;
@@ -67,6 +76,15 @@ class WebController extends Controller
                 }else{
                     return back();
                 }
+=======
+                if($p->id == $product->id ){
+                    if ($p->cart_qty < $product->quantity){ $p->cart_qty =$p->cart_qty+1;
+                        session(["cart"=>$cart]);
+                        return redirect()->back()->with('success', ['your message,here']);
+                    }else{
+                        return back();
+                    }
+>>>>>>> 64bed8652b22af4e33f23979ef0b60602db2119e
             }
         }
         $product->cart_qty=1;
@@ -77,7 +95,6 @@ class WebController extends Controller
     public function pshopping($id, Request $request){
         $product=Product::find($id);
         $cart =$request->session()->get("cart");
-
         if($cart==null){
             $cart=[];
         }
@@ -96,8 +113,6 @@ class WebController extends Controller
         session(["cart"=>$cart]);
         return redirect()->to("/cart");
     }
-
-
     public function cart(Request $request){
         $cart = $request->session()->get("cart");
         if($cart == null){
@@ -108,7 +123,6 @@ class WebController extends Controller
             $cart_total += ($p->price*$p->cart_qty);
         }
         return view("cart",["cart"=>$cart,'cart_total'=>$cart_total]);
-
     }
     public function updateCart(Request $request){
         if(!$cart=session()->has("cart")){
@@ -129,8 +143,6 @@ class WebController extends Controller
 
         return redirect()->to("/cart");
     }
-
-
     public function reduceOne($id,Request $request){
         if(!$cart=session()->has("cart")){
             return redirect()->to("/");
@@ -157,8 +169,6 @@ class WebController extends Controller
         }
         return response()->json(['status'=>false,"message"=>"Fails"]);
     }
-
-
     public function deleteItemCart($id){
         $cartOld = session()->get("cart");
         session()->forget("cart");
@@ -176,13 +186,10 @@ class WebController extends Controller
         }
         return redirect()->to("/cart");
     }
-
     public function clearCart(Request $request){
         $request->session()->forget("cart");
         return redirect()->to("/");
     }
-
-
     public function checkout(Request $request){
         if(!$request->session()->has("cart")){
             return redirect()->to("/");
@@ -235,7 +242,6 @@ class WebController extends Controller
         session()->forget("cart");
         return redirect()->to("/checkout-success");
     }
-
     public function oldBill(Request $request){
         $order =Order::where ("user_id",Auth::id())->get();
         $orderPend = Order::where("user_id",Auth::id())->where("status",0)->get();
@@ -291,17 +297,13 @@ class WebController extends Controller
         }
         return redirect()->to("/oldBill");
     }
-
-
     public function checkoutSuccess(){
         return view("checkoutSuccess");
     }
     public function getListOrder(){
-
         $listOrder =Order::where ("user_id",Auth::id())->get();
         return view('listOrder',['listOrder'=>$listOrder]);
     }
-
     public function postLogin(Request $request){
         $validator = Validator::make($request->all(),[
             "email" => 'required|email',
@@ -318,7 +320,6 @@ class WebController extends Controller
         }
         return response()->json(['status'=>false,'message'=>"login failure"]);
     }
-
     public function profile(){
         $user = Auth::user();
         $order = Order::where("user_id",Auth::id())->paginate(1);
@@ -329,7 +330,6 @@ class WebController extends Controller
         $countCan = Order::where("user_id",Auth::id())->where("status",4)->get()->count();
         return view('profile',['user'=>$user,'order'=>$order,'countPend'=>$countPend,'countPro'=>$countPro,'countShip'=>$countShip,'countCom'=>$countCom,'countCan'=>$countCan]);
     }
-
     public function upProfile(Request $request){
         $user = User::find(Auth::id());
         $request->validate([
@@ -349,17 +349,19 @@ class WebController extends Controller
         }
         return redirect()->to("/");
     }
-
     public function upAvt(Request $request){
         $user = User::find(Auth::id());
         try {
             $avt = null;
+            $ext_allow = ["png","jpg","jpeg","gif","svg"];
             if($request->hasFile("avt")) {
                 $file = $request->file("avt");
-                $file_name = $file->getClientOriginalName();
+                $file_name = time()."-".$file->getClientOriginalName();
                 $ext = $file->getClientOriginalExtension();
-                $file->move("upload", $file_name);
-                $avt = "upload/" . $file_name;
+                if(in_array($ext,$ext_allow)){
+                    $file->move("upload",$file_name);
+                    $avt = "upload/".$file_name;
+                }
             }
             $user->update([
                 "avt"=>$avt,
@@ -370,12 +372,27 @@ class WebController extends Controller
         }
         return redirect()->to("profile");
     }
+    public function postPromotion(Request $request){
+        $validator = Validator::make($request->all(),[
+            'emailSub'=> 'required|unique:emailsub,email',
+        ]);
+        if( $validator->fails()){
+            return response()->json(["status"=>false,"message"=>$validator->errors()->first()]);
+        } else {
+            DB::table("emailSub")->insert([
+               'email'=>$request->get('emailSub'),
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now(),
+            ]);
+            return response()->json(['status'=>true,'message'=>"Success"]);
+        }
+
+    }
     public function feedback($o,$id){
         $order=Order::find($o);
         $product=Product::find($id);
         return view('feedback',['product'=>$product,'order'=>$order]);
     }
-
     public function postFeedback(Request $request){
         $request->validate([
             'rate'=>'required',
@@ -389,10 +406,8 @@ class WebController extends Controller
             'rate'=> $request->get("rate"),
             'message'=> $request->get("message")
         ]);
-//            DB::table("feedback")->insert ([
-//
-//            ]);
 
+        return redirect()->to("/");
     }
     public function comment(){
 //        $countComment = Comment::all()->count();

@@ -149,7 +149,7 @@
                     </div>
 
                     <span class="s-text8 p-t-5 p-b-5">
-							Showing 1–12 of 16 results
+							Showing 1–12 of {{count($categories->Products)}} results
 						</span>
                 </div>
 

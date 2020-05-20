@@ -325,7 +325,7 @@ class AdminController extends Controller
 
     public function editOrder($id, Request $request){
         $order = Order::find($id);
-        $user = User::find($order->id);
+        $user = User::find($order->user_id);
         $request->validate([
             "status"=>"",
         ]);
@@ -345,6 +345,7 @@ class AdminController extends Controller
             if($order->status == 4){
                 Mail::to($user->email)->send(new OrderCancel());
             }
+
         }catch (\Exception $e){
             return redirect()->back();
         }

@@ -43,7 +43,7 @@
                     <th scope="row">{{$k->id}}</th>
                     <td class="s-text19">{{$k->product_name}}</td>
                     <td class="s-text19">x{{$k->cart_qty}}</td>
-                    <td class="s-text19">{{$k->price}}</td>
+                    <td class="s-text19">$ {{$k->getPrice()}}</td>
                 </tr>
             @empty
                 <p>No Product</p>
@@ -100,7 +100,7 @@
         </div>
         <div class="size15 trans-0-4">
             <!-- Button -->
-            <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" onclick="return confirm('Check out')">
+            <button class="flex-c-m sizefull bg0 bo-rad-23 hov1 s-text1 trans-0-4" onclick="return confirm('Check out')">
                 Proceed to Checkout
             </button>
         </div>

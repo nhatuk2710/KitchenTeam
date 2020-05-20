@@ -16,7 +16,7 @@
 
                         <div style="color: red"  class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="zoomIn">
                             <!-- Button -->
-                            <a style="color: black"    href="product.html" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
+                            <a style="color: black"    href="#" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
                                 Shop Now
                             </a>
                         </div>
@@ -35,13 +35,14 @@
 
                         <div style="color: red"  class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="slideInUp">
                             <!-- Button -->
-                            <a style="color: black"  href="product.html" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
+                            <a style="color: black"  href="#" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
                                 Shop Now
                             </a>
                         </div>
                     </div>
                 </div>
-
+{{--                979922513056-p3afvouf4rps9gj53bmon9i14b6lvj4c.apps.googleusercontent.com--}}
+{{--                krtjV9xulsHKmI713cGz3qFf--}}
                 <div class="item-slick1 item3-slick1" style="background-image: url(images/slide-02.jpg);">
                     <div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
                         <h2 style="color: red"  class="caption1-slide1 xl-text2 t-center bo14 p-b-6 animated visible-false m-b-22" data-appear="rotateInDownLeft">
@@ -54,7 +55,7 @@
 
                         <div style="color: red"  class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="rotateIn">
                             <!-- Button -->
-                            <a style="color: black" href="product.html" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
+                            <a style="color: black" href="#" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
                                 Shop Now
                             </a>
                         </div>
@@ -76,7 +77,7 @@
             <div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto">
                 <!-- block1 -->
                 <div class="block1 hov-img-zoom pos-relative m-b-30">
-                    <a href="{{url("listingBrand/{$p->id}")}}"><img src={{asset($p->image)}} alt="IMG-BENNER"></a>
+                    <a href="{{url("listingBrand/{$p->id}")}}"><img src={{asset($p->image)}} alt="IMG-BENNER" style="width: 75%"></a>
 
                     <div class="block1-wrapbtn w-size2">
                         <!-- Button -->
@@ -490,28 +491,47 @@
                 </div>
             </a>
         </div>
+{{--        <div class="block4 wrap-pic-w">--}}
+{{--            <img src={{asset("images/blog/blog-2.jpg")}} alt="IMG-INSTAGRAM">--}}
 
-        <!-- Block4 -->
-        <div class="block4 wrap-pic-w">
-            <img src={{asset("images/blog/blog-5.jpg")}} alt="IMG-INSTAGRAM">
+{{--            <a href="#" class="block4-overlay sizefull ab-t-l trans-0-4">--}}
+{{--					<span class="block4-overlay-heart s-text9 flex-m trans-0-4 p-l-40 p-t-25">--}}
+{{--						<i class="icon_heart_alt fs-20 p-r-12" aria-hidden="true"></i>--}}
+{{--						<span class="p-t-2">39</span>--}}
+{{--					</span>--}}
 
-            <a href="#" class="block4-overlay sizefull ab-t-l trans-0-4">
-					<span class="block4-overlay-heart s-text9 flex-m trans-0-4 p-l-40 p-t-25">
-						<i class="icon_heart_alt fs-20 p-r-12" aria-hidden="true"></i>
-						<span class="p-t-2">39</span>
-					</span>
+{{--                <div class="block4-overlay-txt trans-0-4 p-l-40 p-r-25 p-b-30">--}}
+{{--                    <p class="s-text10 m-b-15 h-size1 of-hidden">--}}
+{{--                        Nullam scelerisque, lacus sed consequat laoreet, dui enim iaculis leo, eu viverra ex nulla in tellus. Nullam nec ornare tellus, ac fringilla lacus. Ut sit amet enim orci. Nam eget metus elit.--}}
+{{--                    </p>--}}
 
-                <div class="block4-overlay-txt trans-0-4 p-l-40 p-r-25 p-b-30">
-                    <p class="s-text10 m-b-15 h-size1 of-hidden">
-                        Nullam scelerisque, lacus sed consequat laoreet, dui enim iaculis leo, eu viverra ex nulla in tellus. Nullam nec ornare tellus, ac fringilla lacus. Ut sit amet enim orci. Nam eget metus elit.
-                    </p>
+{{--                    <span class="s-text9">--}}
+{{--							Photo by @nancyward--}}
+{{--						</span>--}}
+{{--                </div>--}}
+{{--            </a>--}}
+{{--        </div>--}}
+{{--        <!-- Block4 -->--}}
+{{--        <div class="block4 wrap-pic-w">--}}
+{{--            <img src={{asset("images/blog/blog-5.jpg")}} alt="IMG-INSTAGRAM">--}}
 
-                    <span class="s-text9">
-							Photo by @nancyward
-						</span>
-                </div>
-            </a>
-        </div>
+{{--            <a href="#" class="block4-overlay sizefull ab-t-l trans-0-4">--}}
+{{--					<span class="block4-overlay-heart s-text9 flex-m trans-0-4 p-l-40 p-t-25">--}}
+{{--						<i class="icon_heart_alt fs-20 p-r-12" aria-hidden="true"></i>--}}
+{{--						<span class="p-t-2">39</span>--}}
+{{--					</span>--}}
+
+{{--                <div class="block4-overlay-txt trans-0-4 p-l-40 p-r-25 p-b-30">--}}
+{{--                    <p class="s-text10 m-b-15 h-size1 of-hidden">--}}
+{{--                        Nullam scelerisque, lacus sed consequat laoreet, dui enim iaculis leo, eu viverra ex nulla in tellus. Nullam nec ornare tellus, ac fringilla lacus. Ut sit amet enim orci. Nam eget metus elit.--}}
+{{--                    </p>--}}
+
+{{--                    <span class="s-text9">--}}
+{{--							Photo by @nancyward--}}
+{{--						</span>--}}
+{{--                </div>--}}
+{{--            </a>--}}
+{{--        </div>--}}
     </div>
 </section>
 

@@ -1107,7 +1107,7 @@ li.sale-noti > a {
 
 .side-menu .sub-menu > li {
   padding-left: 12px;
-  padding-top:
+
 }
 
 .side-menu .sub-menu a:hover {
@@ -1174,6 +1174,7 @@ li.sale-noti > a {
 
 .logo2 img {
   max-height: 27px;
+    padding-top: 4px;
 }
 
 .fixed-header2 {

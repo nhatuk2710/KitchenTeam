@@ -38,33 +38,17 @@
 
         <div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
             <h4 class="s-text12 p-b-30">
-                Links
+                Brand
             </h4>
-
+            <?php $brand =\App\Brand::all() ?>
             <ul>
-                <li class="p-b-9">
-                    <a href="#" class="s-text7">
-                        Search
-                    </a>
-                </li>
-
-                <li class="p-b-9">
-                    <a href="#" class="s-text7">
-                        About Us
-                    </a>
-                </li>
-
-                <li class="p-b-9">
-                    <a href="#" class="s-text7">
-                        Contact Us
-                    </a>
-                </li>
-
-                <li class="p-b-9">
-                    <a href="#" class="s-text7">
-                        Returns
-                    </a>
-                </li>
+                @foreach($brand as $c)
+                    <li class="p-b-9">
+                        <a href="{{url("listingBrand/{$c->id}")}}" class="s-text7">
+                            {{$c->brand_name}}
+                        </a>
+                    </li>
+                @endforeach
             </ul>
         </div>
 
@@ -104,17 +88,17 @@
             <h4 class="s-text12 p-b-30">
                 Newsletter
             </h4>
-
-            <form>
+            <form  method="post">
+                @csrf
                 <div class="effect1 w-size9">
-                    <input class="s-text7 bg6 w-full p-b-5" type="text" name="emails" placeholder="email@example.com">
+                    <input class="s-text7 bg6 w-full p-b-5" type="email" name="emailSub" placeholder="Email">
                     <span class="effect1-line"></span>
                 </div>
 
                 <div class="w-size2 p-t-20">
                     <!-- Button -->
-                    <button class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4">
-                        Subscribe
+                    <button type="button" id="promotion" class="flex-c-m size11 bg4 bo-rad-23 hov1 m-text3 trans-0-4">
+                        Receive promotions
                     </button>
                 </div>
 
@@ -170,8 +154,27 @@
         <div class="wrap-video-mo-01">
             <div class="w-full wrap-pic-w op-0-0"><img src="{{asset("images/icons/video-16-9.jpg")}}" alt="IMG"></div>
             <div class="video-mo-01">
-                <iframe src="https://www.youtube.com/embed/Nt8ZrWY2Cmk?rel=0&amp;showinfo=0" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/j9V78UbdzWI?rel=0&amp;showinfo=0" allowfullscreen></iframe>
             </div>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $("#promotion").bind("click",function () {
+        $.ajax({
+            url: "{{url("postPromotion")}}",
+            method: "POST",
+            data: {
+                _token: $("input[name=_token]").val(),
+                emailSub: $("input[name=emailSub]").val(),
+            },
+            success: function (res) {
+                if(res.status){
+                    location.reload();
+                }else{
+                    alert(res.message);
+                }
+            }
+        });
+    });
+</script>
