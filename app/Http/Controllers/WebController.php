@@ -22,129 +22,162 @@ use Illuminate\Support\Facades\Validator;
 
 class WebController extends Controller
 {
-    public function home(){
+    public function home()
+    {
         $cateband = Category::all()->take(3);
         $brandband = Brand::all()->take(3);
-        $sale = Product::take(8)->orderBy("price",'asc')->get();
-        $ex = Product::take(8)->orderBy("price",'desc')->get();
-        $new = Product::take(4)->orderBy("created_at",'desc')->get();
-        $product=Product::all();
-        $pro= $product->sortByDesc('price')->take(5);
-        $rate=collect([]);
-        foreach ($product as $p){
-            $feedback = FeedBack::where("product_id",$p->id)->get();
-            $p->rate=$feedback->avg('rate');
-            $rate[]=$p;
+        $sale = Product::take(8)->orderBy("price", 'asc')->get();
+        $ex = Product::take(8)->orderBy("price", 'desc')->get();
+        $new = Product::take(4)->orderBy("created_at", 'desc')->get();
+        $product = Product::all();
+        $pro = $product->sortByDesc('price')->take(5);
+        $rate = collect([]);
+        foreach ($product as $p) {
+            $feedback = FeedBack::where("product_id", $p->id)->get();
+            $p->rate = $feedback->avg('rate');
+            $rate[] = $p;
         }
         $top = $rate->sortByDesc('rate')->take(8);
-        return view('home-page',['brandband'=>$brandband,'cateband'=>$cateband,'sale'=>$sale,'ex'=>$ex,'new'=>$new,'top'=>$top]);
+        return view('home-page', ['brandband' => $brandband, 'cateband' => $cateband, 'sale' => $sale, 'ex' => $ex, 'new' => $new, 'top' => $top]);
     }
 
-    public function product($id){
-        $rate = FeedBack::where("product_id",$id)->get();
-        $rateAvg = FeedBack::where("rate",$id)->avg('rate');
-        $product=Product::find($id);
+    public function product($id)
+    {
+        $rate = FeedBack::where("product_id", $id)->get();
+        $rateAvg = FeedBack::where("rate", $id)->avg('rate');
+        $product = Product::find($id);
         $brand = Brand::find($product->brand_id);
-        $category=Category::find($product->category_id);
-        $brand_product =$brand->Products()->take(4)->get();
-        $category_product =Category::find($product->category_id)->Products()->take(8)->get();
-        return view('product',['rate'=>$rate,'product'=>$product,'category_product'=>$category_product,'brand_product'=>$brand_product,'brand'=>$brand,'category'=>$category]);
+        $category = Category::find($product->category_id);
+        $brand_product = $brand->Products()->take(4)->get();
+        $category_product = Category::find($product->category_id)->Products()->take(8)->get();
+        return view('product', ['rate' => $rate, 'product' => $product, 'category_product' => $category_product, 'brand_product' => $brand_product, 'brand' => $brand, 'category' => $category]);
     }
-    public function listingcate($id){
+
+    public function listingcate($id)
+    {
         $categories = Category::find($id);
         $product = $categories->Products()->paginate(12);
-        return view('listCate',['product'=>$product,'categories'=>$categories]);
+        return view('listCate', ['product' => $product, 'categories' => $categories]);
     }
-    public function listingBrand($id){
+
+    public function listingBrand($id)
+    {
         $brand = Brand::find($id);
-        $product=$brand->Products()->paginate(9);
-        return view("listBrand",['product'=>$product,'brand'=>$brand]);
+        $product = $brand->Products()->paginate(9);
+        return view("listBrand", ['product' => $product, 'brand' => $brand]);
     }
-    public function shopping($id, Request $request){
-        $product=Product::find($id);
-        $cart =$request->session()->get("cart");
-        if($cart==null){
-            $cart=[];
+
+    public function shopping($id, Request $request)
+    {
+        $product = Product::find($id);
+        $cart = $request->session()->get("cart");
+        if ($cart == null) {
+            $cart = [];
         }
-        foreach ($cart as $p){
-                if($p->id == $product->id ){
-                    if ($p->cart_qty < $product->quantity){ $p->cart_qty =$p->cart_qty+1;
-                        session(["cart"=>$cart]);
-                        return redirect()->back()->with('success', ['your message,here']);
-                    }else{
-                        return back();
-                    }
+        foreach ($cart as $p) {
+
+            if ($p->id == $product->id) {
+                if ($p->cart_qty < $product->quantity) {
+                    $p->cart_qty = $p->cart_qty + 1;
+                    session(["cart" => $cart]);
+                    return redirect()->back()->with('success', ['your message,here']);
+                } else {
+                    return back();
+                }
+            }
+            if ($p->id == $product->id) {
+                if ($p->cart_qty < $product->quantity) {
+                    $p->cart_qty = $p->cart_qty + 1;
+                    session(["cart" => $cart]);
+                    return redirect()->back()->with('success', ['your message,here']);
+                } else {
+                    return back();
+                }
+
             }
         }
-        $product->cart_qty=1;
-        $cart[]=$product;
-        session(["cart"=>$cart]);
+        $product->cart_qty = 1;
+        $cart[] = $product;
+        session(["cart" => $cart]);
         return redirect()->back();
     }
-    public function pshopping($id, Request $request){
-        $product=Product::find($id);
-        $cart =$request->session()->get("cart");
-        if($cart==null){
-            $cart=[];
+
+    public
+    function pshopping($id, Request $request)
+    {
+        $product = Product::find($id);
+        $cart = $request->session()->get("cart");
+        if ($cart == null) {
+            $cart = [];
         }
-        foreach ($cart as $p){
-            if($p->id == $product->id){
+        foreach ($cart as $p) {
+            if ($p->id == $product->id) {
                 $request->validate([
-                    'qty'=> 'required|integer|between:1,'.($product->quantity-$p->cart_qty)
+                    'qty' => 'required|integer|between:1,' . ($product->quantity - $p->cart_qty)
                 ]);
-                $p->cart_qty =$p->cart_qty+$request->get("qty");
-                session(["cart"=>$cart]);
+                $p->cart_qty = $p->cart_qty + $request->get("qty");
+                session(["cart" => $cart]);
                 return redirect()->to("/cart");
             }
         }
-        $product->cart_qty=$request->get("qty");
-        $cart[]=$product;
-        session(["cart"=>$cart]);
+        $product->cart_qty = $request->get("qty");
+        $cart[] = $product;
+        session(["cart" => $cart]);
         return redirect()->to("/cart");
     }
-    public function cart(Request $request){
-        $cart = $request->session()->get("cart");
-        if($cart == null){
-            $cart = [];
-        }
-        $cart_total = 0 ;
-        foreach ($cart as $p){
-            $cart_total += ($p->price*$p->cart_qty);
-        }
-        return view("cart",["cart"=>$cart,'cart_total'=>$cart_total]);
-    }
-    public function updateCart(Request $request){
-        if(!$cart=session()->has("cart")){
-            return redirect()->to("/");
-        }
-        $cart =$request-> session()->get('cart');
-        if($cart==null){
-            $cart=[];
-        }
-        foreach ($cart as $p){
-            $product = Product::find($p->id);
-            $request->validate([
-                'qty'.'/'.$p->id  => 'required|integer|between:1,'.$product->quantity,
-            ]);
-            $p->cart_qty =$request->get("qty/$p->id");
-            $cart[] = $product;
+
+
+        public
+        function cart(Request $request)
+        {
+            $cart = $request->session()->get("cart");
+            if ($cart == null) {
+                $cart = [];
+            }
+            $cart_total = 0;
+            foreach ($cart as $p) {
+                $cart_total += ($p->price * $p->cart_qty);
+            }
+            return view("cart", ["cart" => $cart, 'cart_total' => $cart_total]);
         }
 
-        return redirect()->to("/cart");
-    }
-    public function reduceOne($id,Request $request){
-        if(!$cart=session()->has("cart")){
-            return redirect()->to("/");
-        }
-        $cart =$request-> session()->get('cart');
-        foreach ($cart as $p){
-            if($p->id ==$id){
-                $p->cart_qty-=1;
-                return response()->json(["status"=>true,"message"=>"Succcess"]);
+        public
+        function updateCart(Request $request)
+        {
+            if (!$cart = session()->has("cart")) {
+                return redirect()->to("/");
             }
+            $cart = $request->session()->get('cart');
+            if ($cart == null) {
+                $cart = [];
+            }
+            foreach ($cart as $p) {
+                $product = Product::find($p->id);
+                $request->validate([
+                    'qty' . '/' . $p->id => 'required|integer|between:1,' . $product->quantity,
+                ]);
+                $p->cart_qty = $request->get("qty/$p->id");
+                $cart[] = $product;
+            }
+
+            return redirect()->to("/cart");
         }
-        return response()->json(['status'=>false,"message"=>"Fails"]);
-    }
+
+        public function reduceOne($id, Request $request)
+        {
+            if (!$cart = session()->has("cart")) {
+                return redirect()->to("/");
+            }
+            $cart = $request->session()->get('cart');
+            foreach ($cart as $p) {
+                if ($p->id == $id) {
+                    $p->cart_qty -= 1;
+                    return response()->json(["status" => true, "message" => "Succcess"]);
+                }
+            }
+            return response()->json(['status' => false, "message" => "Fails"]);
+        }
+
     public function increaseOne($id,Request $request){
         if(!$cart=session()->has("cart")){
             return redirect()->to("/");

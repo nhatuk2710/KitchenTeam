@@ -1,7 +1,6 @@
 @extends('layout')
 @section('tittle','Trang chủ')
 @section('all')
-
     <section class="slide1">
         <div class="wrap-slick1">
             <div class="slick1">
