@@ -38,6 +38,7 @@ class WebController extends Controller
             $rate[] = $p;
         }
         $top = $rate->sortByDesc('rate')->take(8);
+
         return view('home-page', ['brandband' => $brandband, 'cateband' => $cateband, 'sale' => $sale, 'ex' => $ex, 'new' => $new, 'top' => $top]);
     }
     public function product($id)
