@@ -326,9 +326,6 @@ class AdminController extends Controller
     public function editOrder($id, Request $request){
         $order = Order::find($id);
         $user = User::find($order->user_id);
-        $request->validate([
-            "status"=>"",
-        ]);
         try{
             $order->update([
                 "status"=>$request->get("status"),
@@ -342,15 +339,23 @@ class AdminController extends Controller
             if($order->status == 3){
                 Mail::to($user->email)->send(new OrderComplete($order));
             }
-            if($order->status == 4){
-                Mail::to($user->email)->send(new OrderCancel());
-            }
 
         }catch (\Exception $e){
-            return redirect()->back();
+            return redirect()->back()->with('message','Fail');
         }
         return redirect()->back();
     }
-
-
+    public function cancleOrder($id){
+        $order = Order::find($id);
+        $user = User::find($order->user_id);
+        try {
+            $order->update([
+                "status"=>4,
+            ]);
+        }catch (\Exception $e){
+            return redirect()->back()->with('message','Fail');
+        }
+        Mail::to($user->email)->send(new OrderCancel());
+        return redirect()->back()->with('message','Success');
+    }
 }

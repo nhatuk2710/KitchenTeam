@@ -100,53 +100,18 @@
                                                             <a>{{$p->payment_method}}</a>
                                                         </td>
                                                         <td>
-                                                            @if($p->status == 0)
                                                                 <a>Pending</a>
-                                                            @elseif($p->status == 1)
-                                                                <a>Process</a>
-                                                            @elseif($p->status == 2)
-                                                                <a>Shipping</a>
-                                                            @elseif($p->status == 3)
-                                                                <a>Complete</a>
-                                                            @elseif($p->status == 4)
-                                                                <a>Cancel</a>
-                                                            @endif
                                                         </td>
                                                         <td>
-                                                            <a>{{$p->created_at}}</a>
+                                                            <a>{{$p->id}}</a>
                                                         </td>
                                                         <td>
-                                                            <form method="post" action="{{url("admin/order/editOrder/{$p->id}")}}">
+                                                            <form method="post" action="{{url("admin/order/editOrder/{$p->id}")}}" class="changeStatus" >
                                                                 @csrf
-
-                                                                @if($p->status==0)
-                                                                    <button type="submit" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</button>
-                                                                    <select name="status" class="btn btn-danger btn-xs">
-                                                                        <option value="1">Process</option>
-{{--                                                                        <option value="2">Shipping</option>--}}
-{{--                                                                        <option value="3">Complete</option>--}}
-                                                                        <option value="4">Cancel</option>
-                                                                    </select>
-                                                                @elseif($p->status==1)
-                                                                    <button type="submit" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</button>
-                                                                    <select name="status" class="btn btn-danger btn-xs">
-                                                                        <option value="2">Ship</option>
-{{--                                                                        <option value="3">Complete</option>--}}
-                                                                        <option value="4">Cancel</option>
-                                                                    </select>
-                                                                @elseif($p->status==2)
-                                                                    <button type="submit" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</button>
-                                                                    <select name="status" class="btn btn-danger btn-xs">
-                                                                        <option value="3">Complete</option>
-                                                                        <option value="4">Cancel</option>
-                                                                    </select>
-                                                                @elseif($p->status==3)
-                                                                    <a>Complete</a>
-                                                                @elseif($p->status==4)
-                                                                    <a>Cancel</a>
-                                                                @endif
+                                                                <button  class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i>Process</button>
+                                                                <input name="status" value="1" hidden>
+                                                                    <a onclick="return confirm('Are you sure?')" href="{{url("admin/order/cancelOrder/{$p->id}")}}" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i> Cancel</a>
                                                             </form>
-                                                            {{--                                                    <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>--}}
                                                         </td>
                                                     </tr>
                                                 @empty
@@ -223,52 +188,18 @@
                                                             <a>{{$p->payment_method}}</a>
                                                         </td>
                                                         <td>
-                                                            @if($p->status == 0)
-                                                                <a>Pending</a>
-                                                            @elseif($p->status == 1)
                                                                 <a>Process</a>
-                                                            @elseif($p->status == 2)
-                                                                <a>Shipping</a>
-                                                            @elseif($p->status == 3)
-                                                                <a>Complete</a>
-                                                            @elseif($p->status == 4)
-                                                                <a>Cancel</a>
-                                                            @endif
                                                         </td>
                                                         <td>
                                                             <a>{{$p->created_at}}</a>
                                                         </td>
                                                         <td>
-                                                            <form method="post" action="{{url("admin/order/editOrder/{$p->id}")}}">
+                                                            <form method="post" action="{{url("admin/order/editOrder/{$p->id}")}}" id="changeStatus1">
                                                                 @csrf
-
-                                                                @if($p->status==0)
-                                                                    <button type="submit" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</button>
-                                                                    <select name="status" class="btn btn-danger btn-xs">
-                                                                        <option value="1">Process</option>
-                                                                        <option value="2">Shipping</option>
-                                                                        <option value="3">Complete</option>
-                                                                        <option value="4">Cancel</option>
-                                                                    </select>
-                                                                @elseif($p->status==1)
-                                                                    <button type="submit" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</button>
-                                                                    <select name="status" class="btn btn-danger btn-xs">
-                                                                        <option value="2">Shipping</option>
-                                                                        <option value="4">Cancel</option>
-                                                                    </select>
-                                                                @elseif($p->status==2)
-                                                                    <button type="submit" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</button>
-                                                                    <select name="status" class="btn btn-danger btn-xs">
-                                                                        <option value="3">Complete</option>
-                                                                        <option value="4">Cancel</option>
-                                                                    </select>
-                                                                @elseif($p->status==3)
-                                                                    <a>Complete</a>
-                                                                @elseif($p->status==4)
-                                                                    <a>Cancel</a>
-                                                                @endif
+                                                                <button  class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i>Shipping</button>
+                                                                <input name="status" value="2" hidden>
+                                                                <a onclick="return confirm('Are you sure?')" href="{{url("admin/order/cancelOrder/{$p->id}")}}" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i> Cancel</a>
                                                             </form>
-                                                            {{--                                                    <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>--}}
                                                         </td>
                                                     </tr>
                                                 @empty
@@ -346,53 +277,18 @@
                                                             <a>{{$p->payment_method}}</a>
                                                         </td>
                                                         <td>
-                                                            @if($p->status == 0)
-                                                                <a>Pending</a>
-                                                            @elseif($p->status == 1)
-                                                                <a>Process</a>
-                                                            @elseif($p->status == 2)
                                                                 <a>Shipping</a>
-                                                            @elseif($p->status == 3)
-                                                                <a>Complete</a>
-                                                            @elseif($p->status == 4)
-                                                                <a>Cancel</a>
-                                                            @endif
                                                         </td>
                                                         <td>
                                                             <a>{{$p->created_at}}</a>
                                                         </td>
                                                         <td>
-                                                            <form method="post" action="{{url("admin/order/editOrder/{$p->id}")}}">
+                                                            <form method="post" action="{{url("admin/order/editOrder/{$p->id}")}}" class="changeStatus2">
                                                                 @csrf
-
-                                                                @if($p->status==0)
-                                                                    <button type="submit" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</button>
-                                                                    <select name="status" class="btn btn-danger btn-xs">
-                                                                        <option value="1">Process</option>
-                                                                        <option value="2">Shipping</option>
-                                                                        <option value="3">Complete</option>
-                                                                        <option value="4">Cancel</option>
-                                                                    </select>
-                                                                @elseif($p->status==1)
-                                                                    <select name="status" class="btn btn-danger btn-xs">
-                                                                        <option value="2">Shipping</option>
-                                                                        <option value="3">Complete</option>
-                                                                        <option value="4">Cancel</option>
-                                                                    </select>
-                                                                    <button type="submit" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</button>
-                                                                @elseif($p->status==2)
-                                                                    <button type="submit" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</button>
-                                                                    <select name="status" class="btn btn-danger btn-xs">
-                                                                        <option value="3">Complete</option>
-                                                                        <option value="4">Cancel</option>
-                                                                    </select>
-                                                                @elseif($p->status==3)
-                                                                    <a>Complete</a>
-                                                                @elseif($p->status==4)
-                                                                    <a>Cancel</a>
-                                                                @endif
+                                                                <button  class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i>Complete</button>
+                                                                <input name="status" value="3" hidden>
+                                                                <a onclick="return confirm('Are you sure?')" href="{{url("admin/order/cancelOrder/{$p->id}")}}" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i> Cancel</a>
                                                             </form>
-                                                            {{--                                                    <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>--}}
                                                         </td>
                                                     </tr>
                                                 @empty
@@ -442,7 +338,6 @@
                                                     <th>Payment method</th>
                                                     <th>Status</th>
                                                     <th>Created_at</th>
-                                                    <th style="width: 20%">#Edit</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -469,53 +364,10 @@
                                                             <a>{{$p->payment_method}}</a>
                                                         </td>
                                                         <td>
-                                                            @if($p->status == 0)
-                                                                <a>Pending</a>
-                                                            @elseif($p->status == 1)
-                                                                <a>Process</a>
-                                                            @elseif($p->status == 2)
-                                                                <a>Shipping</a>
-                                                            @elseif($p->status == 3)
                                                                 <a>Complete</a>
-                                                            @elseif($p->status == 4)
-                                                                <a>Cancel</a>
-                                                            @endif
                                                         </td>
                                                         <td>
                                                             <a>{{$p->created_at}}</a>
-                                                        </td>
-                                                        <td>
-                                                            <form method="post" action="{{url("admin/order/editOrder/{$p->id}")}}">
-                                                                @csrf
-
-                                                                @if($p->status==0)
-                                                                    <button type="submit" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</button>
-                                                                    <select name="status" class="btn btn-danger btn-xs">
-                                                                        <option value="1">Process</option>
-                                                                        <option value="2">Shipping</option>
-                                                                        <option value="3">Complete</option>
-                                                                        <option value="4">Cancel</option>
-                                                                    </select>
-                                                                @elseif($p->status==1)
-                                                                    <select name="status" class="btn btn-danger btn-xs">
-                                                                        <option value="2">Shipping</option>
-                                                                        <option value="3">Complete</option>
-                                                                        <option value="4">Cancel</option>
-                                                                    </select>
-                                                                    <button type="submit" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</button>
-                                                                @elseif($p->status==2)
-                                                                    <button type="submit" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</button>
-                                                                    <select name="status" class="btn btn-danger btn-xs">
-                                                                        <option value="3">Complete</option>
-                                                                        <option value="4">Cancel</option>
-                                                                    </select>
-                                                                @elseif($p->status==3)
-                                                                    <a>Complete</a>
-                                                                @elseif($p->status==4)
-                                                                    <a>Cancel</a>
-                                                                @endif
-                                                            </form>
-                                                            {{--                                                    <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>--}}
                                                         </td>
                                                     </tr>
                                                 @empty
@@ -565,7 +417,7 @@
                                                     <th>Payment method</th>
                                                     <th>Status</th>
                                                     <th>Created_at</th>
-                                                    <th style="width: 20%">#Edit</th>
+
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -592,53 +444,10 @@
                                                             <a>{{$p->payment_method}}</a>
                                                         </td>
                                                         <td>
-                                                            @if($p->status == 0)
-                                                                <a>Pending</a>
-                                                            @elseif($p->status == 1)
-                                                                <a>Process</a>
-                                                            @elseif($p->status == 2)
-                                                                <a>Shipping</a>
-                                                            @elseif($p->status == 3)
-                                                                <a>Complete</a>
-                                                            @elseif($p->status == 4)
                                                                 <a>Cancel</a>
-                                                            @endif
                                                         </td>
                                                         <td>
                                                             <a>{{$p->created_at}}</a>
-                                                        </td>
-                                                        <td>
-                                                            <form method="post" action="{{url("admin/order/editOrder/{$p->id}")}}">
-                                                                @csrf
-
-                                                                @if($p->status==0)
-                                                                    <button type="submit" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</button>
-                                                                    <select name="status" class="btn btn-danger btn-xs">
-                                                                        <option value="1">Process</option>
-                                                                        <option value="2">Shipping</option>
-                                                                        <option value="3">Complete</option>
-                                                                        <option value="4">Cancel</option>
-                                                                    </select>
-                                                                @elseif($p->status==1)
-                                                                    <select name="status" class="btn btn-danger btn-xs">
-                                                                        <option value="2">Shipping</option>
-                                                                        <option value="3">Complete</option>
-                                                                        <option value="4">Cancel</option>
-                                                                    </select>
-                                                                    <button type="submit" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</button>
-                                                                @elseif($p->status==2)
-                                                                    <button type="submit" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</button>
-                                                                    <select name="status" class="btn btn-danger btn-xs">
-                                                                        <option value="3">Complete</option>
-                                                                        <option value="4">Cancel</option>
-                                                                    </select>
-                                                                @elseif($p->status==3)
-                                                                    <a>Complete</a>
-                                                                @elseif($p->status==4)
-                                                                    <a>Cancel</a>
-                                                                @endif
-                                                            </form>
-                                                            {{--                                                    <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>--}}
                                                         </td>
                                                     </tr>
                                                 @empty
@@ -664,3 +473,4 @@
         </div>
     </div>
     @endsection
+

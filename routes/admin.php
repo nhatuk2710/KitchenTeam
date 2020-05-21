@@ -34,6 +34,7 @@ Route::get('deleteBrand/{id}','AdminController@deleteBrand');
 Route::get("order/tableOrder","AdminController@tableOrder");
 Route::post("order/editOrder/{id}","AdminController@editOrder");
 Route::get("order/searchOrder","AdminController@searchOrder");
+Route::get("order/cancelOrder/{id}","AdminController@cancleOrder");
 
 //User
 Route::get('user/tableUser','AdminController@tableUser');

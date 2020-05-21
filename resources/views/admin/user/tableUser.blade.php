@@ -67,7 +67,11 @@
                                             <tr>
                                                 <td>{{$p->id}}</td>
                                                 <td>
-                                                    <a>{{$p->name}}</a>
+                                                    <a>{{$p->name}}
+                                                    @if($p->provider=='facebook')
+                                                            (Facebook)
+                                                        @endif
+                                                    </a>
                                                     <br />
                                                 </td>
                                                 <td>

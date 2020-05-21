@@ -84,7 +84,7 @@
 						</span>
                     <div class="flex-w">
                         <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
-                            <form method="get" id="formSorting">
+                            <form method="get" class="formSorting">
                             <select class="selection-2 orderBy" name="sorting">
                                 <option>Default Sorting</option>
                                 <option {{Request::get('sorting')=="new" ?"selected='selected'":''}} value="new">New</option>
@@ -167,10 +167,8 @@
 <div id="dropDownSelect2"></div>
 <script>
   $(function () {
-        $('.orderBy').change(function (e) {
-            e.preventDefault();
-            $('#formSorting').submit(
-
+        $('.orderBy').change(function () {
+            $('.formSorting').submit(
             )
         })
   })
