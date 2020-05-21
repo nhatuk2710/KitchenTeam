@@ -127,16 +127,6 @@ class WebController extends Controller
                     return back();
                 }
             }
-            if ($p->id == $product->id) {
-                if ($p->cart_qty < $product->quantity) {
-                    $p->cart_qty = $p->cart_qty + 1;
-                    session(["cart" => $cart]);
-                    return redirect()->back()->with('success', ['your message,here']);
-                } else {
-                    return back();
-                }
-
-            }
         }
         $product->cart_qty = 1;
         $cart[] = $product;
@@ -376,7 +366,7 @@ class WebController extends Controller
     }
     public function profile(){
         $user = Auth::user();
-        $order = Order::where("user_id",Auth::id())->paginate(1);
+        $order = Order::where("user_id",Auth::id())->get();
         $countPend = Order::where("user_id",Auth::id())->where("status",0)->get()->count();
         $countPro = Order::where("user_id",Auth::id())->where("status",1)->get()->count();
         $countShip = Order::where("user_id",Auth::id())->where("status",2)->get()->count();

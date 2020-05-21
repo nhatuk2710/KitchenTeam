@@ -53,7 +53,7 @@
 
                 <div class="size15 trans-0-4 pull-right" style="margin-top: 2%">
                     <!-- Button -->
-                    @if($order->status==4)
+                    @if($order->status==3||$order->status==4)
                     <a class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" href="{{url("repurchase/{$order->id}")}}">
                       Repurchased
                     </a>
