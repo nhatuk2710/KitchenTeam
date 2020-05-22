@@ -42,7 +42,6 @@
         </div>
     </section>
     <script>
-        var s =1
         $("#review").rating({
             "value":5 ,
             "click": function (e) {
