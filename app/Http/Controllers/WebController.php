@@ -38,9 +38,9 @@ class WebController extends Controller
             $rate[] = $p;
         }
         $top = $rate->sortByDesc('rate')->take(8);
+
         return view('home-page', ['brandband' => $brandband, 'cateband' => $cateband, 'sale' => $sale, 'ex' => $ex, 'new' => $new, 'top' => $top]);
     }
-
     public function product($id)
     {
         $rate = FeedBack::where("product_id", $id)->get();
@@ -52,21 +52,63 @@ class WebController extends Controller
         $category_product = Category::find($product->category_id)->Products()->take(8)->get();
         return view('product', ['rate' => $rate, 'product' => $product, 'category_product' => $category_product, 'brand_product' => $brand_product, 'brand' => $brand, 'category' => $category]);
     }
-
-    public function listingcate($id)
-    {
+    public function listingcate($id ,Request $request){
         $categories = Category::find($id);
-        $product = $categories->Products()->paginate(12);
+        $product = $categories->Products();
+        $brand=Brand::all();
+        if ($request->brand){
+            $brandname =$request->brand;
+            if ($brandname=='all'){
+
+            }
+            foreach ($brand as $b){
+            if ($b->brand_name==$brandname){
+                $product=$product->where('brand_id',$b->id);
+            }
+            }
+        }
+        if ($request->sorting){
+         $sorting =$request->sorting;
+         if ($sorting=='new'){
+             $product=$product->orderBy('created_at','desc');
+         }
+         elseif ($sorting=='old'){
+             $product=$product->orderBy('created_at','asc');
+         }
+         elseif ($sorting=='low'){
+             $product=$product->orderBy('price','asc');
+         }
+         elseif ($sorting=='high'){
+             $product=$product->orderBy('price','desc');
+         }
+//         switch ($sorting){
+//             case 'new':
+//                $product->orderBy('created_at','desc');
+//                 break;
+//             case 'old':
+//                 $product->orderBy('created_at','asc');
+//                 break;
+//             case 'low':
+//                 $product->orderBy('price','asc');
+//                 break;
+//             case 'high':
+//                 $product->orderBy('price','desc');
+//                 break;
+//         }
+        }
+
+
+        $product =$product->paginate(9);
+
+
         return view('listCate', ['product' => $product, 'categories' => $categories]);
     }
-
     public function listingBrand($id)
     {
         $brand = Brand::find($id);
         $product = $brand->Products()->paginate(9);
         return view("listBrand", ['product' => $product, 'brand' => $brand]);
     }
-
     public function shopping($id, Request $request)
     {
         $product = Product::find($id);
@@ -85,25 +127,13 @@ class WebController extends Controller
                     return back();
                 }
             }
-            if ($p->id == $product->id) {
-                if ($p->cart_qty < $product->quantity) {
-                    $p->cart_qty = $p->cart_qty + 1;
-                    session(["cart" => $cart]);
-                    return redirect()->back()->with('success', ['your message,here']);
-                } else {
-                    return back();
-                }
-
-            }
         }
         $product->cart_qty = 1;
         $cart[] = $product;
         session(["cart" => $cart]);
         return redirect()->back();
     }
-
-    public
-    function pshopping($id, Request $request)
+    public function pshopping($id, Request $request)
     {
         $product = Product::find($id);
         $cart = $request->session()->get("cart");
@@ -125,10 +155,7 @@ class WebController extends Controller
         session(["cart" => $cart]);
         return redirect()->to("/cart");
     }
-
-
-        public
-        function cart(Request $request)
+    public function cart(Request $request)
         {
             $cart = $request->session()->get("cart");
             if ($cart == null) {
@@ -140,30 +167,27 @@ class WebController extends Controller
             }
             return view("cart", ["cart" => $cart, 'cart_total' => $cart_total]);
         }
-
-        public
-        function updateCart(Request $request)
-        {
-            if (!$cart = session()->has("cart")) {
-                return redirect()->to("/");
-            }
-            $cart = $request->session()->get('cart');
-            if ($cart == null) {
-                $cart = [];
-            }
-            foreach ($cart as $p) {
-                $product = Product::find($p->id);
-                $request->validate([
-                    'qty' . '/' . $p->id => 'required|integer|between:1,' . $product->quantity,
-                ]);
-                $p->cart_qty = $request->get("qty/$p->id");
-                $cart[] = $product;
-            }
-
-            return redirect()->to("/cart");
+    public function updateCart(Request $request)
+    {
+        if (!$cart = session()->has("cart")) {
+            return redirect()->to("/");
+        }
+        $cart = $request->session()->get('cart');
+        if ($cart == null) {
+            $cart = [];
+        }
+        foreach ($cart as $p) {
+            $product = Product::find($p->id);
+            $request->validate([
+                'qty' . '/' . $p->id => 'required|integer|between:1,' . $product->quantity,
+            ]);
+            $p->cart_qty = $request->get("qty/$p->id");
+            $cart[] = $product;
         }
 
-        public function reduceOne($id, Request $request)
+        return redirect()->to("/cart");
+    }
+    public function reduceOne($id, Request $request)
         {
             if (!$cart = session()->has("cart")) {
                 return redirect()->to("/");
@@ -177,7 +201,6 @@ class WebController extends Controller
             }
             return response()->json(['status' => false, "message" => "Fails"]);
         }
-
     public function increaseOne($id,Request $request){
         if(!$cart=session()->has("cart")){
             return redirect()->to("/");
@@ -331,7 +354,6 @@ class WebController extends Controller
             "email" => 'required|email',
             "password"=> "required|min:8"
         ]);
-
         if($validator->fails()){
             return response()->json(["status"=>false,"message"=>$validator->errors()->first()]);
         }
@@ -344,7 +366,7 @@ class WebController extends Controller
     }
     public function profile(){
         $user = Auth::user();
-        $order = Order::where("user_id",Auth::id())->paginate(1);
+        $order = Order::where("user_id",Auth::id())->get();
         $countPend = Order::where("user_id",Auth::id())->where("status",0)->get()->count();
         $countPro = Order::where("user_id",Auth::id())->where("status",1)->get()->count();
         $countShip = Order::where("user_id",Auth::id())->where("status",2)->get()->count();

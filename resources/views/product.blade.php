@@ -14,7 +14,10 @@
         .widget .mic-info { color: #666666;font-size: 11px; }
         .widget .action { margin-top:5px; }
         .widget .comment-text { font-size: 12px; }
-        .widget .btn-block { border-top-left-radius:0px;border-top-right-radius:0px; }
+        .widget .btn-block { border-top-left-radius:0px;border-top-right-radius:0px;
+
+        }
+        .fa-star{ color: rgb(252, 215, 3)}
     </style>
     <div class="bread-crumb bgwhite flex-w p-l-52 p-r-15 p-t-30 p-l-15-sm">
         <a href="{{url("/")}}" class="s-text16">
@@ -103,8 +106,27 @@
                     </div>
                 </div>
                 <div  style="color: rgb(252, 215, 3);">
-                <i class="fa fa-star"></i>
-                    <i class="fa fa-star-half-full"></i>
+                    @if($rate->avg('rate')<1.5)
+                        <i class="fa fa-star"></i>
+                        @elseif($rate->avg('rate')<2.5)
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        @elseif($rate->avg('rate')<3.5)
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        @elseif($rate->avg('rate')<4.5)
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        @else
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                         @endif
                 </div>
 
                 <!--  -->
@@ -138,16 +160,56 @@
 
                 <div class="wrap-dropdown-content bo7 p-t-15 p-b-14">
                     <h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
-                        Reviews (0)
+                        Reviews ({{count($rate)}})
                         <i class="down-mark fs-12 color1 fa fa-minus dis-none" aria-hidden="true"></i>
                         <i class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>
                     </h5>
 
                     <div class="dropdown-content dis-none p-t-15 p-b-23">
-                        <p class="s-text8">
-                            Fusce ornare mi vel risus porttitor dignissim. Nunc eget risus at ipsum blandit ornare vel sed velit. Proin gravida arcu nisl, a dignissim mauris placerat
-                        </p>
+                        @forelse($rate as $r)
+                        <div class="list-group-item">
+                            <div class="col-xs-10 col-md-11">
+                                <div>
+                                    <div class="mic-info" >
+                                        <a href="#">{{$r->name}}</a> on {{date_format($r->created_at,"d M Y")}}
+                                        @if($r->rate <1.5)
+                                            <i class="fa fa-star"></i>
+                                        @elseif($r->rate <2.5)
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        @elseif($r->rate<3.5)
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        @elseif($r->rate<4.5)
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        @else
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        @endif
+
+                                    </div>
+                                    <div class="comment-text">
+                                        <p>{{$r->message}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @empty
                     </div>
+
+                        <div class="dropdown-content dis-none p-t-15 p-b-23">
+                            <p class="s-text8">
+                                No reviews
+                            </p>
+                        </div>
+                            @endforelse
 
                 </div>
             </div>
@@ -298,6 +360,13 @@
                     }
                 }
             });
+        });
+        $("#review").rating({
+            "value":5 ,
+            "click": function (e) {
+                console.log(e);
+                $("#starsInput").val(e.stars);
+            }
         });
     </script>
     @endsection

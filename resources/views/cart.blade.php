@@ -41,14 +41,14 @@
                                             <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
                                         </a>
                                     @else
-                                    <a  class="reduceOne color1 flex-c-m size7 bg8 eff2" href="#" data-id="{{$p->id}}">
+                                    <a  class="reduceOne color1 flex-c-m size7 bg8 eff2"  data-id="{{$p->id}}">
                                         <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
                                     </a>
                                   @endif
 
                                     <input class="size8 m-text18 t-center num-product" type="number" name="qty/{{$p->id}}" value="{{$p->cart_qty}}">
                                     @if($p->cart_qty<$p->quantity)
-                                    <a class="increaseOne color1 flex-c-m size7 bg8 eff2" href="#" data-id="{{$p->id}}" >
+                                    <a class="increaseOne color1 flex-c-m size7 bg8 eff2"  data-id="{{$p->id}}" >
                                         <i class="fs-12 fa fa-plus" aria-hidden="true"></i>
                                     </a>
                                         @else

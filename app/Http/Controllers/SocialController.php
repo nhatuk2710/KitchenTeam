@@ -17,6 +17,12 @@ class SocialController extends Controller
     public function callback($provider)
     {
         $getInfo = Socialite::driver($provider)->user();
+        $userIn =User::all();
+        foreach($userIn as $u){
+            if ($u->email==$getInfo->email){
+                return back();
+            }
+        }
         $user = $this->createUser($getInfo,$provider);
         auth()->login($user);
         return redirect()->to('/');
@@ -25,6 +31,7 @@ class SocialController extends Controller
         $user = User::where('provider_id', $getInfo->id)->first();
         if (!$user) {
             $user = User::create([
+                'role'=>'0',
                 'avt'       =>$getInfo->avatar,
                 'name'     => $getInfo->name,
                 'email'    => $getInfo->email,

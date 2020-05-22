@@ -63,7 +63,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#add">
+                                        <a href=""  class="btn btn-primary btn-xs" data-toggle="modal" data-target="#add">
                                             Add +
                                         </a>
                                         @forelse($brands as $p)
@@ -91,7 +91,7 @@
                                                     Edit
                                                 </a>
 {{--                                                <a href="{{url("admin/brand/brandEdit",['id'=>$p->id])}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>--}}
-                                                <a href="#" class="deleteBrand btn btn-danger btn-xs" data-id="{{$p->id}}"><i class="fa fa-trash-o"></i> Delete </a>
+                                                <a href="" class="deleteBrand btn btn-danger btn-xs" data-id="{{$p->id}}"><i class="fa fa-trash-o"></i> Delete </a>
                                             </td>
                                         </tr>
                                             @empty
