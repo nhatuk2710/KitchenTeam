@@ -7,7 +7,7 @@ Route :: prefix("admin")->middleware("check_admin")->group(function (){
 });
 
 //Route::prefix("login")->middleware("auth")->group(function (){
-//    include_once ("auth/layouts/login.blade.php");
+//    include_once ("auth/layouts/register.blade.php");
 //});
 /*
 |--------------------------------------------------------------------------
