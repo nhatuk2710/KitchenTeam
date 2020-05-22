@@ -106,8 +106,14 @@
                     </div>
                 </div>
                 <div  style="color: rgb(252, 215, 3);">
-                    @if($rate->avg('rate')<1.5)
+                    @if(!$rate->avg('rate'))
                         <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        @elseif($rate->avg('rate')<1.5)
+                            <i class="fa fa-star"></i>
                         @elseif($rate->avg('rate')<2.5)
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -172,7 +178,8 @@
                                 <div>
                                     <div class="mic-info" >
                                         <a href="#">{{$r->name}}</a> on {{date_format($r->created_at,"d M Y")}}
-                                        @if($r->rate <1.5)
+
+                                        @if($r->rate <1)
                                             <i class="fa fa-star"></i>
                                         @elseif($r->rate <2.5)
                                             <i class="fa fa-star"></i>

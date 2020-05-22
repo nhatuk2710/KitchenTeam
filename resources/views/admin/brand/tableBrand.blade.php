@@ -87,10 +87,10 @@
                                                 <a>{{$p->updated_at}}</a>
                                             </td>
                                             <td>
-                                                <a href=""  class="editBrand btn btn-primary btn-xs" data-toggle="modal" data-target="#edit" data-id="{{$p->id}}">
-                                                    Edit
-                                                </a>
-{{--                                                <a href="{{url("admin/brand/brandEdit",['id'=>$p->id])}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>--}}
+{{--                                                <a href=""  class="editBrand btn btn-primary btn-xs" data-toggle="modal" data-target="#edit" data-id="{{$p->id}}">--}}
+{{--                                                    Edit--}}
+{{--                                                </a>--}}
+                                                <a href="{{url("admin/brand/brandEdit",['id'=>$p->id])}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
                                                 <a href="" class="deleteBrand btn btn-danger btn-xs" data-id="{{$p->id}}"><i class="fa fa-trash-o"></i> Delete </a>
                                             </td>
                                         </tr>
@@ -116,12 +116,17 @@
                 <div class="modal-header">
                     <h4 class="modal-title" id="myModalLabel">Brand</h4>
                 </div>
-                <form action="#" method="post">
+                <form action="#" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
                             <input type="text"  class="form-control @if($errors->has("brand_name"))is-invalid @endif"  name="brand_name"
                                    placeholder="Brand Name"/>
+                        </div>
+                        <div class="form-group">
+                        <label for="cc-name" class="control-label mb-1">Ảnh đại diện</label>
+                        <input name="image" type="file" value="{{old("image")}}"
+                               class="form-control cc-name " >
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -160,6 +165,8 @@
                 data: {
                     _token: $("input[name=_token]").val(),
                     brand_name: $("input[name=brand_name]").val(),
+                    image: $("input[name=image]").val(),
+
                 },
                 success: function (res) {
                     if(res.status){

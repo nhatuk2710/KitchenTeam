@@ -79,12 +79,15 @@ class AdminController extends Controller
         ]);
         try {
             $image = null;
-            if($request->hasFile("image")){
+            $ext_allow = ["png","jpg","jpeg","gif","svg"];
+            if($request->hasFile("image")) {
                 $file = $request->file("image");
-                $file_name = $file->getClientOriginalName();
+                $file_name = time()."-".$file->getClientOriginalName();
                 $ext = $file->getClientOriginalExtension();
-                $file->move("upload",$file_name);
-                $image = "upload/".$file_name;
+                if(in_array($ext,$ext_allow)){
+                    $file->move("upload",$file_name);
+                    $image = "upload/".$file_name;
+                }
             }
             $category->update([
                 "category_name"=>$request->get('category_name'),
@@ -270,12 +273,26 @@ class AdminController extends Controller
     public function createBrand(Request $request){
         $validator = Validator::make($request->all(),[
             "brand_name" => 'required|string|unique:brand',
+            'image'=>''
         ]);
+
         if( $validator->fails()){
             return response()->json(["status"=>false,"message"=>$validator->errors()->first()]);
         } else {
+            $image = null;
+            $ext_allow = ["png","jpg","jpeg","gif","svg"];
+            if($request->hasFile("image")) {
+                $file = $request->file("image");
+                $file_name = time()."-".$file->getClientOriginalName();
+                $ext = $file->getClientOriginalExtension();
+                if(in_array($ext,$ext_allow)){
+                    $file->move("upload",$file_name);
+                    $image = "upload/".$file_name;
+                }
+            }
             Brand::create([
-                "brand_name"=>$request->get("brand_name")
+                "brand_name"=>$request->get("brand_name"),
+                "image"=>$image,
             ]);
             return response()->json(['status'=>true,'message'=>"Brand success"]);
         }
@@ -290,8 +307,20 @@ class AdminController extends Controller
         if($validator->fails()){
             return response()->json(['status'=>false,"message"=>$validator->errors()->first()]);
         }else{
+            $image = null;
+            $ext_allow = ["png","jpg","jpeg","gif","svg"];
+            if($request->hasFile("image")) {
+                $file = $request->file("image");
+                $file_name = time()."-".$file->getClientOriginalName();
+                $ext = $file->getClientOriginalExtension();
+                if(in_array($ext,$ext_allow)){
+                    $file->move("upload",$file_name);
+                    $image = "upload/".$file_name;
+                }
+            }
             $brand->update([
-                "brand_name"=>$request->get("brand_name")
+                "brand_name"=>$request->get("brand_name"),
+                "image"=>$image,
             ]);
             return response()->json(["status"=>true,"message"=>"Brand succcess"]);
         }
